@@ -12,6 +12,9 @@
   "author": "Joe Longstreet",
   "license": "MIT",
   "dependencies": {
-    "duino": "0.0.9"
+    "connect": "^3.2.0",
+    "serve-static": "^1.6.3",
+    "socket.io": "^1.1.0",
+    "firmata": "^0.3.3"
   }
 }
