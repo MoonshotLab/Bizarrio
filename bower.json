@@ -1,0 +1,11 @@
+{
+  "name": "bizarrio",
+  "version": "0.0.0",
+  "authors": [
+    "Joe Longstreet <joelongstreet@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "phaser": "~2.1.1"
+  }
+}

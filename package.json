@@ -1,0 +1,17 @@
+{
+  "name": "bizarrio",
+  "version": "0.0.0",
+  "description": "a 2d projection based game played in a 3d environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bizarrio"
+  ],
+  "author": "Joe Longstreet",
+  "license": "MIT",
+  "dependencies": {
+    "duino": "0.0.9"
+  }
+}
