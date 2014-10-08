@@ -1,13 +1,13 @@
-{ "height":5,
+{ "height":10,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 8, 0, 0, 0, 0, 0, 0],
-         "height":5,
-         "name":"Tile Layer 1",
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 11, 0, 0, 9, 11, 0, 0, 0, 0, 43, 45, 0, 0, 43, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "name":"Stuff",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":5,
+         "width":10,
          "x":0,
          "y":0
         }],
@@ -16,24 +16,24 @@
     {
 
     },
- "tileheight":50,
+ "tileheight":16,
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/..\/..\/Desktop\/starstruck 2\/tiles-1.png",
-         "imageheight":64,
-         "imagewidth":272,
+         "image":"tileset.png",
+         "imageheight":289,
+         "imagewidth":289,
          "margin":0,
-         "name":"tiles-1",
+         "name":"tileset",
          "properties":
             {
 
             },
-         "spacing":0,
+         "spacing":1,
          "tileheight":16,
          "tilewidth":16
         }],
- "tilewidth":50,
+ "tilewidth":16,
  "version":1,
- "width":5
+ "width":10
 }

@@ -1,45 +1,42 @@
 var socket = io();
+var platformLayer, outieLayer, outieIsHidden = true;
+var player, facing = 'left', jumpTimer = 0;
+var cursors, jumpButton;
 
-var map;
-var layer;
-var player;
-var facing = 'left';
-var jumpTimer = 0;
-var platformLayer;
-var outieLayer;
-var cursors;
-var jumpButton;
-var outieIsHidden = true;
 
 var preload = function(){
   game.load.tilemap('platforms', 'assets/platforms.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.tilemap('outie', 'assets/outie.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('tiles-1', 'assets/tiles-1.png');
+  game.load.image('tileset', 'assets/tileset.png');
   game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 };
 
 
-var hidePlatform = function(){
-  socket.emit('hide-platform');
-  outieLayer.visible = false;
-};
+// Message back to the server, telling it to toggle
+// the status of the servo
+var toggleOutie = function(){
+  outieIsHidden = !outieIsHidden;
 
-var showPlatform = function(){
-  socket.emit('show-platform');
-  outieLayer.visible = true;
+  if(outieIsHidden){
+    socket.emit('hide-platform');
+    outieLayer.visible = false;
+  } else{
+    socket.emit('show-platform');
+    outieLayer.visible = true;
+  }
 };
 
 
 var create = function(){
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.stage.backgroundColor = '#000000';
+  game.physics.arcade.gravity.y = 500;
 
-  game.physics.arcade.gravity.y = 250;
-
+  // Player physics and animations
   player = game.add.sprite(32, 32, 'dude');
   game.physics.enable(player, Phaser.Physics.ARCADE);
 
-  player.body.bounce.y = 0.2;
+  player.body.bounce.y = 0.5;
   player.body.collideWorldBounds = true;
   player.body.setSize(20, 32, 5, 16);
 
@@ -47,43 +44,34 @@ var create = function(){
   player.animations.add('turn', [4], 20, true);
   player.animations.add('right', [5, 6, 7, 8], 10, true);
 
+  // There's probably a better way to do this,
   var platformMap = game.add.tilemap('platforms');
   var outieMap = game.add.tilemap('outie');
-  platformMap.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
-  outieMap.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
-  platformMap.addTilesetImage('tiles-1');
-  outieMap.addTilesetImage('tiles-1');
 
-  platformLayer = platformMap.createLayer('Tile Layer 1');
-  outieLayer = outieMap.createLayer('Tile Layer 1');
-  platformLayer.debug=true;
-  outieLayer.debug=true;
+  platformMap.addTilesetImage('tileset');
+  outieMap.addTilesetImage('tileset');
+  platformMap.setCollisionByExclusion([]);
+  outieMap.setCollisionByExclusion([]);
+
+  platformLayer = platformMap.createLayer('Stuff');
+  outieLayer = outieMap.createLayer('Stuff');
   outieLayer.visible = false;
+  // End, todo better
 
-  game.camera.follow(player);
-
+  // Buttons 'n stuff
   cursors = game.input.keyboard.createCursorKeys();
   jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-
-  setInterval(function(){
-    outieIsHidden = !outieIsHidden;
-
-    if(outieIsHidden)
-      hidePlatform();
-    else
-      showPlatform();
-
-  }, 5000);
+  setInterval(toggleOutie, 1000);
 };
 
 
 var update = function() {
-  if(outieIsHidden)
-    game.physics.arcade.collide(player, platformLayer);
-  else
-    game.physics.arcade.collide(player, outieLayer);
+  // Determine which layer to treat as the collision layer
+  var collisionLayer = outieIsHidden ? platformLayer : outieLayer;
+  game.physics.arcade.collide(player, collisionLayer);
 
+  // Handle player movement
   player.body.velocity.x = 0;
 
   if (cursors.left.isDown){
@@ -121,6 +109,6 @@ var update = function() {
 
 
 var game = new Phaser.Game(
-  800, 600, Phaser.CANVAS, 'bizarrio',
+  160, 160, Phaser.CANVAS, 'bizarrio',
   { preload: preload, create: create, update: update }
 );
