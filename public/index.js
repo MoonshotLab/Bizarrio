@@ -62,7 +62,7 @@ var create = function(){
   cursors = game.input.keyboard.createCursorKeys();
   jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-  setInterval(toggleOutie, 1000);
+  setInterval(toggleOutie, 5000);
 };
 
 
@@ -102,7 +102,7 @@ var update = function() {
   }
 
   if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer){
-    player.body.velocity.y = -250;
+    player.body.velocity.y = -270;
     jumpTimer = game.time.now + 750;
   }
 };
