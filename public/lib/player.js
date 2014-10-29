@@ -45,7 +45,7 @@ Player.prototype.update = function(){
   this.character.body.velocity.x = 0;
 
   if(this.controls.speed.isDown)
-    speed = speed*1.5;
+    speed = speed*2;
 
   // Move character left and right
   if(this.controls.left.isDown){
@@ -66,8 +66,8 @@ Player.prototype.update = function(){
     if(this.facing != 'idle') {
       this.character.animations.stop();
 
-      if(this.facing == 'left') player.frame = 0;
-      else player.frame = 5;
+      if(this.facing == 'left') this.character.frame = 0;
+      else this.character.frame = 5;
 
       this.facing = 'idle';
     }
@@ -85,7 +85,7 @@ Player.prototype.update = function(){
 
       this.character.body.velocity.y = -1*(this.jumpPower);
       this.isJumping = false;
-      this.jumpPower = 0;
+      this.jumpPower = 15;
   } else if(this.controls.jump.isDown &&
     this.character.body.onFloor()){
       // building power
