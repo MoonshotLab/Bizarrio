@@ -1,5 +1,8 @@
 # Bizarrio
-A proof of concept 2 dimensional game projected upon a real life changing 3d surface.
+A 2 dimensional game projected upon a real life changing 3d surface.
+
+## Map
+16x13 tiles, each tile is 64x64.
 
 ## Getting Started
 * Make sure all dependencies are installed - `npm install`, `bower install`.
