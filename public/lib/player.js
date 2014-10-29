@@ -1,10 +1,14 @@
 var Player = function(game, indice){
   this.game       = game;
   this.character  = null;
-  this.jumpTimer  = 0;
   this.indice     = indice;
   this.controls   = {};
   this.facing     = 'left';
+
+  // jumping
+  this.isJumping = false;
+  this.jumpPower = 0;
+  this.jumpPressed = 0;
 
   var controlMapping = settings.controls[indice];
   for(var prop in controlMapping){
@@ -70,12 +74,27 @@ Player.prototype.update = function(){
   }
 
   // JUMP!
-  if(this.controls.jump.isDown &&
-    this.character.body.onFloor() &&
-    this.game.time.now > this.jumpTimer) {
-      this.character.body.velocity.y = -1*(settings.players.jumpPower);
-      this.jumpTimer = this.game.time.now + 750;
-    }
+  if(this.jumpPressed && !this.controls.jump.isDown &&
+    this.character.body.onFloor()){
+      // when releasing jump buton
+      this.isJumping = true;
+      this.jumpPressed = false;
+
+      if(this.jumpPower >= settings.players.maxJumpPower)
+          this.jumpPower = settings.players.maxJumpPower;
+
+      this.character.body.velocity.y = -1*(this.jumpPower);
+      this.isJumping = false;
+      this.jumpPower = 0;
+  } else if(this.controls.jump.isDown &&
+    this.character.body.onFloor()){
+      // building power
+      this.jumpPressed = true;
+      this.jumpPower+=15;
+  } else{
+    // reset
+    this.jumpPower = 0;
+  }
 
   return this.character;
 };
