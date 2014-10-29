@@ -37,18 +37,22 @@ Player.prototype.create = function(){
 
 
 Player.prototype.update = function(){
+  var speed = settings.players.speed;
   this.character.body.velocity.x = 0;
+
+  if(this.controls.speed.isDown)
+    speed = speed*1.5;
 
   // Move character left and right
   if(this.controls.left.isDown){
-    this.character.body.velocity.x = -1*settings.players.speed;
+    this.character.body.velocity.x = -1*speed;
 
     if(this.facing != 'left'){
       this.character.animations.play('left');
       this.facing = 'left';
     }
   } else if(this.controls.right.isDown){
-    this.character.body.velocity.x = settings.players.speed;
+    this.character.body.velocity.x = speed;
 
     if(this.facing != 'right'){
       this.character.animations.play('right');
