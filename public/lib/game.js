@@ -1,9 +1,13 @@
+var sprite;
+
 // Options
   // players : [{ name : 'Joe' }]
 var Game = function(opts){
   this.interface = null;
-  this.staticMap = null;
+  this.layers = { platforms : null };
+  this.map = null;
   this.players = [];
+  this.obstacles = null;
 
   return this;
 };
@@ -27,8 +31,10 @@ Game.prototype.init = function(opts){
 
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
+  self.interface.load.tilemap('trap-doors', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
   self.interface.load.image('red', 'assets/red.png');
+  self.interface.load.image('trap-door', 'assets/trap-door.png');
 };
 
 
@@ -47,12 +53,18 @@ Game.prototype.create = function(self, opts){
     self.players.push(player);
   }
 
-  // Create the map and the layer to hold collisions
-  var platformMap = self.interface.add.tilemap('platforms');
-  platformMap.addTilesetImage('red');
-  platformMap.setCollisionByExclusion([]);
+  // create the map and the layer to hold collisions
+  self.map = self.interface.add.tilemap('platforms');
+  self.map.addTilesetImage('red');
+  self.map.setCollisionByExclusion([]);
 
-  self.staticMap = platformMap.createLayer('platforms');
+  // find the trap doors, make them each an instance
+  self.interface.obstacles = self.interface.add.group();
+  self.map.objects['trap-doors'].forEach(function(el){
+    new TrapDoor(self, self.interface.obstacles, el);
+  });
+
+  self.layers.platforms = self.map.createLayer('platforms');
 };
 
 
@@ -62,7 +74,8 @@ Game.prototype.update = function(self, opts){
     characters.push(player.character);
   });
 
-  self.interface.physics.arcade.collide(characters, self.staticMap);
+  self.interface.physics.arcade.collide(characters, self.layers.platforms);
+  self.interface.physics.arcade.collide(characters, self.interface.obstacles);
 
   self.players.forEach(function(player){
     self.interface.physics.arcade.collide(characters, player.character);

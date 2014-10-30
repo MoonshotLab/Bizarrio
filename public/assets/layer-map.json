@@ -17,14 +17,14 @@
          "name":"background",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":96,
          "x":0,
          "y":0
         }, 
         {
          "height":78,
-         "name":"swings",
+         "name":"trap-doors",
          "objects":[
                 {
                  "gid":3,
@@ -39,6 +39,20 @@
                  "width":0,
                  "x":120,
                  "y":140
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":260
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -90,7 +104,7 @@
          "imageheight":20,
          "imagewidth":120,
          "margin":0,
-         "name":"swing",
+         "name":"trap-door",
          "properties":
             {
 
