@@ -9,6 +9,16 @@ var TrapDoor = function(game, group, el){
   this.sprite.body.allowGravity = false;
   this.sprite.body.immovable = true;
 
+  // save so we can send to server later
+  this.pin = el.properties.pin;
+  this.type = 'trap-door';
+
+  // report to the server so it can prepare the arduino
+  bizarrio.socket.emit('register-hardware', {
+    'type'  : this.type,
+    'pin'   : this.pin
+  });
+
   return this;
 };
 
@@ -17,9 +27,16 @@ TrapDoor.prototype.toggle = function(opts){
   var self = this;
 
   setInterval(function(){
-    if(self.sprite.y == -100)
+    var state = 'min';
+
+    if(self.sprite.y == -100){
       self.sprite.y = self.originalY;
-    else
-      self.sprite.y = -100;
+      state = 'max';
+    } else self.sprite.y = -100;
+
+    bizarrio.socket.emit('update-hardware', {
+      pin : self.pin, type : self.type, state : state
+    });
+
   }, opts.timer);
 };

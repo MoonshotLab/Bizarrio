@@ -58,9 +58,12 @@ Game.prototype.create = function(self, opts){
 
   // find the trap doors, make them each an instance
   self.interface.obstacles = self.interface.add.group();
-  self.map.objects['trap-doors'].forEach(function(el){
+
+  self.map.objects['trap-doors'].forEach(function(el, i){
     var trapDoor = new TrapDoor(self, self.interface.obstacles, el);
-    trapDoor.toggle({ timer : 3000 });
+    setTimeout(function(){
+      trapDoor.toggle({ timer : 1000 });
+    }, i*250);
   });
 
   self.layers.platforms = self.map.createLayer('platforms');
