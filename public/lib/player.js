@@ -1,6 +1,7 @@
 var Player = function(game, indice){
+  this.score      = 0;
   this.game       = game;
-  this.character  = null;
+  this.sprite     = null;
   this.indice     = indice;
   this.controls   = {};
   this.facing     = 'left';
@@ -21,55 +22,56 @@ var Player = function(game, indice){
 
 
 Player.prototype.initCharacter = function(){
-  this.character = this.game.add.sprite(32, 32, 'player');
+  this.sprite = this.game.add.sprite(32, 32, 'player');
+  this.sprite.name = 'player-' + this.indice;
 
-  return this.character;
+  return this.sprite;
 };
 
 
 Player.prototype.create = function(){
-  this.character.body.bounce.y = settings.players.bounce;
-  this.character.body.collideWorldBounds = true;
-  this.character.body.setSize(20, 32, 5, 16);
+  this.sprite.body.bounce.y = settings.players.bounce;
+  this.sprite.body.collideWorldBounds = true;
+  this.sprite.body.setSize(20, 32, 5, 16);
 
-  this.character.x = 900;
+  this.sprite.x = 0;
 
-  this.character.animations.add('left', [0, 1, 2, 3], 10, true);
-  this.character.animations.add('turn', [4], 20, true);
-  this.character.animations.add('right', [5, 6, 7, 8], 10, true);
+  this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
+  this.sprite.animations.add('turn', [4], 20, true);
+  this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 
-  return this.character;
+  return this.sprite;
 };
 
 
 Player.prototype.update = function(){
   var speed = settings.players.speed;
-  this.character.body.velocity.x = 0;
+  this.sprite.body.velocity.x = 0;
 
   if(this.controls.speed.isDown)
     speed = speed*3;
 
   // Move character left and right
   if(this.controls.left.isDown){
-    this.character.body.velocity.x = -1*speed;
+    this.sprite.body.velocity.x = -1*speed;
 
     if(this.facing != 'left'){
-      this.character.animations.play('left');
+      this.sprite.animations.play('left');
       this.facing = 'left';
     }
   } else if(this.controls.right.isDown){
-    this.character.body.velocity.x = speed;
+    this.sprite.body.velocity.x = speed;
 
     if(this.facing != 'right'){
-      this.character.animations.play('right');
+      this.sprite.animations.play('right');
       this.facing = 'right';
     }
   } else{
     if(this.facing != 'idle') {
-      this.character.animations.stop();
+      this.sprite.animations.stop();
 
-      if(this.facing == 'left') this.character.frame = 0;
-      else this.character.frame = 5;
+      if(this.facing == 'left') this.sprite.frame = 0;
+      else this.sprite.frame = 5;
 
       this.facing = 'idle';
     }
@@ -77,7 +79,7 @@ Player.prototype.update = function(){
 
   // JUMP!
   if(this.jumpPressed && !this.controls.jump.isDown &&
-    this.character.body.onFloor()){
+    this.sprite.body.onFloor()){
       // when releasing jump buton
       this.isJumping = true;
       this.jumpPressed = false;
@@ -85,11 +87,11 @@ Player.prototype.update = function(){
       if(this.jumpPower >= settings.players.maxJumpPower)
           this.jumpPower = settings.players.maxJumpPower;
 
-      this.character.body.velocity.y = -1*(this.jumpPower);
+      this.sprite.body.velocity.y = -1*(this.jumpPower);
       this.isJumping = false;
       this.jumpPower = 40;
   } else if(this.controls.jump.isDown &&
-    this.character.body.onFloor()){
+    this.sprite.body.onFloor()){
       // building power
       this.jumpPressed = true;
       this.jumpPower += 30;
@@ -98,5 +100,5 @@ Player.prototype.update = function(){
     this.jumpPower = 0;
   }
 
-  return this.character;
+  return this.sprite;
 };
