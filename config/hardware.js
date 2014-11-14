@@ -4,13 +4,15 @@ module.exports = function(){
       'min'       : 25,
       'max'       : 50,
       'mode'      : 'SERVO',
-      'action'    : 'servoWrite'
+      'action'    : 'servoWrite',
+      'reset'     : 25
     },
     'coin'      : {
       'on'        : 1,
       'off'       : 0,
       'mode'      : 'OUTPUT',
-      'action'    : 'digitalWrite'
+      'action'    : 'digitalWrite',
+      'reset'     : 0
     }
   };
 };
