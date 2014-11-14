@@ -3,8 +3,10 @@
 var Game = function(opts){
   this.interface = null;
   this.layers = { platforms : null };
+
   this.map = null;
-  this.players = [];
+  this.playerManager = new PlayerManager();
+  this.coinManager = new CoinManager();
   this.obstacles = null;
 
   return this;
@@ -30,9 +32,11 @@ Game.prototype.init = function(opts){
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.tilemap('trap-doors', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
+  self.interface.load.tilemap('coins', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
   self.interface.load.image('red', 'assets/red.png');
   self.interface.load.image('trap-door', 'assets/trap-door.png');
+  self.interface.load.image('gold', 'assets/gold.png');
 };
 
 
@@ -46,19 +50,22 @@ Game.prototype.create = function(self, opts){
   for(var i=0; i<opts.players.length; i++){
     var player = new Player(self.interface, i);
     player.initCharacter();
-    self.interface.physics.enable(player.character, Phaser.Physics.ARCADE);
+    self.interface.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.create();
-    self.players.push(player);
+    self.playerManager.add(player);
   }
 
   // create the map and the layer to hold collisions
   self.map = self.interface.add.tilemap('platforms');
+  self.map = self.interface.add.tilemap('coins');
+
   self.map.addTilesetImage('red');
+  self.map.addTilesetImage('gold');
+
   self.map.setCollisionByExclusion([]);
 
   // find the trap doors, make them each an instance
   self.interface.obstacles = self.interface.add.group();
-
   self.map.objects['trap-doors'].forEach(function(el, i){
     var trapDoor = new TrapDoor(self, self.interface.obstacles, el);
     setTimeout(function(){
@@ -66,21 +73,35 @@ Game.prototype.create = function(self, opts){
     }, i*250);
   });
 
+  // find the coins, make each an instance, add to coin manager
+  self.interface.coins = self.interface.add.group();
+  self.map.objects.coins.forEach(function(el, i){
+    var coin = new Coin(self, self.interface.coins, el, i);
+    self.coinManager.add(coin);
+
+    if(i === 0)
+      coin.toggle();
+  });
+
   self.layers.platforms = self.map.createLayer('platforms');
 };
 
 
 Game.prototype.update = function(self, opts){
-  var characters = [];
-  self.players.forEach(function(player){
-    characters.push(player.character);
-  });
+  var characters = this.playerManager.getSprites();
 
   self.interface.physics.arcade.collide(characters, self.layers.platforms);
   self.interface.physics.arcade.collide(characters, self.interface.obstacles);
 
-  self.players.forEach(function(player){
-    self.interface.physics.arcade.collide(characters, player.character);
+  self.interface.physics.arcade.overlap(
+    characters, self.interface.coins, function(sprite1, sprite2){
+      if(self.coinManager.collect(sprite2.name))
+        self.playerManager.score(sprite1.name);
+    }
+  );
+
+  self.playerManager.players.forEach(function(player){
+    self.interface.physics.arcade.collide(characters, player.sprite);
     player.update();
   });
 };

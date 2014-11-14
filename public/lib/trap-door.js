@@ -1,8 +1,6 @@
 var TrapDoor = function(game, group, el){
-  var self = this;
-
   this.originalY = el.y - game.map.tileHeight;
-  this.sprite = group.create(el.x, self.originalY, 'trap-door');
+  this.sprite = group.create(el.x, this.originalY, 'trap-door');
 
   // make it behave like a platform
   game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
