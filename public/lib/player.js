@@ -32,6 +32,8 @@ Player.prototype.create = function(){
   this.character.body.collideWorldBounds = true;
   this.character.body.setSize(20, 32, 5, 16);
 
+  this.character.x = 900;
+
   this.character.animations.add('left', [0, 1, 2, 3], 10, true);
   this.character.animations.add('turn', [4], 20, true);
   this.character.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -45,7 +47,7 @@ Player.prototype.update = function(){
   this.character.body.velocity.x = 0;
 
   if(this.controls.speed.isDown)
-    speed = speed*2;
+    speed = speed*3;
 
   // Move character left and right
   if(this.controls.left.isDown){
@@ -85,12 +87,12 @@ Player.prototype.update = function(){
 
       this.character.body.velocity.y = -1*(this.jumpPower);
       this.isJumping = false;
-      this.jumpPower = 15;
+      this.jumpPower = 40;
   } else if(this.controls.jump.isDown &&
     this.character.body.onFloor()){
       // building power
       this.jumpPressed = true;
-      this.jumpPower+=15;
+      this.jumpPower += 30;
   } else{
     // reset
     this.jumpPower = 0;
