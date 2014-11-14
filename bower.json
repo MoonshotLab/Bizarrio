@@ -6,6 +6,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "phaser": "~2.1.1"
+    "phaser": "~2.1.1",
+    "underscore": "~1.7.0"
   }
 }
