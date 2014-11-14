@@ -5,9 +5,9 @@ var Game = function(opts){
   this.layers = { platforms : null };
 
   this.map = null;
-  this.playerManager = new PlayerManager();
-  this.coinManager = new CoinManager();
-  this.obstacles = null;
+  this.playerManager  = new PlayerManager();
+  this.coinManager    = new CoinManager();
+  this.obstacles      = null;
 
   return this;
 };
@@ -31,12 +31,13 @@ Game.prototype.init = function(opts){
 
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
-  self.interface.load.tilemap('trap-doors', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
-  self.interface.load.tilemap('coins', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
-  self.interface.load.image('red', 'assets/red.png');
-  self.interface.load.image('trap-door', 'assets/trap-door.png');
-  self.interface.load.image('gold', 'assets/gold.png');
+
+  if(bizarrio.debug){
+    self.interface.load.image('red', 'assets/red.png');
+    self.interface.load.image('trap-door', 'assets/trap-door.png');
+    self.interface.load.image('gold', 'assets/gold.png');
+  }
 };
 
 
@@ -49,20 +50,16 @@ Game.prototype.create = function(self, opts){
   // create all the players
   for(var i=0; i<opts.players.length; i++){
     var player = new Player(self.interface, i);
-    player.initCharacter();
     self.interface.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.create();
     self.playerManager.add(player);
   }
 
-  // create the map and the layer to hold collisions
+  // create the static map
   self.map = self.interface.add.tilemap('platforms');
-  self.map = self.interface.add.tilemap('coins');
-
-  self.map.addTilesetImage('red');
-  self.map.addTilesetImage('gold');
-
   self.map.setCollisionByExclusion([]);
+  if(bizarrio.debug)
+    self.map.addTilesetImage('red');
 
   // find the trap doors, make them each an instance
   self.interface.obstacles = self.interface.add.group();
@@ -79,8 +76,7 @@ Game.prototype.create = function(self, opts){
     var coin = new Coin(self, self.interface.coins, el, i);
     self.coinManager.add(coin);
 
-    if(i === 0)
-      coin.toggle();
+    if(i === 0) coin.toggle();
   });
 
   self.layers.platforms = self.map.createLayer('platforms');

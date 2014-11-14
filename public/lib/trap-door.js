@@ -1,6 +1,10 @@
 var TrapDoor = function(game, group, el){
   this.originalY = el.y - game.map.tileHeight;
-  this.sprite = group.create(el.x, this.originalY, 'trap-door');
+
+  var imagePath;
+  if(bizarrio.debug)
+    imagePath = 'trap-door';
+  this.sprite = group.create(el.x, this.originalY, imagePath);
 
   // make it behave like a platform
   game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
@@ -37,4 +41,6 @@ TrapDoor.prototype.toggle = function(opts){
     });
 
   }, opts.timer);
+
+  return this;
 };

@@ -1,5 +1,9 @@
 var Coin = function(game, group, el, indice){
-  this.sprite = group.create(el.x, el.y - game.map.tileHeight, 'gold');
+
+  var imagePath;
+  if(bizarrio.debug)
+    imagePath = 'gold';
+  this.sprite = group.create(el.x, el.y - game.map.tileHeight, imagePath);
 
   // no gravity, sits still
   game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);

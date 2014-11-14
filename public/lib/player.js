@@ -17,15 +17,10 @@ var Player = function(game, indice){
     this.controls[prop] = game.input.keyboard.addKey(Phaser.Keyboard[key]);
   }
 
-  return this;
-};
-
-
-Player.prototype.initCharacter = function(){
   this.sprite = this.game.add.sprite(32, 32, 'player');
   this.sprite.name = 'player-' + this.indice;
 
-  return this.sprite;
+  return this;
 };
 
 
@@ -40,7 +35,7 @@ Player.prototype.create = function(){
   this.sprite.animations.add('turn', [4], 20, true);
   this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 
-  return this.sprite;
+  return this;
 };
 
 
@@ -100,5 +95,5 @@ Player.prototype.update = function(){
     this.jumpPower = 0;
   }
 
-  return this.sprite;
+  return this;
 };

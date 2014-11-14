@@ -1,6 +1,7 @@
 var bizarrio = {
   socket  : io(),
-  game    : new Game()
+  game    : new Game(),
+  debug   : false
 };
 
 bizarrio.game.init({
