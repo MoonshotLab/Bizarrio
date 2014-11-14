@@ -12,6 +12,6 @@ io.on('connection', function(socket){
   // { pin : 5, type : 'trap-door', state : 'min' }
   socket.on('update-hardware', arduino.updatePin);
 
-  // { pin : 5, type : 'trap-door',  }
+  // { pin : 5, type : 'trap-door' }
   socket.on('register-hardware', arduino.registerPin);
 });
