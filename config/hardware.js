@@ -20,6 +20,13 @@ module.exports = function(){
       'mode'      : 'OUTPUT',
       'action'    : 'digitalWrite',
       'reset'     : 0
-    }
+    },
+    'toggle' : {
+      'min'       : 25,
+      'max'       : 50,
+      'mode'      : 'SERVO',
+      'action'    : 'servoWrite',
+      'reset'     : 25
+    },
   };
 };

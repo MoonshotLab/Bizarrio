@@ -95,14 +95,39 @@
                  "width":0,
                  "x":180,
                  "y":220
-                }, 
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":96,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":78,
+         "name":"toggles",
+         "objects":[
                 {
-                 "gid":5,
+                 "gid":6,
                  "height":0,
                  "name":"",
                  "properties":
                     {
-                     "pin":"5"
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":240
+                }, 
+                {
+                 "gid":6,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
                     },
                  "type":"",
                  "visible":true,
@@ -119,35 +144,10 @@
         }, 
         {
          "height":78,
-         "name":"switches",
-         "objects":[
-                {
-                 "gid":5,
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-                     "pin":"6"
-                    },
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":400,
-                 "y":240
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "width":96,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "height":78,
          "name":"portals",
          "objects":[
                 {
-                 "gid":6,
+                 "gid":5,
                  "height":0,
                  "name":"",
                  "properties":
@@ -161,7 +161,7 @@
                  "y":260
                 }, 
                 {
-                 "gid":6,
+                 "gid":5,
                  "height":0,
                  "name":"",
                  "properties":
@@ -261,21 +261,6 @@
         }, 
         {
          "firstgid":5,
-         "image":"..\/..\/src\/switch.png",
-         "imageheight":60,
-         "imagewidth":40,
-         "margin":0,
-         "name":"switch",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":60,
-         "tilewidth":40
-        }, 
-        {
-         "firstgid":6,
          "image":"..\/..\/src\/portal.png",
          "imageheight":20,
          "imagewidth":120,
@@ -288,6 +273,21 @@
          "spacing":0,
          "tileheight":20,
          "tilewidth":120
+        }, 
+        {
+         "firstgid":6,
+         "image":"..\/..\/src\/toggle.png",
+         "imageheight":80,
+         "imagewidth":40,
+         "margin":0,
+         "name":"toggle",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":80,
+         "tilewidth":40
         }],
  "tilewidth":20,
  "version":1,

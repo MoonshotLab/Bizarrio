@@ -2,6 +2,7 @@ var Game = function(){
   this.playerManager  = new PlayerManager();
   this.coinManager    = new CoinManager();
   this.portalManager  = new PortalManager();
+  this.toggleManager  = new ToggleManager();
 
   this.interface      = null;
   this.map            = null;
@@ -38,6 +39,7 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('red', 'assets/red.png');
     self.interface.load.image('trap-door', 'assets/trap-door.png');
     self.interface.load.image('portal', 'assets/portal.png');
+    self.interface.load.image('toggle', 'assets/toggle.png');
     self.interface.load.image('gold', 'assets/gold.png');
   }
 };
@@ -64,9 +66,13 @@ Game.prototype.create = function(self, opts){
 
 
 Game.prototype.update = function(self, opts){
-  self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
   self.interface.physics.arcade.collide(self.characters, self.layers.platforms);
-
+  self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
+  self.interface.physics.arcade.overlap(self.characters, self.objects.toggles,
+    function(character, toggle){
+      self.toggleManager.activate(character, toggle);
+    }
+  );
   self.interface.physics.arcade.collide(self.characters, self.objects.portals,
     function(character, portal){
       self.portalManager.transport(character, portal);
@@ -128,7 +134,16 @@ Game.prototype._createObjects = function(){
     var portal = new Portal(self, self.objects.portals, el, i);
     self.portalManager.add(portal);
   });
-  this.portalManager.open();
+
+  // make the toggles
+  this.objects.toggles = this.interface.add.group();
+  this.map.objects.toggles.forEach(function(el, i){
+    var toggle = new Toggle(self, self.objects.toggles, el, i);
+    self.toggleManager.add(toggle);
+  });
+  this.toggleManager.bind('activated', function(){
+    self.portalManager.open();
+  });
 
   // make the coins
   this.objects.coins = this.interface.add.group();
