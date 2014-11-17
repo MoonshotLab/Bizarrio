@@ -1,6 +1,7 @@
 var Game = function(){
   this.playerManager  = new PlayerManager();
   this.coinManager    = new CoinManager();
+  this.portalManager  = new PortalManager();
 
   this.interface      = null;
   this.map            = null;
@@ -36,6 +37,7 @@ Game.prototype.preload = function(self, opts){
   if(bizarrio.debug){
     self.interface.load.image('red', 'assets/red.png');
     self.interface.load.image('trap-door', 'assets/trap-door.png');
+    self.interface.load.image('portal', 'assets/portal.png');
     self.interface.load.image('gold', 'assets/gold.png');
   }
 };
@@ -62,20 +64,24 @@ Game.prototype.create = function(self, opts){
 
 
 Game.prototype.update = function(self, opts){
-  var characters = this.playerManager.getSprites();
+  self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
+  self.interface.physics.arcade.collide(self.characters, self.layers.platforms);
 
-  self.interface.physics.arcade.collide(characters, self.layers.platforms);
-  self.interface.physics.arcade.collide(characters, self.objects.trapDoors);
+  self.interface.physics.arcade.collide(self.characters, self.objects.portals,
+    function(character, portal){
+      self.portalManager.transport(character, portal);
+    }
+  );
 
   self.interface.physics.arcade.overlap(
-    characters, self.objects.coins, function(sprite1, sprite2){
+    self.characters, self.objects.coins, function(sprite1, sprite2){
       if(self.coinManager.collect(sprite2.name))
         self.playerManager.score(sprite1.name);
     }
   );
 
   self.playerManager.players.forEach(function(player){
-    self.interface.physics.arcade.collide(characters, player.sprite);
+    self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
 };
@@ -93,6 +99,8 @@ Game.prototype._createPlayers = function(players){
 
     self.playerManager.add(instance.create());
   });
+
+  self.characters = self.playerManager.getSprites();
 };
 
 
@@ -113,6 +121,14 @@ Game.prototype._createObjects = function(){
       trapDoor.toggle({ timer : 1000 });
     }, i*250);
   });
+
+  // make the portals
+  this.objects.portals = this.interface.add.group();
+  this.map.objects.portals.forEach(function(el, i){
+    var portal = new Portal(self, self.objects.portals, el, i);
+    self.portalManager.add(portal);
+  });
+  this.portalManager.open();
 
   // make the coins
   this.objects.coins = this.interface.add.group();

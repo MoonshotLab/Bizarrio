@@ -13,6 +13,13 @@ module.exports = function(){
       'mode'      : 'OUTPUT',
       'action'    : 'digitalWrite',
       'reset'     : 0
+    },
+    'portal'      : {
+      'on'        : 1,
+      'off'       : 0,
+      'mode'      : 'OUTPUT',
+      'action'    : 'digitalWrite',
+      'reset'     : 0
     }
   };
 };
