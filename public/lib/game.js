@@ -5,10 +5,8 @@ var Game = function(){
   this.interface      = null;
   this.map            = null;
 
-  this.layers         = {
-    platforms : null,
-    obstacles : null
-  };
+  this.layers         = {};
+  this.objects        = {};
 
   return this;
 };
@@ -44,50 +42,22 @@ Game.prototype.preload = function(self, opts){
 
 
 Game.prototype.create = function(self, opts){
-  // start physics and gravity
+  // start physics, gravity, collision mapping, and create
+  // the static platform mappings
   self.interface.physics.startSystem(Phaser.Physics.ARCADE);
-  self.interface.stage.backgroundColor = '#000000';
   self.interface.physics.arcade.gravity.y = settings.gravity;
-
-  // create all the players
-  for(var i=0; i<opts.players.length; i++){
-    var player = new Player({
-      game : self.interface, indice: i, name : opts.players[i].name
-    });
-
-    self.interface.physics.enable(player.sprite, Phaser.Physics.ARCADE);
-    player.create();
-    self.playerManager.add(player);
-  }
-
-  var scoreboard = new Scoreboard(self.playerManager.players);
-  self.playerManager.bind('score', scoreboard.update);
-
-  // create the static map
   self.map = self.interface.add.tilemap('platforms');
+  self.layers.platforms = self.map.createLayer('platforms');
   self.map.setCollisionByExclusion([]);
+
+  // color the platforms if in debug mose
   if(bizarrio.debug)
     self.map.addTilesetImage('red');
 
-  // find the trap doors, make them each an instance
-  self.layers.obstacles = self.interface.add.group();
-  self.map.objects['trap-doors'].forEach(function(el, i){
-    var trapDoor = new TrapDoor(self, self.layers.obstacles, el);
-    setTimeout(function(){
-      trapDoor.toggle({ timer : 1000 });
-    }, i*250);
-  });
-
-  // find the coins, make each an instance, add to coin manager
-  self.interface.coins = self.interface.add.group();
-  self.map.objects.coins.forEach(function(el, i){
-    var coin = new Coin(self, self.interface.coins, el, i);
-    self.coinManager.add(coin);
-
-    if(i === 0) coin.toggle();
-  });
-
-  self.layers.platforms = self.map.createLayer('platforms');
+  // init all the interface elements
+  self._createPlayers(opts.players);
+  self._createScoreboard();
+  self._createObjects();
 };
 
 
@@ -95,10 +65,10 @@ Game.prototype.update = function(self, opts){
   var characters = this.playerManager.getSprites();
 
   self.interface.physics.arcade.collide(characters, self.layers.platforms);
-  self.interface.physics.arcade.collide(characters, self.layers.obstacles);
+  self.interface.physics.arcade.collide(characters, self.objects.trapDoors);
 
   self.interface.physics.arcade.overlap(
-    characters, self.interface.coins, function(sprite1, sprite2){
+    characters, self.objects.coins, function(sprite1, sprite2){
       if(self.coinManager.collect(sprite2.name))
         self.playerManager.score(sprite1.name);
     }
@@ -107,5 +77,49 @@ Game.prototype.update = function(self, opts){
   self.playerManager.players.forEach(function(player){
     self.interface.physics.arcade.collide(characters, player.sprite);
     player.update();
+  });
+};
+
+
+Game.prototype._createPlayers = function(players){
+  var self = this;
+
+  players.forEach(function(player, i){
+    var instance = new Player({
+      indice  : i,
+      game    : self.interface,
+      name    : player.name
+    });
+
+    self.playerManager.add(instance.create());
+  });
+};
+
+
+Game.prototype._createScoreboard = function(){
+  var scoreboard = new Scoreboard(this.playerManager.players);
+  this.playerManager.bind('score', scoreboard.update);
+};
+
+
+Game.prototype._createObjects = function(){
+  var self = this;
+
+  // make the trap doors
+  this.objects.trapDoors = this.interface.add.group();
+  this.map.objects['trap-doors'].forEach(function(el, i){
+    var trapDoor = new TrapDoor(self, self.objects.trapDoors, el);
+    setTimeout(function(){
+      trapDoor.toggle({ timer : 1000 });
+    }, i*250);
+  });
+
+  // make the coins
+  this.objects.coins = this.interface.add.group();
+  this.map.objects.coins.forEach(function(el, i){
+    var coin = new Coin(self, self.objects.coins, el, i);
+    self.coinManager.add(coin);
+
+    if(i === 0) coin.toggle();
   });
 };

@@ -16,10 +16,7 @@ var Scoreboard = function(players){
 
 
 Scoreboard.prototype.update = function(player){
-  console.log(player);
   var $player = $('#scoreboard').find('.player-' + player.indice);
-  console.log($player);
   var $selector = $player.find('.score');
   $selector.text(player.score);
-
 };
