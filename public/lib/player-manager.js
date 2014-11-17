@@ -34,8 +34,11 @@ PlayerManager.prototype.getSprites = function(){
 PlayerManager.prototype.score = function(name){
   var scoringPlayer = this.findByName(name);
 
-  if(scoringPlayer)
+  if(scoringPlayer){
     scoringPlayer.score++;
-
-  // console.log(scoringPlayer.score);
+    this.trigger('score', scoringPlayer);
+  }
 };
+
+
+MicroEvent.mixin(PlayerManager);

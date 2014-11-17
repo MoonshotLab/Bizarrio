@@ -7,6 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "phaser": "~2.1.1",
-    "underscore": "~1.7.0"
+    "underscore": "~1.7.0",
+    "microevent.js": "https://github.com/jeromeetienne/microevent.js.git",
+    "zepto": "~1.1.4"
   }
 }

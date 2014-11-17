@@ -1,12 +1,9 @@
 var bizarrio = {
   socket  : io(),
   game    : new Game(),
-  debug   : false
+  debug   : true
 };
 
 bizarrio.game.init({
-  players : [
-    { name : 'Joe' },
-    { name : 'Ricky' }
-  ]
+  players : [{}, {}]
 });

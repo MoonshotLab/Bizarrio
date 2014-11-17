@@ -1,18 +1,20 @@
-// Options
-  // players : [{ name : 'Joe' }]
-var Game = function(opts){
-  this.interface = null;
-  this.layers = { platforms : null };
-
-  this.map = null;
+var Game = function(){
   this.playerManager  = new PlayerManager();
   this.coinManager    = new CoinManager();
-  this.obstacles      = null;
+
+  this.interface      = null;
+  this.map            = null;
+
+  this.layers         = {
+    platforms : null,
+    obstacles : null
+  };
 
   return this;
 };
 
 
+// { players : [{}, {}] }
 Game.prototype.init = function(opts){
   var self = this;
 
@@ -49,11 +51,17 @@ Game.prototype.create = function(self, opts){
 
   // create all the players
   for(var i=0; i<opts.players.length; i++){
-    var player = new Player(self.interface, i);
+    var player = new Player({
+      game : self.interface, indice: i, name : opts.players[i].name
+    });
+
     self.interface.physics.enable(player.sprite, Phaser.Physics.ARCADE);
     player.create();
     self.playerManager.add(player);
   }
+
+  var scoreboard = new Scoreboard(self.playerManager.players);
+  self.playerManager.bind('score', scoreboard.update);
 
   // create the static map
   self.map = self.interface.add.tilemap('platforms');
@@ -62,9 +70,9 @@ Game.prototype.create = function(self, opts){
     self.map.addTilesetImage('red');
 
   // find the trap doors, make them each an instance
-  self.interface.obstacles = self.interface.add.group();
+  self.layers.obstacles = self.interface.add.group();
   self.map.objects['trap-doors'].forEach(function(el, i){
-    var trapDoor = new TrapDoor(self, self.interface.obstacles, el);
+    var trapDoor = new TrapDoor(self, self.layers.obstacles, el);
     setTimeout(function(){
       trapDoor.toggle({ timer : 1000 });
     }, i*250);
@@ -87,7 +95,7 @@ Game.prototype.update = function(self, opts){
   var characters = this.playerManager.getSprites();
 
   self.interface.physics.arcade.collide(characters, self.layers.platforms);
-  self.interface.physics.arcade.collide(characters, self.interface.obstacles);
+  self.interface.physics.arcade.collide(characters, self.layers.obstacles);
 
   self.interface.physics.arcade.overlap(
     characters, self.interface.coins, function(sprite1, sprite2){

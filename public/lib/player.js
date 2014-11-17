@@ -1,8 +1,10 @@
-var Player = function(game, indice){
+// { game : game, indice : 5, name : 'Joe' }
+var Player = function(opts){
   this.score      = 0;
-  this.game       = game;
+  this.game       = opts.game;
   this.sprite     = null;
-  this.indice     = indice;
+  this.indice     = opts.indice;
+  this.name       = 'Player ' + opts.indice;
   this.controls   = {};
   this.facing     = 'left';
 
@@ -11,10 +13,10 @@ var Player = function(game, indice){
   this.jumpPower = 0;
   this.jumpPressed = 0;
 
-  var controlMapping = settings.controls[indice];
+  var controlMapping = settings.controls[this.indice];
   for(var prop in controlMapping){
     var key = controlMapping[prop];
-    this.controls[prop] = game.input.keyboard.addKey(Phaser.Keyboard[key]);
+    this.controls[prop] = opts.game.input.keyboard.addKey(Phaser.Keyboard[key]);
   }
 
   this.sprite = this.game.add.sprite(32, 32, 'player');
