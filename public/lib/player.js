@@ -1,26 +1,28 @@
-// { game : game, indice : 5, name : 'Joe' }
+// { game : game, indice : 5 }
 var Player = function(opts){
-  this.score      = 0;
-  this.game       = opts.game;
-  this.sprite     = null;
-  this.indice     = opts.indice;
-  this.name       = 'Player ' + opts.indice;
-  this.controls   = {};
-  this.facing     = 'left';
+  this.score        = 0;
+  this.sprite       = null;
 
-  // jumping
-  this.isJumping = false;
-  this.jumpPower = 0;
-  this.jumpPressed = 0;
+  this.indice       = opts.indice;
+  this.game         = opts.game;
 
-  var controlMapping = settings.controls[this.indice];
+  this.name         = 'Player ' + opts.indice;
+  this.facing       = 'right';
+
+  this.controls     = {};
+
+  this.isJumping    = false;
+  this.jumpPower    = 0;
+  this.jumpPressed  = 0;
+
+  var controlMapping = bizarrio.settings.controls[opts.indice];
   for(var prop in controlMapping){
     var key = controlMapping[prop];
     this.controls[prop] = opts.game.input.keyboard.addKey(Phaser.Keyboard[key]);
   }
 
   this.sprite = this.game.add.sprite(32, 32, 'player');
-  this.sprite.name = 'player-' + this.indice;
+  this.sprite.name = 'player-' + opts.indice;
 
   return this;
 };
@@ -28,8 +30,9 @@ var Player = function(opts){
 
 Player.prototype.create = function(){
   this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+  this.sprite.body.gravity.x = 5;
 
-  this.sprite.body.bounce.y = settings.players.bounce;
+  this.sprite.body.bounce.y = bizarrio.settings.players.bounce;
   this.sprite.body.collideWorldBounds = true;
   this.sprite.body.setSize(20, 32, 5, 16);
 
@@ -44,7 +47,7 @@ Player.prototype.create = function(){
 
 
 Player.prototype.update = function(){
-  var speed = settings.players.speed;
+  var speed = bizarrio.settings.players.speed;
   this.sprite.body.velocity.x = 0;
 
   if(this.controls.speed.isDown)
@@ -83,8 +86,8 @@ Player.prototype.update = function(){
       this.isJumping = true;
       this.jumpPressed = false;
 
-      if(this.jumpPower >= settings.players.maxJumpPower)
-          this.jumpPower = settings.players.maxJumpPower;
+      if(this.jumpPower >= bizarrio.settings.players.maxJumpPower)
+          this.jumpPower = bizarrio.settings.players.maxJumpPower;
 
       this.sprite.body.velocity.y = -1*(this.jumpPower);
       this.isJumping = false;
@@ -98,6 +101,8 @@ Player.prototype.update = function(){
     // reset
     this.jumpPower = 0;
   }
+
+  this.sprite.body.acceleration.x = 0;
 
   return this;
 };
