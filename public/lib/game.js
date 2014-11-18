@@ -89,12 +89,8 @@ Game.prototype.update = function(self, opts){
     self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
-
   self.interface.physics.arcade.collide(self.characters, self.objects.ice,
-    function(character, ice){
-      self.ice.slide(character, ice);
-    }
-  );
+    Ice.prototype.slide);
 };
 
 
@@ -104,8 +100,7 @@ Game.prototype._createPlayers = function(players){
   players.forEach(function(player, i){
     var instance = new Player({
       indice  : i,
-      game    : self.interface,
-      name    : player.name
+      game    : self.interface
     });
 
     self.playerManager.add(instance.create());
@@ -141,10 +136,9 @@ Game.prototype._createObjects = function(){
   });
 
   // make the ice
-  this.ice = null;
   this.objects.ice = this.interface.add.group();
   this.map.objects.ice.forEach(function(el, i){
-    self.ice = new Ice(self, self.objects.ice, el, i);
+    new Ice(self, self.objects.ice, el, i);
   });
 
   // make the toggles

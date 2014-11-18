@@ -1,26 +1,28 @@
-// { game : game, indice : 5, name : 'Joe' }
+// { game : game, indice : 5 }
 var Player = function(opts){
-  this.score      = 0;
-  this.game       = opts.game;
-  this.sprite     = null;
-  this.indice     = opts.indice;
-  this.name       = 'Player ' + opts.indice;
-  this.controls   = {};
-  this.facing     = 'right';
+  this.score        = 0;
+  this.sprite       = null;
 
-  // jumping
-  this.isJumping = false;
-  this.jumpPower = 0;
-  this.jumpPressed = 0;
+  this.indice       = opts.indice;
+  this.game         = opts.game;
 
-  var controlMapping = bizarrio.settings.controls[this.indice];
+  this.name         = 'Player ' + opts.indice;
+  this.facing       = 'right';
+
+  this.controls     = {};
+
+  this.isJumping    = false;
+  this.jumpPower    = 0;
+  this.jumpPressed  = 0;
+
+  var controlMapping = bizarrio.settings.controls[opts.indice];
   for(var prop in controlMapping){
     var key = controlMapping[prop];
     this.controls[prop] = opts.game.input.keyboard.addKey(Phaser.Keyboard[key]);
   }
 
   this.sprite = this.game.add.sprite(32, 32, 'player');
-  this.sprite.name = 'player-' + this.indice;
+  this.sprite.name = 'player-' + opts.indice;
 
   return this;
 };

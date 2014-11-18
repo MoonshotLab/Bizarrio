@@ -3,12 +3,12 @@ var bizarrio = {
   game      : new Game(),
   debug     : true,
   settings  : {
+    slickness : 5000,
     gravity : 500,
     players : {
       speed : 90,
       bounce : 0.2,
-      maxJumpPower : 360,
-      slideAccel : 5000
+      maxJumpPower : 360
     },
     controls : [
       {

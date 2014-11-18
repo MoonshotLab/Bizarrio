@@ -22,13 +22,9 @@ var Ice = function(game, group, el, indice){
 
 
 Ice.prototype.slide = function(character, ice){
-  // this.sprite.body.acceleration.x = bizarrio.settings.slideAccel;
-  // this.sprite.body.acceleration.x = -1*bizarrio.settings.slideAccel;
-  // console.log(character.body._dx);
-  // var dx = character.body._dx;
-  var accel = bizarrio.settings.players.slideAccel;
-  // console.log(bizarrio.settings.slideAccel);
-  character.body.acceleration.x = accel;
+  var accel = bizarrio.settings.slickness;
+  if(character.body.facing == 1)
+    accel = -1*accel;
 
-  console.log('a');
+  character.body.acceleration.x = accel;
 };
