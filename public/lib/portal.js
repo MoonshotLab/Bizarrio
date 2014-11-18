@@ -35,10 +35,18 @@ var Portal = function(game, group, el, indice){
 Portal.prototype.close = function(){
   this.isOpen = false;
   this.sprite.alpha = 0.5;
+
+  bizarrio.socket.emit('update-hardware', {
+    pin : this.pin, type : this.type, state : 'off'
+  });
 };
 
 
 Portal.prototype.open = function(){
   this.sprite.alpha = 1;
   this.isOpen = true;
+
+  bizarrio.socket.emit('update-hardware', {
+    pin : this.pin, type : this.type, state : 'on'
+  });
 };

@@ -26,7 +26,7 @@ var Toggle = function(game, group, el, indice){
 
   // save so we can send to server later
   this.pin = el.properties.pin;
-  this.type = 'switch';
+  this.type = 'toggle';
 
   // report to the server so it can prepare the arduino
   bizarrio.socket.emit('register-hardware', {
@@ -49,12 +49,19 @@ Toggle.prototype.activate = function(){
   if(this.actionable){
     this.actionable = false;
 
+    var position = 'max';
     if(this.state == 'off'){
       this.state = 'on';
       this.sprite.alpha = 1;
+      position = 'max';
     } else{
       this.state = 'off';
       this.sprite.alpha = 0.5;
+      position = 'min';
     }
+
+    bizarrio.socket.emit('update-hardware', {
+      pin : this.pin, type : this.type, state : position
+    });
   }
 };
