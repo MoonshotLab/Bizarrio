@@ -41,6 +41,7 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('portal', 'assets/portal.png');
     self.interface.load.image('toggle', 'assets/toggle.png');
     self.interface.load.image('gold', 'assets/gold.png');
+    self.interface.load.image('ice', 'assets/ice.png');
   }
 };
 
@@ -49,7 +50,7 @@ Game.prototype.create = function(self, opts){
   // start physics, gravity, collision mapping, and create
   // the static platform mappings
   self.interface.physics.startSystem(Phaser.Physics.ARCADE);
-  self.interface.physics.arcade.gravity.y = settings.gravity;
+  self.interface.physics.arcade.gravity.y = bizarrio.settings.gravity;
   self.map = self.interface.add.tilemap('platforms');
   self.layers.platforms = self.map.createLayer('platforms');
   self.map.setCollisionByExclusion([]);
@@ -78,18 +79,22 @@ Game.prototype.update = function(self, opts){
       self.portalManager.transport(character, portal);
     }
   );
-
   self.interface.physics.arcade.overlap(
     self.characters, self.objects.coins, function(sprite1, sprite2){
       if(self.coinManager.collect(sprite2.name))
         self.playerManager.score(sprite1.name);
     }
   );
-
   self.playerManager.players.forEach(function(player){
     self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
+
+  self.interface.physics.arcade.collide(self.characters, self.objects.ice,
+    function(character, ice){
+      self.ice.slide(character, ice);
+    }
+  );
 };
 
 
@@ -133,6 +138,13 @@ Game.prototype._createObjects = function(){
   this.map.objects.portals.forEach(function(el, i){
     var portal = new Portal(self, self.objects.portals, el, i);
     self.portalManager.add(portal);
+  });
+
+  // make the ice
+  this.ice = null;
+  this.objects.ice = this.interface.add.group();
+  this.map.objects.ice.forEach(function(el, i){
+    self.ice = new Ice(self, self.objects.ice, el, i);
   });
 
   // make the toggles

@@ -18,20 +18,6 @@
                 {
                  "gid":3,
                  "height":0,
-                 "name":"2",
-                 "properties":
-                    {
-                     "pin":"2"
-                    },
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":120,
-                 "y":140
-                }, 
-                {
-                 "gid":3,
-                 "height":0,
                  "name":"3",
                  "properties":
                     {
@@ -55,6 +41,20 @@
                  "visible":true,
                  "width":0,
                  "x":240,
+                 "y":260
+                }, 
+                {
+                 "gid":3,
+                 "height":0,
+                 "name":"2",
+                 "properties":
+                    {
+                     "pin":"2"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
                  "y":260
                 }],
          "opacity":1,
@@ -171,8 +171,33 @@
                  "type":"",
                  "visible":true,
                  "width":0,
+                 "x":360,
+                 "y":140
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":96,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":78,
+         "name":"ice",
+         "objects":[
+                {
+                 "gid":7,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
                  "x":120,
-                 "y":120
+                 "y":140
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -288,6 +313,21 @@
          "spacing":0,
          "tileheight":80,
          "tilewidth":40
+        }, 
+        {
+         "firstgid":7,
+         "image":"..\/..\/src\/ice.png",
+         "imageheight":20,
+         "imagewidth":120,
+         "margin":0,
+         "name":"ice",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":20,
+         "tilewidth":120
         }],
  "tilewidth":20,
  "version":1,
