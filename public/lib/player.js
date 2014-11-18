@@ -80,8 +80,7 @@ Player.prototype.update = function(){
   }
 
   // JUMP!
-  if(this.jumpPressed && !this.controls.jump.isDown &&
-    this.sprite.body.onFloor()){
+  if(this.jumpPressed && !this.controls.jump.isDown){
       // when releasing jump buton
       this.isJumping = true;
       this.jumpPressed = false;
