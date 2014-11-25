@@ -7,7 +7,7 @@ var Portal = function(opts){
 
   // set the portal to closed
   this.isOpen = false;
-  this.sprite.alpha = 0.5;
+  this.sprite.alpha = 0.25;
 
   return this;
 };
@@ -18,7 +18,7 @@ Portal.prototype = Object.create(Obstacle.prototype);
 
 Portal.prototype.close = function(){
   this.isOpen = false;
-  this.sprite.alpha = 0.5;
+  this.sprite.alpha = 0.25;
 
   bizarrio.socket.emit('update-hardware', {
     pin : this.pin, type : this.type, state : 'off'

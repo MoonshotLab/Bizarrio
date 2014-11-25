@@ -37,11 +37,11 @@ Game.prototype.preload = function(self, opts){
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
 
   if(bizarrio.debug){
-    self.interface.load.image('red', 'assets/red.png');
+    self.interface.load.image('platform', 'assets/platform.png');
     self.interface.load.image('trap-door', 'assets/trap-door.png');
     self.interface.load.image('portal', 'assets/portal.png');
     self.interface.load.image('toggle', 'assets/toggle.png');
-    self.interface.load.image('gold', 'assets/gold.png');
+    self.interface.load.image('coin', 'assets/coin.png');
     self.interface.load.image('ice', 'assets/ice.png');
     self.interface.load.image('waterfall', 'assets/waterfall.png');
     self.interface.load.image('conveyor', 'assets/conveyor.png');
@@ -60,7 +60,7 @@ Game.prototype.create = function(self, opts){
 
   // color the platforms if in debug mose
   if(bizarrio.debug)
-    self.map.addTilesetImage('red');
+    self.map.addTilesetImage('platform');
 
   // init all the interface elements
   self._createPlayers(opts.players);
