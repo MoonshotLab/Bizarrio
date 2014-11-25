@@ -91,7 +91,7 @@ Game.prototype.update = function(self, opts){
         self.playerManager.score(sprite1.name);
     }
   );
-  self.playerManager.players.forEach(function(player){
+  self.playerManager.items.forEach(function(player){
     self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
@@ -120,7 +120,7 @@ Game.prototype._createPlayers = function(players){
 
 
 Game.prototype._createScoreboard = function(){
-  var scoreboard = new Scoreboard(this.playerManager.players);
+  var scoreboard = new Scoreboard(this.playerManager.items);
   this.playerManager.bind('score', scoreboard.update);
 };
 

@@ -1,32 +1,18 @@
 var PortalManager = function(){
-  this.portals = [];
+  this.init();
 };
 
 
-PortalManager.prototype.findByName = function(name){
-  var foundPortal;
-
-  this.portals.forEach(function(portal){
-    if(portal.sprite.name == name)
-      foundPortal = portal;
-  });
-
-  return foundPortal;
-};
-
-
-PortalManager.prototype.add = function(portal){
-  this.portals.push(portal);
-};
+PortalManager.prototype = Object.create(Manager.prototype);
 
 
 PortalManager.prototype.open = function(){
-  this.portals.forEach(function(portal){
+  this.items.forEach(function(portal){
     portal.close();
   });
 
-  var endPointA = this.portals[Math.floor(Math.random()*this.portals.length)];
-  var leftOvers = _.without(this.portals, endPointA);
+  var endPointA = this.items[Math.floor(Math.random()*this.items.length)];
+  var leftOvers = _.without(this.items, endPointA);
   var endPointB = leftOvers[Math.floor(Math.random()*leftOvers.length)];
 
   endPointA.open();
@@ -38,7 +24,7 @@ PortalManager.prototype.transport = function(character, portalSprite){
   var endPointA = this.findByName(portalSprite.name);
 
   if(endPointA.isOpen){
-    var leftOvers = _.without(this.portals, endPointA);
+    var leftOvers = _.without(this.items, endPointA);
     var endPointB = leftOvers[Math.floor(Math.random()*leftOvers.length)];
 
     endPointA.close();

@@ -1,23 +1,9 @@
 var ToggleManager = function(){
-  this.toggles = [];
+  this.init();
 };
 
 
-ToggleManager.prototype.findByName = function(name){
-  var foundToggle;
-
-  this.toggles.forEach(function(toggle){
-    if(toggle.sprite.name == name)
-      foundToggle = toggle;
-  });
-
-  return foundToggle;
-};
-
-
-ToggleManager.prototype.add = function(toggle){
-  this.toggles.push(toggle);
-};
+ToggleManager.prototype = Object.create(Manager.prototype);
 
 
 ToggleManager.prototype.activate = function(character, toggle){
