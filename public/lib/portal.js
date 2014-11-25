@@ -1,35 +1,19 @@
-var Portal = function(game, group, el, indice){
+var Portal = function(opts){
 
-  var imagePath;
-  if(bizarrio.debug)
-    imagePath = 'portal';
-  this.sprite = group.create(el.x, el.y - game.map.tileHeight, imagePath);
+  this.type = 'portal';
+  if(bizarrio.debug) opts.imagePath = 'portal';
 
-  // set the sprite name
-  this.name = 'portal-' + indice;
-  this.sprite.name = this.name;
+  this.init(opts);
 
   // set the portal to closed
   this.isOpen = false;
   this.sprite.alpha = 0.5;
 
-  // no gravity, sits still
-  game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-  this.sprite.body.allowGravity = false;
-  this.sprite.body.immovable = true;
-
-  // save so we can send to server later
-  this.pin = el.properties.pin;
-  this.type = 'portal';
-
-  // report to the server so it can prepare the arduino
-  bizarrio.socket.emit('register-hardware', {
-    'type'  : this.type,
-    'pin'   : this.pin
-  });
-
   return this;
 };
+
+
+Portal.prototype = Object.create(Obstacle.prototype);
 
 
 Portal.prototype.close = function(){

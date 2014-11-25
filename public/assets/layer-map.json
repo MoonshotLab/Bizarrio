@@ -13,7 +13,7 @@
         }, 
         {
          "height":78,
-         "name":"trap-doors",
+         "name":"trapDoors",
          "objects":[
                 {
                  "gid":3,

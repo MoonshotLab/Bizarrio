@@ -1,15 +1,11 @@
-var Toggle = function(game, group, el, indice){
+var Toggle = function(opts){
 
-  var imagePath;
-  if(bizarrio.debug)
-    imagePath = 'toggle';
+  if(bizarrio.debug) opts.imagePath = 'toggle';
+  // this needs to change, i don't know why it's required
+  opts.y = (opts.el.y - opts.game.map.tileHeight*4);
+  this.type = 'toggle';
 
-  var y = (el.y - game.map.tileHeight*4);
-  this.sprite = group.create(el.x, y, imagePath);
-
-  // set the sprite name
-  this.name = 'toggle-' + indice;
-  this.sprite.name = this.name;
+  this.init(opts);
 
   // set the portal to closed
   this.state = 'on';
@@ -19,23 +15,11 @@ var Toggle = function(game, group, el, indice){
   this.timer = null;
   this.actionable = true;
 
-  // no gravity, sits still
-  game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-  this.sprite.body.allowGravity = false;
-  this.sprite.body.immovable = true;
-
-  // save so we can send to server later
-  this.pin = el.properties.pin;
-  this.type = 'toggle';
-
-  // report to the server so it can prepare the arduino
-  bizarrio.socket.emit('register-hardware', {
-    'type'  : this.type,
-    'pin'   : this.pin
-  });
-
   return this;
 };
+
+
+Toggle.prototype = Object.create(Obstacle.prototype);
 
 
 Toggle.prototype.activate = function(){

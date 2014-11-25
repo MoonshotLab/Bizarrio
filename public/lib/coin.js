@@ -1,32 +1,18 @@
-var Coin = function(game, group, el, indice){
-
-  var imagePath;
-  if(bizarrio.debug)
-    imagePath = 'gold';
-  this.sprite = group.create(el.x, el.y - game.map.tileHeight, imagePath);
-
-  // no gravity, sits still
-  game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-  this.sprite.body.allowGravity = false;
-
-  // set the state to disabled
-  this.name = 'coin-' + indice;
-  this.sprite.alive = false;
-  this.sprite.alpha = 0;
-  this.sprite.name = this.name;
-
-  // save so we can send to server later
-  this.pin = el.properties.pin;
+var Coin = function(opts){
+  if(bizarrio.debug) opts.imagePath = 'gold';
   this.type = 'coin';
 
-  // report to the server so it can prepare the arduino
-  bizarrio.socket.emit('register-hardware', {
-    'type'  : this.type,
-    'pin'   : this.pin
-  });
+  this.init(opts);
+
+  // set the state to disabled
+  this.sprite.alive = false;
+  this.sprite.alpha = 0;
 
   return this;
 };
+
+
+Coin.prototype = Object.create(Obstacle.prototype);
 
 
 Coin.prototype.toggle = function(){

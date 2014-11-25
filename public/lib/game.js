@@ -128,34 +128,57 @@ Game.prototype._createScoreboard = function(){
 Game.prototype._createObjects = function(){
   var self = this;
 
-  // make the trap doors
   this.objects.trapDoors = this.interface.add.group();
-  this.map.objects['trap-doors'].forEach(function(el, i){
-    if(i === 0 || i === 1 || i === 2 ){
-    var trapDoor = new TrapDoor(self, self.objects.trapDoors, el);
+  this.objects.portals = this.interface.add.group();
+  this.objects.ice = this.interface.add.group();
+  this.objects.toggles = this.interface.add.group();
+  this.objects.waterfalls = this.interface.add.group();
+  this.objects.coins = this.interface.add.group();
+
+  // make the trap doors
+  this.map.objects.trapDoors.forEach(function(el, i){
+    var trapDoor = new TrapDoor({
+      game    : self,
+      group   : self.objects.trapDoors,
+      el      : el,
+      indice  : i
+    });
+
     setTimeout(function(){
       trapDoor.toggle({ timer : 3000 });
     }, i*1500);
-    }
   });
 
   // make the portals
-  this.objects.portals = this.interface.add.group();
   this.map.objects.portals.forEach(function(el, i){
-    var portal = new Portal(self, self.objects.portals, el, i);
+    var portal = new Portal({
+      game    : self,
+      group   : self.objects.portals,
+      el      : el,
+      indice  : i
+    });
+
     self.portalManager.add(portal);
   });
 
   // make the ice
-  this.objects.ice = this.interface.add.group();
   this.map.objects.ice.forEach(function(el, i){
-    new Ice(self, self.objects.ice, el, i);
+    new Ice({
+      game    : self,
+      group   : self.objects.ice,
+      el      : el,
+      indice  : i
+    });
   });
 
   // make the toggles
-  this.objects.toggles = this.interface.add.group();
   this.map.objects.toggles.forEach(function(el, i){
-    var toggle = new Toggle(self, self.objects.toggles, el, i);
+    var toggle = new Toggle({
+      game    : self,
+      group   : self.objects.toggles,
+      el      : el,
+      indice  : i
+    });
     self.toggleManager.add(toggle);
   });
   this.toggleManager.bind('activated', function(){
@@ -163,15 +186,24 @@ Game.prototype._createObjects = function(){
   });
 
   // make the waterfalls
-  this.objects.waterfalls = this.interface.add.group();
   this.map.objects.waterfalls.forEach(function(el, i){
-    new Waterfall(self, self.objects.waterfalls, el, i);
+    new Waterfall({
+      game    : self,
+      group   : self.objects.waterfalls,
+      el      : el,
+      indice  : i
+    });
   });
 
   // make the coins
-  this.objects.coins = this.interface.add.group();
   this.map.objects.coins.forEach(function(el, i){
-    var coin = new Coin(self, self.objects.coins, el, i);
+    var coin = new Coin({
+      game    : self,
+      group   : self.objects.coins,
+      el      : el,
+      indice  : i
+    });
+
     self.coinManager.add(coin);
 
     if(i === 0) coin.toggle();

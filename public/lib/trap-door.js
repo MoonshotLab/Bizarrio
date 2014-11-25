@@ -1,28 +1,19 @@
-var TrapDoor = function(game, group, el){
-  this.originalY = el.y - game.map.tileHeight;
+var TrapDoor = function(opts){
+  this.type = 'trap-door';
+  this.originalY = opts.el.y - opts.game.map.tileHeight;
 
-  var imagePath;
-  if(bizarrio.debug)
-    imagePath = 'trap-door';
-  this.sprite = group.create(el.x, this.originalY, imagePath);
+  if(bizarrio.debug) opts.imagePath = 'trap-door';
 
-  // make it behave like a platform
-  game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+  this.init(opts);
+
   this.sprite.body.allowGravity = false;
   this.sprite.body.immovable = true;
 
-  // save so we can send to server later
-  this.pin = el.properties.pin;
-  this.type = 'trap-door';
-
-  // report to the server so it can prepare the arduino
-  bizarrio.socket.emit('register-hardware', {
-    'type'  : this.type,
-    'pin'   : this.pin
-  });
-
   return this;
 };
+
+
+TrapDoor.prototype = Object.create(Obstacle.prototype);
 
 
 TrapDoor.prototype.toggle = function(opts){

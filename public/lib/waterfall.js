@@ -1,26 +1,18 @@
-var Waterfall = function(game, group, el, indice){
-  var imagePath;
-  if(bizarrio.debug)
-    imagePath = 'waterfall';
-
-  var y = (el.y - game.map.tileHeight*18);
-  this.sprite = group.create(el.x, y, imagePath);
-
-  // set the sprite name
-  this.name = 'waterfall-' + indice;
-  this.sprite.name = this.name;
-
-  // no gravity, sits still
-  game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-  this.sprite.body.allowGravity = false;
-  this.sprite.body.immovable = true;
-
-  // save so we can send to server later
-  this.pin = el.properties.pin;
+var Waterfall = function(opts){
+  if(bizarrio.debug) opts.imagePath = 'waterfall';
   this.type = 'waterfall';
+  // this needs to change, i don't know why it's required
+  opts.y = (opts.el.y - opts.game.map.tileHeight*18);
+
+  this.init(opts);
+
+  this.sprite.alpha = 0.5;
 
   return this;
 };
+
+
+Waterfall.prototype = Object.create(Obstacle.prototype);
 
 
 Waterfall.prototype.freeze = function(character, waterfall){
