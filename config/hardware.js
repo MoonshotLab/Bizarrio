@@ -1,11 +1,11 @@
 module.exports = function(){
   return {
     'trap-door' : {
-      'min'       : 25,
+      'min'       : 140,
       'max'       : 50,
       'mode'      : 'SERVO',
       'action'    : 'servoWrite',
-      'reset'     : 25
+      'reset'     : 50
     },
     'coin'      : {
       'on'        : 1,
@@ -22,11 +22,11 @@ module.exports = function(){
       'reset'     : 0
     },
     'toggle' : {
-      'min'       : 25,
-      'max'       : 50,
+      'min'       : 30,
+      'max'       : 70,
       'mode'      : 'SERVO',
       'action'    : 'servoWrite',
-      'reset'     : 25
+      'reset'     : 70
     },
   };
 };
