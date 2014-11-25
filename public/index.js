@@ -1,16 +1,19 @@
 var bizarrio = {
-  socket    : io(),
-  game      : new Game(),
-  debug     : true,
-  settings  : {
-    slickness : 5000,
-    gravity : 500,
-    players : {
-      speed : 90,
-      bounce : 0.2,
-      maxJumpPower : 360
+  socket      : io(),
+  game        : new Game(),
+  debug       : true,
+
+  settings    : {
+    iceSlickness    : 5000,
+    conveyorSpeed   : 7000,
+    gravity         : 500,
+    players         : {
+      speed             : 90,
+      bounce            : 0.2,
+      maxJumpPower      : 360
     },
-    controls : [
+
+    controls        : [
       {
         'left'  : 'A',
         'right' : 'D',
@@ -38,6 +41,7 @@ var bizarrio = {
     ]
   }
 };
+
 
 bizarrio.game.init({
   players : [{}]

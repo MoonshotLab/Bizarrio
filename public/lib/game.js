@@ -1,14 +1,15 @@
 var Game = function(){
-  this.playerManager  = new PlayerManager();
-  this.coinManager    = new CoinManager();
-  this.portalManager  = new PortalManager();
-  this.toggleManager  = new ToggleManager();
+  this.playerManager    = new PlayerManager();
+  this.coinManager      = new CoinManager();
+  this.portalManager    = new PortalManager();
+  this.toggleManager    = new ToggleManager();
+  this.conveyorManager  = new ConveyorManager();
 
-  this.interface      = null;
-  this.map            = null;
+  this.interface        = null;
+  this.map              = null;
 
-  this.layers         = {};
-  this.objects        = {};
+  this.layers           = {};
+  this.objects          = {};
 
   return this;
 };
@@ -43,6 +44,7 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('gold', 'assets/gold.png');
     self.interface.load.image('ice', 'assets/ice.png');
     self.interface.load.image('waterfall', 'assets/waterfall.png');
+    self.interface.load.image('conveyor', 'assets/conveyor.png');
   }
 };
 
@@ -70,36 +72,41 @@ Game.prototype.create = function(self, opts){
 Game.prototype.update = function(self, opts){
   self.interface.physics.arcade.collide(self.characters, self.layers.platforms);
   self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
+
   self.interface.physics.arcade.overlap(self.characters, self.objects.toggles,
     function(character, toggle){
       self.toggleManager.activate(character, toggle);
     }
   );
-  self.interface.physics.arcade.overlap(self.characters, self.objects.toggles,
-    function(character, toggle){
-      self.toggleManager.activate(character, toggle);
-    }
-  );
+
   self.interface.physics.arcade.collide(self.characters, self.objects.portals,
     function(character, portal){
       self.portalManager.transport(character, portal);
     }
   );
+
   self.interface.physics.arcade.overlap(
     self.characters, self.objects.coins, function(sprite1, sprite2){
       if(self.coinManager.collect(sprite2.name))
         self.playerManager.score(sprite1.name);
     }
   );
+
   self.playerManager.items.forEach(function(player){
     self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
 
-  self.interface.physics.arcade.collide(self.characters, self.objects.ice,
-    Ice.prototype.slide);
-  self.interface.physics.arcade.overlap(self.characters, self.objects.waterfalls,
-    Waterfall.prototype.freeze);
+  self.interface.physics.arcade.collide(self.characters, self.objects.conveyors,
+    function(character, conveyor){
+      self.conveyorManager.accelerate(character, conveyor);
+    }
+  );
+
+  self.interface.physics.arcade.collide(
+    self.characters, self.objects.ice, Ice.prototype.slide );
+  self.interface.physics.arcade.overlap(
+    self.characters, self.objects.waterfalls, Waterfall.prototype.freeze );
 };
 
 
@@ -133,6 +140,7 @@ Game.prototype._createObjects = function(){
   this.objects.ice = this.interface.add.group();
   this.objects.toggles = this.interface.add.group();
   this.objects.waterfalls = this.interface.add.group();
+  this.objects.conveyors = this.interface.add.group();
   this.objects.coins = this.interface.add.group();
 
   // make the trap doors
@@ -193,6 +201,16 @@ Game.prototype._createObjects = function(){
       el      : el,
       indice  : i
     });
+  });
+
+  // make the conveyors
+  this.map.objects.conveyors.forEach(function(el, i){
+    self.conveyorManager.add(new Conveyor({
+      game    : self,
+      group   : self.objects.conveyors,
+      el      : el,
+      indice  : i
+    }));
   });
 
   // make the coins

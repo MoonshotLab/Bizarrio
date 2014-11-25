@@ -181,20 +181,59 @@
         {
          "height":78,
          "name":"waterfalls",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":96,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":78,
+         "name":"conveyors",
          "objects":[
                 {
-                 "gid":8,
+                 "gid":9,
                  "height":0,
                  "name":"",
                  "properties":
                     {
-                     "pin":"25"
+                     "direction":"right"
                     },
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":240,
+                 "x":280,
+                 "y":500
+                }, 
+                {
+                 "gid":9,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+                     "direction":"left"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":440,
                  "y":420
+                }, 
+                {
+                 "gid":9,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+                     "direction":"right"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":260,
+                 "y":340
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -340,6 +379,21 @@
          "spacing":0,
          "tileheight":360,
          "tilewidth":120
+        }, 
+        {
+         "firstgid":9,
+         "image":"..\/..\/src\/conveyor.png",
+         "imageheight":20,
+         "imagewidth":240,
+         "margin":0,
+         "name":"conveyor",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":20,
+         "tilewidth":240
         }],
  "tilewidth":20,
  "version":1,

@@ -24,6 +24,9 @@
  <tileset firstgid="8" name="waterfall" tilewidth="120" tileheight="360">
   <image source="waterfall.png" width="120" height="360"/>
  </tileset>
+ <tileset firstgid="9" name="conveyor" tilewidth="240" tileheight="20">
+  <image source="conveyor.png" width="240" height="20"/>
+ </tileset>
  <layer name="platforms" width="96" height="78">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -155,10 +158,21 @@
   </object>
  </objectgroup>
  <objectgroup name="ice" width="96" height="78" visible="0"/>
- <objectgroup name="waterfalls" width="96" height="78">
-  <object gid="8" x="240" y="420">
+ <objectgroup name="waterfalls" width="96" height="78"/>
+ <objectgroup name="conveyors" width="96" height="78">
+  <object gid="9" x="280" y="500">
    <properties>
-    <property name="pin" value="25"/>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object gid="9" x="440" y="420">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object gid="9" x="260" y="340">
+   <properties>
+    <property name="direction" value="right"/>
    </properties>
   </object>
  </objectgroup>
