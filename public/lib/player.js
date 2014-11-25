@@ -2,6 +2,8 @@
 var Player = function(opts){
   this.score        = 0;
   this.sprite       = null;
+  this.isFrozen     = false;
+  this.freezeTimer  = null;
 
   this.indice       = opts.indice;
   this.game         = opts.game;
@@ -36,72 +38,88 @@ Player.prototype.create = function(){
   this.sprite.body.collideWorldBounds = true;
   this.sprite.body.setSize(20, 32, 5, 16);
 
-  this.sprite.x = 400;
+  this.sprite.x = 125;
 
   this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
   this.sprite.animations.add('turn', [4], 20, true);
   this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
+  this.sprite.animations.add('frozen', [4], 10, true);
 
   return this;
 };
 
 
+Player.prototype.freeze = function(){
+  var self = this;
+  this.isFrozen = true;
+  clearTimeout(this.freezeTimer);
+  self.sprite.animations.play('frozen');
+
+  this.freezeTimer = setTimeout(function(){
+    self.isFrozen = false;
+  }, 1000);
+};
+
+
 Player.prototype.update = function(){
   var speed = bizarrio.settings.players.speed;
-  this.sprite.body.velocity.x = 0;
 
-  if(this.controls.speed.isDown)
-    speed = speed*3;
+  if(!this.isFrozen){
+    this.sprite.body.velocity.x = 0;
 
-  // Move character left and right
-  if(this.controls.left.isDown){
-    this.sprite.body.velocity.x = -1*speed;
+    if(this.controls.speed.isDown)
+      speed = speed*3;
 
-    if(this.facing != 'left'){
-      this.sprite.animations.play('left');
-      this.facing = 'left';
+    // Move character left and right
+    if(this.controls.left.isDown){
+      this.sprite.body.velocity.x = -1*speed;
+
+      if(this.facing != 'left'){
+        this.sprite.animations.play('left');
+        this.facing = 'left';
+      }
+    } else if(this.controls.right.isDown){
+      this.sprite.body.velocity.x = speed;
+
+      if(this.facing != 'right'){
+        this.sprite.animations.play('right');
+        this.facing = 'right';
+      }
+    } else{
+      if(this.facing != 'idle') {
+        this.sprite.animations.stop();
+
+        if(this.facing == 'left') this.sprite.frame = 0;
+        else this.sprite.frame = 5;
+
+        this.facing = 'idle';
+      }
     }
-  } else if(this.controls.right.isDown){
-    this.sprite.body.velocity.x = speed;
 
-    if(this.facing != 'right'){
-      this.sprite.animations.play('right');
-      this.facing = 'right';
+    // JUMP!
+    if(this.jumpPressed && !this.controls.jump.isDown){
+
+        // when releasing jump buton
+        this.isJumping = true;
+        this.jumpPressed = false;
+
+        if(this.jumpPower >= bizarrio.settings.players.maxJumpPower)
+            this.jumpPower = bizarrio.settings.players.maxJumpPower;
+
+        this.sprite.body.velocity.y = -1*(this.jumpPower);
+        this.isJumping = false;
+        this.jumpPower = 40;
+    } else if(this.controls.jump.isDown){
+        // building power
+        this.jumpPressed = true;
+        this.jumpPower += 30;
+    } else{
+      // reset
+      this.jumpPower = 0;
     }
-  } else{
-    if(this.facing != 'idle') {
-      this.sprite.animations.stop();
 
-      if(this.facing == 'left') this.sprite.frame = 0;
-      else this.sprite.frame = 5;
-
-      this.facing = 'idle';
-    }
+    this.sprite.body.acceleration.x = 0;
   }
-
-  // JUMP!
-  if(this.jumpPressed && !this.controls.jump.isDown){
-      // when releasing jump buton
-      this.isJumping = true;
-      this.jumpPressed = false;
-
-      if(this.jumpPower >= bizarrio.settings.players.maxJumpPower)
-          this.jumpPower = bizarrio.settings.players.maxJumpPower;
-
-      this.sprite.body.velocity.y = -1*(this.jumpPower);
-      this.isJumping = false;
-      this.jumpPower = 40;
-  } else if(this.controls.jump.isDown &&
-    this.sprite.body.onFloor()){
-      // building power
-      this.jumpPressed = true;
-      this.jumpPower += 30;
-  } else{
-    // reset
-    this.jumpPower = 0;
-  }
-
-  this.sprite.body.acceleration.x = 0;
 
   return this;
 };

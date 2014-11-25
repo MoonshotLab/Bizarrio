@@ -42,6 +42,7 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('toggle', 'assets/toggle.png');
     self.interface.load.image('gold', 'assets/gold.png');
     self.interface.load.image('ice', 'assets/ice.png');
+    self.interface.load.image('waterfall', 'assets/waterfall.png');
   }
 };
 
@@ -74,6 +75,11 @@ Game.prototype.update = function(self, opts){
       self.toggleManager.activate(character, toggle);
     }
   );
+  self.interface.physics.arcade.overlap(self.characters, self.objects.toggles,
+    function(character, toggle){
+      self.toggleManager.activate(character, toggle);
+    }
+  );
   self.interface.physics.arcade.collide(self.characters, self.objects.portals,
     function(character, portal){
       self.portalManager.transport(character, portal);
@@ -89,8 +95,11 @@ Game.prototype.update = function(self, opts){
     self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
+
   self.interface.physics.arcade.collide(self.characters, self.objects.ice,
     Ice.prototype.slide);
+  self.interface.physics.arcade.overlap(self.characters, self.objects.waterfalls,
+    Waterfall.prototype.freeze);
 };
 
 
@@ -122,10 +131,12 @@ Game.prototype._createObjects = function(){
   // make the trap doors
   this.objects.trapDoors = this.interface.add.group();
   this.map.objects['trap-doors'].forEach(function(el, i){
+    if(i === 0 || i === 1 || i === 2 ){
     var trapDoor = new TrapDoor(self, self.objects.trapDoors, el);
     setTimeout(function(){
-      trapDoor.toggle({ timer : 1000 });
-    }, i*250);
+      trapDoor.toggle({ timer : 3000 });
+    }, i*1500);
+    }
   });
 
   // make the portals
@@ -149,6 +160,12 @@ Game.prototype._createObjects = function(){
   });
   this.toggleManager.bind('activated', function(){
     self.portalManager.open();
+  });
+
+  // make the waterfalls
+  this.objects.waterfalls = this.interface.add.group();
+  this.map.objects.waterfalls.forEach(function(el, i){
+    new Waterfall(self, self.objects.waterfalls, el, i);
   });
 
   // make the coins
