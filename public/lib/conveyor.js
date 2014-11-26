@@ -9,7 +9,7 @@ var Conveyor = function(opts){
   // set default direction and turn motor on
   this.direction = opts.el.properties.direction || 'left';
   bizarrio.socket.emit('update-hardware', {
-    pin : self.pin, type : self.type, state : 'on'
+    pin : this.pin, type : this.type, state : 'on'
   });
 
   // store some properties in the sprite for easy access
