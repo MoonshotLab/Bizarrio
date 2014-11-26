@@ -192,9 +192,21 @@
   <object gid="4" x="960" y="600"/>
  </objectgroup>
  <objectgroup name="conveyors" width="96" height="78">
-  <object gid="6" x="720" y="720"/>
-  <object gid="6" x="960" y="840"/>
-  <object gid="6" x="720" y="960"/>
+  <object gid="6" x="720" y="720">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object gid="6" x="960" y="840">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object gid="6" x="720" y="960">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="background" width="96" height="78" visible="0">
   <data encoding="csv">

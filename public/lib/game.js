@@ -70,21 +70,29 @@ Game.prototype.create = function(self, opts){
 
 
 Game.prototype.update = function(self, opts){
+  // Platforms
   self.interface.physics.arcade.collide(self.characters, self.layers.platforms);
+
+  // Trap Doors
   self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
 
-  self.interface.physics.arcade.overlap(self.characters, self.objects.toggles,
+  // Toggles
+  self.interface.physics.arcade.overlap(
+    self.characters, self.objects.toggles,
     function(character, toggle){
       self.toggleManager.activate(character, toggle);
     }
   );
 
-  self.interface.physics.arcade.collide(self.characters, self.objects.portals,
+  // Portals
+  self.interface.physics.arcade.collide(
+    self.characters, self.objects.portals,
     function(character, portal){
       self.portalManager.transport(character, portal);
     }
   );
 
+  // Coins
   self.interface.physics.arcade.overlap(
     self.characters, self.objects.coins, function(sprite1, sprite2){
       if(self.coinManager.collect(sprite2.name))
@@ -92,21 +100,31 @@ Game.prototype.update = function(self, opts){
     }
   );
 
+  // Ice
+  self.interface.physics.arcade.collide(self.characters, self.objects.ice,
+    function(character, ice){ character.onIce = true; }
+  );
+
+  // Waterfall
+  self.interface.physics.arcade.overlap(self.characters, self.objects.waterfalls,
+    function(character, waterfall){ character.isFrozen = true; }
+  );
+
+  // Conveyor Belts
+  self.interface.physics.arcade.collide(self.characters, self.objects.conveyors,
+    function(character, conveyor){
+      character.conveyor = {
+        dir   : conveyor.direction,
+        accel : conveyor.speed
+      };
+    }
+  );
+
+  // Player Updating
   self.playerManager.items.forEach(function(player){
     self.interface.physics.arcade.collide(self.characters, player.sprite);
     player.update();
   });
-
-  self.interface.physics.arcade.collide(self.characters, self.objects.conveyors,
-    function(character, conveyor){
-      self.conveyorManager.accelerate(character, conveyor);
-    }
-  );
-
-  self.interface.physics.arcade.collide(
-    self.characters, self.objects.ice, Ice.prototype.slide );
-  self.interface.physics.arcade.overlap(
-    self.characters, self.objects.waterfalls, Waterfall.prototype.freeze );
 };
 
 
@@ -114,12 +132,12 @@ Game.prototype._createPlayers = function(players){
   var self = this;
 
   players.forEach(function(player, i){
-    var instance = new Player({
-      indice  : i,
-      game    : self.interface
-    });
-
-    self.playerManager.add(instance.create());
+    self.playerManager.add(
+      new Player({
+        indice  : i,
+        game    : self.interface
+      })
+    );
   });
 
   self.characters = self.playerManager.getSprites();

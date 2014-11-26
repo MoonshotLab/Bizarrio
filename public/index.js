@@ -7,11 +7,10 @@ var bizarrio = {
     iceSlickness    : 5000,
     conveyorSpeed   : 7000,
     gravity         : 500,
-    players         : {
-      speed             : 90,
-      bounce            : 0.2,
-      maxJumpPower      : 360
-    },
+    freezeLength    : 1500,
+    playerSpeed     : 90,
+    playerBounce    : 0.2,
+    playerJumpPow   : 360,
 
     controls        : [
       {

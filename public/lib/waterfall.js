@@ -13,9 +13,3 @@ var Waterfall = function(opts){
 
 
 Waterfall.prototype = Object.create(Obstacle.prototype);
-
-
-Waterfall.prototype.freeze = function(character, waterfall){
-  var player = bizarrio.game.playerManager.findByName(character.name);
-  player.freeze();
-};

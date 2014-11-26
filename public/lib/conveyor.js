@@ -1,6 +1,7 @@
 var Conveyor = function(opts){
 
   this.type = 'conveyor';
+  this.speed = bizarrio.settings.conveyorSpeed;
   if(bizarrio.debug) opts.imagePath = 'conveyor';
 
   this.init(opts);
@@ -11,16 +12,13 @@ var Conveyor = function(opts){
     pin : self.pin, type : self.type, state : 'on'
   });
 
+  // store some properties in the sprite for easy access
+  // and setting within the game class
+  this.sprite.speed = this.speed;
+  this.sprite.direction = this.direction;
+
   return this;
 };
 
 
 Conveyor.prototype = Object.create(Obstacle.prototype);
-
-
-Conveyor.prototype.slide = function(character, ice){
-  var accel = bizarrio.settings.conveyorSpeed;
-  if(this.direction == 'left') accel = -1*accel;
-
-  character.body.acceleration.x = accel;
-};

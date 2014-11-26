@@ -1,7 +1,7 @@
 var Scoreboard = function(players){
   var $players = $('#scoreboard').find('.players');
   var template = _.template([
-    '<li class="player-<%= indice %>">',
+    '<li class="<%= cssSelector %>">',
       '<span class="name">',
         '<%= name %>:',
       '</span>',
@@ -16,7 +16,7 @@ var Scoreboard = function(players){
 
 
 Scoreboard.prototype.update = function(player){
-  var $player = $('#scoreboard').find('.player-' + player.indice);
+  var $player = $('#scoreboard').find('.' + player.cssSelector);
   var $selector = $player.find('.score');
   $selector.text(player.score);
 };
