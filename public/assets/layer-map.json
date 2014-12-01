@@ -21,7 +21,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"2"
                     },
                  "type":"",
                  "visible":true,
@@ -35,7 +36,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"3"
                     },
                  "type":"",
                  "visible":true,
@@ -49,7 +51,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"4"
                     },
                  "type":"",
                  "visible":true,
@@ -63,7 +66,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"5"
                     },
                  "type":"",
                  "visible":true,
@@ -77,7 +81,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"6"
                     },
                  "type":"",
                  "visible":true,
@@ -91,7 +96,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"7"
                     },
                  "type":"",
                  "visible":true,
@@ -105,7 +111,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"8"
                     },
                  "type":"",
                  "visible":true,
@@ -119,7 +126,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"9"
                     },
                  "type":"",
                  "visible":true,
@@ -133,7 +141,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"2"
                     },
                  "type":"",
                  "visible":true,
@@ -147,7 +156,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"3"
                     },
                  "type":"",
                  "visible":true,
@@ -161,7 +171,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"4"
                     },
                  "type":"",
                  "visible":true,
@@ -175,7 +186,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"5"
                     },
                  "type":"",
                  "visible":true,
@@ -189,7 +201,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"6"
                     },
                  "type":"",
                  "visible":true,
@@ -203,7 +216,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"7"
                     },
                  "type":"",
                  "visible":true,
@@ -217,7 +231,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"8"
                     },
                  "type":"",
                  "visible":true,
@@ -231,7 +246,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"9"
                     },
                  "type":"",
                  "visible":true,
@@ -245,7 +261,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"10"
                     },
                  "type":"",
                  "visible":true,
@@ -270,7 +287,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"53"
                     },
                  "type":"",
                  "visible":true,
@@ -284,7 +302,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"52"
                     },
                  "type":"",
                  "visible":true,
@@ -298,7 +317,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"51"
                     },
                  "type":"",
                  "visible":true,
@@ -312,7 +332,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"49"
                     },
                  "type":"",
                  "visible":true,
@@ -326,7 +347,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"48"
                     },
                  "type":"",
                  "visible":true,
@@ -340,7 +362,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"50"
                     },
                  "type":"",
                  "visible":true,
@@ -354,7 +377,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"47"
                     },
                  "type":"",
                  "visible":true,
@@ -368,7 +392,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"46"
                     },
                  "type":"",
                  "visible":true,
@@ -382,7 +407,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"45"
                     },
                  "type":"",
                  "visible":true,
@@ -396,7 +422,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"43"
                     },
                  "type":"",
                  "visible":true,
@@ -410,7 +437,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"44"
                     },
                  "type":"",
                  "visible":true,
@@ -424,7 +452,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"42"
                     },
                  "type":"",
                  "visible":true,
@@ -438,7 +467,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"41"
                     },
                  "type":"",
                  "visible":true,
@@ -452,7 +482,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"40"
                     },
                  "type":"",
                  "visible":true,
@@ -466,7 +497,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"39"
                     },
                  "type":"",
                  "visible":true,
@@ -480,7 +512,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"29"
                     },
                  "type":"",
                  "visible":true,
@@ -494,7 +527,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"31"
                     },
                  "type":"",
                  "visible":true,
@@ -508,7 +542,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"42"
                     },
                  "type":"",
                  "visible":true,
@@ -522,7 +557,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"40"
                     },
                  "type":"",
                  "visible":true,
@@ -536,7 +572,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"38"
                     },
                  "type":"",
                  "visible":true,
@@ -550,7 +587,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"39"
                     },
                  "type":"",
                  "visible":true,
@@ -564,7 +602,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"41"
                     },
                  "type":"",
                  "visible":true,
@@ -578,7 +617,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"43"
                     },
                  "type":"",
                  "visible":true,
@@ -592,7 +632,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"44"
                     },
                  "type":"",
                  "visible":true,
@@ -606,7 +647,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"46"
                     },
                  "type":"",
                  "visible":true,
@@ -620,7 +662,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"45"
                     },
                  "type":"",
                  "visible":true,
@@ -634,7 +677,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"47"
                     },
                  "type":"",
                  "visible":true,
@@ -648,7 +692,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"48"
                     },
                  "type":"",
                  "visible":true,
@@ -662,7 +707,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"49"
                     },
                  "type":"",
                  "visible":true,
@@ -676,7 +722,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"50"
                     },
                  "type":"",
                  "visible":true,
@@ -690,7 +737,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"52"
                     },
                  "type":"",
                  "visible":true,
@@ -704,7 +752,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"51"
                     },
                  "type":"",
                  "visible":true,
@@ -718,7 +767,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"53"
                     },
                  "type":"",
                  "visible":true,
@@ -732,7 +782,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"38"
                     },
                  "type":"",
                  "visible":true,
@@ -746,7 +797,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"33"
                     },
                  "type":"",
                  "visible":true,
@@ -771,7 +823,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"11"
                     },
                  "type":"",
                  "visible":true,
@@ -785,7 +838,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"10"
                     },
                  "type":"",
                  "visible":true,
@@ -799,7 +853,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"12"
                     },
                  "type":"",
                  "visible":true,
@@ -824,7 +879,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"28"
                     },
                  "type":"",
                  "visible":true,
@@ -838,7 +894,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"31"
                     },
                  "type":"",
                  "visible":true,
@@ -852,7 +909,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"37"
                     },
                  "type":"",
                  "visible":true,
@@ -866,7 +924,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"36"
                     },
                  "type":"",
                  "visible":true,
@@ -880,7 +939,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"0",
+                     "pin":"27"
                     },
                  "type":"",
                  "visible":true,
@@ -1028,7 +1088,8 @@
                  "name":"",
                  "properties":
                     {
-
+                     "arduino":"1",
+                     "pin":"32"
                     },
                  "type":"",
                  "visible":true,
@@ -1053,7 +1114,9 @@
                  "name":"",
                  "properties":
                     {
-                     "direction":"right"
+                     "arduino":"1",
+                     "direction":"right",
+                     "pin":"33"
                     },
                  "type":"",
                  "visible":true,
@@ -1067,7 +1130,9 @@
                  "name":"",
                  "properties":
                     {
-                     "direction":"left"
+                     "arduino":"1",
+                     "direction":"left",
+                     "pin":"34"
                     },
                  "type":"",
                  "visible":true,
@@ -1081,7 +1146,9 @@
                  "name":"",
                  "properties":
                     {
-                     "direction":"right"
+                     "arduino":"1",
+                     "direction":"right",
+                     "pin":"35"
                     },
                  "type":"",
                  "visible":true,

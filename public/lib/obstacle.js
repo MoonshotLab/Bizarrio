@@ -44,10 +44,12 @@ Obstacle.prototype.init = function(opts){
   });
 
   if(bizarrio.debug){
-    bizarrio.game.interface.add.text(
-      opts.el.x, y, opts.el.properties.pin,
-      { font : '45px Arial', fill : '#ffffff', align : 'center' }
-    );
+    if(opts.el.properties.arduino && opts.el.properties.pin){
+      bizarrio.game.interface.add.text(
+        opts.el.x - 10, y - 5, opts.el.properties.arduino + ' - ' + opts.el.properties.pin,
+        { font : '30px Arial', fill : '#ffffff', align : 'center' }
+      );
+    }
 
     var self = this;
     this.sprite.inputEnabled = true;
