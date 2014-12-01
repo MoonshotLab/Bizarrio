@@ -2,6 +2,7 @@ var bizarrio = {
   socket      : io(),
   game        : new Game(),
   debug       : true,
+  project     : true,
 
   settings    : {
     iceSlickness    : 5000,

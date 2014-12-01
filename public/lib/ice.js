@@ -1,9 +1,13 @@
 var Ice = function(opts){
+  if(bizarrio.project || bizarrio.debug)
+    opts.imagePath = 'ice';
 
   this.type = 'ice';
-  if(bizarrio.debug) opts.imagePath = 'ice';
-
   this.init(opts);
+
+  // override
+  this.sprite.alpha = 1;
+  this.sprite.alive = true;
 
   return this;
 };

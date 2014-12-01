@@ -36,16 +36,14 @@ Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
 
-  if(bizarrio.debug){
-    self.interface.load.image('platform', 'assets/platform.png');
-    self.interface.load.image('trap-door', 'assets/trap-door.png');
-    self.interface.load.image('portal', 'assets/portal.png');
-    self.interface.load.image('toggle', 'assets/toggle.png');
-    self.interface.load.image('coin', 'assets/coin.png');
-    self.interface.load.image('ice', 'assets/ice.png');
-    self.interface.load.image('waterfall', 'assets/waterfall.png');
-    self.interface.load.image('conveyor', 'assets/conveyor.png');
-  }
+  self.interface.load.image('platform', 'assets/platform.png');
+  self.interface.load.image('trap-door', 'assets/trap-door.png');
+  self.interface.load.image('portal', 'assets/portal.png');
+  self.interface.load.image('toggle', 'assets/toggle.png');
+  self.interface.load.image('coin', 'assets/coin.png');
+  self.interface.load.image('ice', 'assets/ice.png');
+  self.interface.load.image('waterfall', 'assets/waterfall.png');
+  self.interface.load.image('conveyor', 'assets/conveyor.png');
 };
 
 
@@ -58,13 +56,16 @@ Game.prototype.create = function(self, opts){
   self.layers.platforms = self.map.createLayer('platforms');
   self.map.setCollisionByExclusion([]);
 
-  // color the platforms if in debug mose
-  if(bizarrio.debug)
+  // color the platforms if in debug mode
+  if(bizarrio.project || bizarrio.debug)
     self.map.addTilesetImage('platform');
 
   // init all the interface elements
-  self._createPlayers(opts.players);
-  self._createScoreboard();
+  if(!bizarrio.debug){
+    self._createPlayers(opts.players);
+    self._createScoreboard();
+  }
+
   self._createObjects();
 };
 
@@ -107,7 +108,10 @@ Game.prototype.update = function(self, opts){
 
   // Waterfall
   self.interface.physics.arcade.overlap(self.characters, self.objects.waterfalls,
-    function(character, waterfall){ character.isFrozen = true; }
+    function(character, waterfall){
+      if(waterfall.sprite.alive)
+        character.isFrozen = true;
+    }
   );
 
   // Conveyor Belts
@@ -169,10 +173,6 @@ Game.prototype._createObjects = function(){
       el      : el,
       indice  : i
     });
-
-    setTimeout(function(){
-      trapDoor.toggle({ timer : 3000 });
-    }, i*1500);
   });
 
   // make the portals
@@ -205,30 +205,38 @@ Game.prototype._createObjects = function(){
       el      : el,
       indice  : i
     });
+
     self.toggleManager.add(toggle);
   });
+
   this.toggleManager.bind('activated', function(){
     self.portalManager.open();
   });
 
   // make the waterfalls
   this.map.objects.waterfalls.forEach(function(el, i){
-    new Waterfall({
+    var waterfall = new Waterfall({
       game    : self,
       group   : self.objects.waterfalls,
       el      : el,
       indice  : i
     });
+
+    if(!bizarrio.debug) waterfall.scheduleRandomToggle();
   });
 
   // make the conveyors
   this.map.objects.conveyors.forEach(function(el, i){
-    self.conveyorManager.add(new Conveyor({
+    var conveyor = new Conveyor({
       game    : self,
       group   : self.objects.conveyors,
       el      : el,
       indice  : i
-    }));
+    });
+
+    self.conveyorManager.add(conveyor);
+
+    if(!bizarrio.debug) conveyor.toggle();
   });
 
   // make the coins
@@ -241,7 +249,7 @@ Game.prototype._createObjects = function(){
     });
 
     self.coinManager.add(coin);
-
-    if(i === 0) coin.toggle();
   });
+
+  if(!bizarrio.debug) this.coinManager.showRandomCoin();
 };

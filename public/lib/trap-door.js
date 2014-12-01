@@ -1,13 +1,13 @@
 var TrapDoor = function(opts){
-  this.type = 'trap-door';
+  if(bizarrio.project || bizarrio.debug)
+    opts.imagePath = 'trap-door';
+
+  this.type      = 'trap-door';
   this.originalY = opts.el.y - opts.game.map.tileHeight;
-
-  if(bizarrio.debug) opts.imagePath = 'trap-door';
-
   this.init(opts);
 
   this.sprite.body.allowGravity = false;
-  this.sprite.body.immovable = true;
+  this.sprite.body.immovable    = true;
 
   return this;
 };
@@ -16,22 +16,23 @@ var TrapDoor = function(opts){
 TrapDoor.prototype = Object.create(Obstacle.prototype);
 
 
-TrapDoor.prototype.toggle = function(opts){
-  var self = this;
+TrapDoor.prototype.toggle = function(){
+  var state = 'hi';
 
-  setInterval(function(){
-    var state = 'min';
+  if(this.sprite.alive){
+    if(!bizarrio.debug) this.sprite.y = -100;
+    this.sprite.alive = false;
+    this.sprite.alpha = 0.25;
+    state = 'lo';
+  } else {
+    if(!bizarrio.debug) this.sprite.y = this.originalY;
+    this.sprite.alive = true;
+    this.sprite.alpha = 1;
+  }
 
-    if(self.sprite.y == -100){
-      self.sprite.y = self.originalY;
-      state = 'max';
-    } else self.sprite.y = -100;
-
-    bizarrio.socket.emit('update-hardware', {
-      pin : self.pin, type : self.type, state : state
-    });
-
-  }, opts.timer);
+  bizarrio.socket.emit('update-hardware', {
+    pin : self.pin, type : self.type, state : state
+  });
 
   return this;
 };

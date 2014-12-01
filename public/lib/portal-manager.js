@@ -23,9 +23,13 @@ PortalManager.prototype.open = function(){
 PortalManager.prototype.transport = function(character, portalSprite){
   var endPointA = this.findByName(portalSprite.name);
 
-  if(endPointA.isOpen){
+  if(endPointA.sprite.alive){
     var leftOvers = _.without(this.items, endPointA);
-    var endPointB = _.findWhere(leftOvers, { isOpen : true });
+    var endPointB = null;
+
+    leftOvers.forEach(function(endPoint){
+      if(endPoint.sprite.alive) endPointB = endPoint;
+    });
 
     endPointA.close();
     endPointB.close();

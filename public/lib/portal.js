@@ -1,13 +1,9 @@
 var Portal = function(opts){
+  if(bizarrio.project || bizarrio.debug)
+    opts.imagePath = 'portal';
 
   this.type = 'portal';
-  if(bizarrio.debug) opts.imagePath = 'portal';
-
   this.init(opts);
-
-  // set the portal to closed
-  this.isOpen = false;
-  this.sprite.alpha = 0.25;
 
   return this;
 };
@@ -17,20 +13,20 @@ Portal.prototype = Object.create(Obstacle.prototype);
 
 
 Portal.prototype.close = function(){
-  this.isOpen = false;
+  this.sprite.alive = false;
   this.sprite.alpha = 0.25;
 
   bizarrio.socket.emit('update-hardware', {
-    pin : this.pin, type : this.type, state : 'off'
+    pin : this.pin, type : this.type, state : 'lo'
   });
 };
 
 
 Portal.prototype.open = function(){
+  this.sprite.alive = true;
   this.sprite.alpha = 1;
-  this.isOpen = true;
 
   bizarrio.socket.emit('update-hardware', {
-    pin : this.pin, type : this.type, state : 'on'
+    pin : this.pin, type : this.type, state : 'hi'
   });
 };
