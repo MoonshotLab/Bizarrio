@@ -44,6 +44,11 @@ Obstacle.prototype.init = function(opts){
   });
 
   if(bizarrio.debug){
+    bizarrio.game.interface.add.text(
+      opts.el.x, y, opts.el.properties.pin,
+      { font : '45px Arial', fill : '#ffffff', align : 'center' }
+    );
+
     var self = this;
     this.sprite.inputEnabled = true;
     this.sprite.events.onInputDown.add(function(){
