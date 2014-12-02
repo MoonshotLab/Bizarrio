@@ -37,10 +37,12 @@ Obstacle.prototype.init = function(opts){
 
   // save hardware pin so we can send to server later
   // report to the server so it can prepare the arduino
-  this.pin = opts.el.properties.pin;
+  this.pin        = opts.el.properties.pin;
+  this.arduinoId  = opts.el.properties.arduino;
   bizarrio.socket.emit('register-hardware', {
-    'type'  : this.type,
-    'pin'   : this.pin
+    type        : this.type,
+    pin         : this.pin,
+    arduinoId   : this.arduinoId
   });
 
   if(bizarrio.debug){
@@ -72,6 +74,9 @@ Obstacle.prototype.toggle = function(){
   } else this.sprite.alpha = 0.25;
 
   bizarrio.socket.emit('update-hardware', {
-    pin : this.pin, type : this.type, state : state
+    pin         : this.pin,
+    type        : this.type,
+    state       : state,
+    arduinoId   : this.arduinoId
   });
 };

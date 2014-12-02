@@ -31,7 +31,10 @@ TrapDoor.prototype.toggle = function(){
   }
 
   bizarrio.socket.emit('update-hardware', {
-    pin : self.pin, type : self.type, state : state
+    pin         : this.pin,
+    type        : this.type,
+    state       : state,
+    arduinoId   : this.arduinoId
   });
 
   return this;
