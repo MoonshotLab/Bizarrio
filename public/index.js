@@ -1,16 +1,17 @@
 var bizarrio = {
   socket      : io(),
   game        : new Game(),
-  debug       : true,
+  debug       : false,
   project     : true,
 
   settings    : {
     iceSlickness    : 5000,
     conveyorSpeed   : 7000,
     gravity         : 500,
-    freezeLength    : 1500,
+    freezeLength    : 3000,
     playerSpeed     : 90,
-    playerBounce    : 0.2,
+    playerSpeedBoost: 1.5,
+    playerBounce    : 0,
     playerJumpPow   : 360,
 
     controls        : [

@@ -3,7 +3,6 @@ var Player = function(opts){
   this.score        = 0;
   this.name         = 'Player ' + opts.indice;
   this.cssSelector  = 'player-' + opts.indice;
-  this.facing       = null;
 
   // keep track of frozeness
   this.isFrozen     = false;
@@ -52,7 +51,8 @@ Player.prototype.update = function(){
     this.sprite.body.velocity.x = 0;
 
     // speed boost
-    if(this.controls.speed.isDown) speed = speed*3;
+    if(this.controls.speed.isDown)
+      speed = speed*bizarrio.settings.playerSpeedBoost;
 
     // handle basic movement
     if(this.controls.left.isDown) this.actions.moveLeft(speed);
@@ -105,20 +105,12 @@ Player.prototype.attachActions = function(){
 
   this.actions.moveLeft = function(speed){
     self.sprite.body.velocity.x = -1*speed;
-
-    if(self.facing != 'left'){
-      self.sprite.animations.play('left');
-      self.facing = 'left';
-    }
+    self.sprite.animations.play('left');
   };
 
   this.actions.moveRight = function(speed){
     self.sprite.body.velocity.x = speed;
-
-    if(self.facing != 'right'){
-      self.sprite.animations.play('right');
-      self.facing = 'right';
-    }
+    self.sprite.animations.play('right');
   };
 
   this.actions.onConveyor = function(){
