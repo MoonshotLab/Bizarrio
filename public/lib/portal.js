@@ -17,10 +17,10 @@ Portal.prototype.close = function(){
   this.sprite.alpha = 0.25;
 
   bizarrio.socket.emit('update-hardware', {
-    pin         : this.pin,
-    type        : this.type,
-    state       : 'lo',
-    arduinoId   : this.arduinoId
+    pin           : this.pin,
+    type          : this.type,
+    state         : 'lo',
+    arduinoIndex  : this.arduinoIndex
   });
 };
 
@@ -30,9 +30,9 @@ Portal.prototype.open = function(){
   this.sprite.alpha = 1;
 
   bizarrio.socket.emit('update-hardware', {
-    pin         : this.pin,
-    type        : this.type,
-    state       : 'hi',
-    arduinoId   : this.arduinoId
+    pin           : this.pin,
+    type          : this.type,
+    state         : 'hi',
+    arduinoIndex  : this.arduinoIndex
   });
 };
