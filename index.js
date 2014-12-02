@@ -13,12 +13,14 @@ console.log('server started and listening on port', port);
 io.on('connection', function(socket){
   // { pin : 5, type : 'trap-door', state : 'min', arduinoIndex : '0' }
   socket.on('update-hardware', function(params){
-    arduinos[params.arduinoIndex].updatePin(params);
+    if(arduinos[params.arduinoIndex])
+      arduinos[params.arduinoIndex].updatePin(params);
   });
 
   // { pin : 5, type : 'trap-door', arduinoIndex : '0' }
   socket.on('register-hardware', function(params){
-    arduinos[params.arduinoIndex].registerPin(params);
+    if(arduinos[params.arduinoIndex])
+      arduinos[params.arduinoIndex].registerPin(params);
   });
 });
 
