@@ -109,8 +109,7 @@ Game.prototype.update = function(self, opts){
   // Waterfall
   self.interface.physics.arcade.overlap(self.characters, self.objects.waterfalls,
     function(character, waterfall){
-      if(waterfall.sprite.alive)
-        character.isFrozen = true;
+      if(waterfall.alive) character.isFrozen = true;
     }
   );
 
