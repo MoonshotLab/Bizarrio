@@ -39,7 +39,7 @@ Toggle.prototype.toggle = function(){
       this.position = 'b';
       this.sprite.alpha = 1;
     } else {
-      this.state = 'lo';
+      state = 'lo';
       this.position = 'a';
       this.sprite.alpha = 0.25;
     }
