@@ -1,7 +1,3 @@
-// TODO:
-// animate player when hitting
-// knockdown player based on snowball direction
-
 // { x : 0, y : 0, dir : 1 || 2 }
 var Snowball = function(opts){
   this.exploded = false;
