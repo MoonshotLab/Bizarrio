@@ -29,6 +29,11 @@ Manager.prototype.getSprites = function(){
   this.items.forEach(function(item){
     sprites.push(item.sprite);
   });
-  
+
   return sprites;
+};
+
+
+Manager.prototype.destroy = function(item){
+  this.items = _.without(this.items, item);
 };

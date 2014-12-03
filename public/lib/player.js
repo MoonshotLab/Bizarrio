@@ -21,7 +21,7 @@ var Player = function(opts){
   }
 
   // create the sprite and enable gravity
-  this.sprite = opts.game.add.sprite(32, 32, 'player');
+  this.sprite = opts.game.add.sprite(125, 0, 'player');
   opts.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
   // set a bunch of sprite attributes
@@ -33,7 +33,6 @@ var Player = function(opts){
   this.sprite.animations.add('turn', [4], 20, true);
   this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
   this.sprite.animations.add('frozen', [4], 10, false);
-  this.sprite.x = 125;
 
   this.attachActions();
 
@@ -81,6 +80,11 @@ Player.prototype.update = function(){
 };
 
 
+Player.prototype.hitByPitch = function(){
+  console.log('hit by pitch');
+};
+
+
 Player.prototype.attachActions = function(){
   var self = this;
   this.actions = {};
@@ -94,6 +98,17 @@ Player.prototype.attachActions = function(){
 
       self.sprite.body.velocity.y = -1*(self.jumpPower);
       self.jumpPower = 40;
+    }
+  };
+
+  this.actions.fireSnowball = function(){
+    if(!self.isFrozen){
+      var body = self.sprite.body;
+      var snowball = new Snowball({
+        x   : body.x,
+        y   : body.y,
+        dir : body.facing
+      });
     }
   };
 
@@ -144,4 +159,6 @@ Player.prototype.attachActions = function(){
 
     self.sprite.body.acceleration.x = accel;
   };
+
+  this.controls.speed.onDown.add(this.actions.fireSnowball, this);
 };

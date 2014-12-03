@@ -45,5 +45,5 @@ var bizarrio = {
 
 
 bizarrio.game.init({
-  players : [{}]
+  players : [{}, {}]
 });
