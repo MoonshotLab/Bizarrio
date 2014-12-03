@@ -19,7 +19,7 @@ var bizarrio = {
         'left'  : 'A',
         'right' : 'D',
         'jump'  : 'W',
-        'speed' : 'Q'
+        'speed' : 'Z'
       },
       {
         'left'  : 'E',
