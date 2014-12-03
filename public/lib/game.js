@@ -4,6 +4,7 @@ var Game = function(){
   this.portalManager    = new PortalManager();
   this.toggleManager    = new ToggleManager();
   this.conveyorManager  = new ConveyorManager();
+  this.snowballManager  = new SnowballManager();
 
   this.interface        = null;
   this.map              = null;
@@ -35,6 +36,7 @@ Game.prototype.init = function(opts){
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
+  self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
 
   self.interface.load.image('platform', 'assets/platform.png');
   self.interface.load.image('trap-door', 'assets/trap-door.png');
@@ -95,9 +97,9 @@ Game.prototype.update = function(self, opts){
 
   // Coins
   self.interface.physics.arcade.overlap(
-    self.characters, self.objects.coins, function(sprite1, sprite2){
-      if(self.coinManager.collect(sprite2.name))
-        self.playerManager.score(sprite1.name);
+    self.characters, self.objects.coins, function(player, coin){
+      if(self.coinManager.collect(coin.name))
+        self.playerManager.score(player.name);
     }
   );
 
@@ -122,6 +124,15 @@ Game.prototype.update = function(self, opts){
       };
     }
   );
+
+  // Snowballs
+  self.interface.physics.arcade.overlap(
+    self.characters, self.objects.snowballs, function(playerSprite, snowballSprite){
+      var player   = self.playerManager.findByName(playerSprite.name);
+      var snowball = self.snowballManager.findByName(snowballSprite.name);
+      snowball.smash();
+      player.hitByPitch();
+    });
 
   // Player Updating
   self.playerManager.items.forEach(function(player){
@@ -163,6 +174,7 @@ Game.prototype._createObjects = function(){
   this.objects.waterfalls = this.interface.add.group();
   this.objects.conveyors = this.interface.add.group();
   this.objects.coins = this.interface.add.group();
+  this.objects.snowballs = this.interface.add.group();
 
   // make the trap doors
   this.map.objects.trapDoors.forEach(function(el, i){

@@ -4,9 +4,10 @@ var Player = function(opts){
   this.name         = 'Player ' + opts.indice;
   this.cssSelector  = 'player-' + opts.indice;
 
-  // keep track of frozeness
+  // keep track of frozeness and if snowballed
   this.isFrozen     = false;
   this.freezeTimer  = null;
+  this.snowballed   = false;
 
   // keep track of jumping
   this.jumpPower    = 0;
@@ -21,7 +22,7 @@ var Player = function(opts){
   }
 
   // create the sprite and enable gravity
-  this.sprite = opts.game.add.sprite(32, 32, 'player');
+  this.sprite = opts.game.add.sprite(125, 0, 'player');
   opts.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
   // set a bunch of sprite attributes
@@ -32,8 +33,8 @@ var Player = function(opts){
   this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
   this.sprite.animations.add('turn', [4], 20, true);
   this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
-  this.sprite.animations.add('frozen', [4], 10, false);
-  this.sprite.x = 125;
+  this.sprite.animations.add('frozen', [9], 10, false);
+  this.sprite.animations.add('smacked', [10, 11], 5, false);
 
   this.attachActions();
 
@@ -45,7 +46,7 @@ Player.prototype.update = function(){
   var speed = bizarrio.settings.playerSpeed;
 
   // disbale controls if frozen
-  if(!this.isFrozen){
+  if(!this.isFrozen && !this.snowballed){
     // stop!!!
     this.sprite.body.velocity.x = 0;
 
@@ -81,6 +82,21 @@ Player.prototype.update = function(){
 };
 
 
+Player.prototype.hitByPitch = function(){
+  var self = this;
+
+  if(!this.snowballed){
+    this.sprite.animations.play('smacked');
+    this.snowballed = true;
+
+    setTimeout(function(){
+      self.sprite.animations.play('turn');
+      self.snowballed = false;
+    }, 2000);
+  }
+};
+
+
 Player.prototype.attachActions = function(){
   var self = this;
   this.actions = {};
@@ -94,6 +110,17 @@ Player.prototype.attachActions = function(){
 
       self.sprite.body.velocity.y = -1*(self.jumpPower);
       self.jumpPower = 40;
+    }
+  };
+
+  this.actions.fireSnowball = function(){
+    if(!self.isFrozen){
+      var body = self.sprite.body;
+      var snowball = new Snowball({
+        x   : body.x,
+        y   : body.y,
+        dir : body.facing
+      });
     }
   };
 
@@ -144,4 +171,6 @@ Player.prototype.attachActions = function(){
 
     self.sprite.body.acceleration.x = accel;
   };
+
+  this.controls.speed.onDown.add(this.actions.fireSnowball, this);
 };
