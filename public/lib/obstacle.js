@@ -72,7 +72,7 @@ Obstacle.prototype.toggle = function(){
 
   var state = 'lo';
   if(this.sprite.alive){
-    this.sprite.alpha = 1;
+    this.sprite.alpha = 0.75;
     state = 'hi';
   } else this.sprite.alpha = 0.25;
 

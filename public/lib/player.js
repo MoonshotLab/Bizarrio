@@ -5,11 +5,6 @@ var Player = function(opts){
   this.cssSelector  = 'player-' + opts.indice;
   this.facing       = 'right';
 
-  // keep track of frozeness and if snowballed
-  this.isFrozen     = false;
-  this.freezeTimer  = null;
-  this.snowballed   = false;
-
   // keep track of jumping
   this.jumpPower    = 0;
   this.jumpPressed  = 0;
@@ -23,7 +18,7 @@ var Player = function(opts){
   }
 
   // create the sprite and enable gravity
-  this.sprite = opts.game.add.sprite(125, 0, 'player');
+  this.sprite = opts.game.add.sprite(825, 570, 'player');
   opts.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
   // set a bunch of sprite attributes
@@ -37,6 +32,15 @@ var Player = function(opts){
   this.sprite.animations.add('frozen', [9], 10, false);
   this.sprite.animations.add('smacked', [10, 11], 5, false);
 
+  // keep track of external set states
+  // yes, isFrozen is listed twice
+  this.freezeTimer      = null;
+  this.snowballed       = false;
+  this.isFrozen         = false;
+  this.sprite.isFrozen  = false;
+  this.sprite.conveyor  = false;
+  this.sprite.onIce     = false;
+
   this.attachActions();
 
   return this;
@@ -46,19 +50,23 @@ var Player = function(opts){
 Player.prototype.update = function(){
   var speed = bizarrio.settings.playerSpeed;
 
-  // disbale controls if frozen
-  if(!this.isFrozen && !this.snowballed){
-    // stop!!!
-    this.sprite.body.velocity.x = 0;
+  // disable controls if frozen or snowballed
+  if(!this.isFrozen){
 
-    // speed boost
-    if(this.controls.speed.isDown)
-      speed = speed*bizarrio.settings.playerSpeedBoost;
+    // if not on ice, play normally
+    if(!this.sprite.onIce){
+      // stop!!!
+      this.sprite.body.velocity.x = 0;
 
-    // handle basic movement
-    if(this.controls.left.isDown) this.actions.moveLeft(speed);
-    else if(this.controls.right.isDown) this.actions.moveRight(speed);
-    else this.sprite.animations.stop();
+      // speed boost
+      if(this.controls.speed.isDown)
+        speed = speed*bizarrio.settings.playerSpeedBoost;
+
+      // handle basic movement
+      if(this.controls.left.isDown) this.actions.moveLeft(speed);
+      else if(this.controls.right.isDown) this.actions.moveRight(speed);
+      else this.sprite.animations.stop();
+    }
 
     // handle jumping and resetting
     if(this.jumpPressed && !this.controls.jump.isDown) this.actions.jump();
@@ -136,16 +144,31 @@ Player.prototype.attachActions = function(){
     self.facing = 'left';
   };
 
+  this.actions.slideLeft = function(){
+    self.sprite.body.velocity.x-=3;
+    self.sprite.animations.play('left');
+    self.facing = 'left';
+  };
+
   this.actions.moveRight = function(speed){
     self.sprite.body.velocity.x = speed;
     self.sprite.animations.play('right');
     self.facing = 'right';
   };
 
+  this.actions.slideRight = function(){
+    self.sprite.body.velocity.x+=3;
+    self.sprite.animations.play('right');
+    self.facing = 'right';
+  };
+
   this.actions.onConveyor = function(){
     var accel = self.sprite.conveyor.accel;
+
+    if(self.isFrozen) self.sprite.body.velocity.x = 0;
     if(self.sprite.conveyor.dir == 'left')
       accel = accel*-1;
+
     self.sprite.body.acceleration.x = accel;
   };
 
@@ -163,16 +186,16 @@ Player.prototype.attachActions = function(){
 
     self.freezeTimer = setTimeout(function(){
       self.isFrozen = false;
-      self.sprite.animations.play('right');
+      self.sprite.animations.play('turn');
     }, bizarrio.settings.freezeLength);
   };
 
   this.actions.onIce = function(){
-    var accel = bizarrio.settings.iceSlickness;
-    if(self.sprite.body.facing == 1)
-      accel = -1*accel;
+    self.sprite.onIce = true;
 
-    self.sprite.body.acceleration.x = accel;
+    if(self.controls.left.isDown) self.actions.slideLeft();
+    else if(self.controls.right.isDown) self.actions.slideRight();
+
   };
 
   this.controls.speed.onDown.add(this.actions.fireSnowball, this);

@@ -3,8 +3,6 @@ var Snowball = function(opts){
   this.exploded = false;
   this.name = new Date().getTime();
 
-  console.log(opts.dir);
-
   var yVel = -20;
   var xVel = 600;
   var xPos = opts.x;
