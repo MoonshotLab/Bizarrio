@@ -5,6 +5,7 @@ var Game = function(){
   this.toggleManager    = new ToggleManager();
   this.conveyorManager  = new ConveyorManager();
   this.snowballManager  = new SnowballManager();
+  this.trapDoorManager  = new TrapDoorManager();
 
   this.interface        = null;
   this.map              = null;
@@ -184,7 +185,10 @@ Game.prototype._createObjects = function(){
       el      : el,
       indice  : i
     });
+
+    self.trapDoorManager.add(trapDoor);
   });
+  self.trapDoorManager.columnify();
 
   // make the portals
   this.map.objects.portals.forEach(function(el, i){

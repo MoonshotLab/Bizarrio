@@ -19,8 +19,9 @@ Obstacle.prototype.init = function(opts){
   }
 
   // create the sprite
-  var y = opts.y || opts.el.y - opts.game.map.tileHeight;
-  this.sprite = opts.group.create(opts.el.x, y, opts.imagePath);
+  this.y = opts.y || opts.el.y - opts.game.map.tileHeight;
+  this.x = opts.el.x;
+  this.sprite = opts.group.create(this.x, this.y, opts.imagePath);
 
   // set the sprite name
   this.name = this.type + '-' + opts.indice;
