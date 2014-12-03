@@ -9,7 +9,6 @@ var Player = function(opts){
   this.freezeTimer  = null;
 
   // keep track of jumping
-  this.isJumping    = false;
   this.jumpPower    = 0;
   this.jumpPressed  = 0;
 
@@ -87,15 +86,15 @@ Player.prototype.attachActions = function(){
   this.actions = {};
 
   this.actions.jump = function(){
-    self.isJumping = true;
     self.jumpPressed = false;
 
-    if(self.jumpPower >= bizarrio.settings.playerJumpPow)
-      self.jumpPower = bizarrio.settings.playerJumpPow;
+    if(self.sprite.body.touching.down || self.sprite.body.onFloor()){
+      if(self.jumpPower >= bizarrio.settings.playerJumpPow)
+        self.jumpPower = bizarrio.settings.playerJumpPow;
 
-    self.sprite.body.velocity.y = -1*(self.jumpPower);
-    self.isJumping = false;
-    self.jumpPower = 40;
+      self.sprite.body.velocity.y = -1*(self.jumpPower);
+      self.jumpPower = 40;
+    }
   };
 
   this.actions.buildJumpPower = function(){
