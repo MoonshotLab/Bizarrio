@@ -1,10 +1,13 @@
 html, body{
   margin: 0;
   background-color: rgba(0,0,0,.9);
+  margin: 100px;
 }
 
 canvas{
   margin: auto;
+  zoom: .49;
+  padding: 0 500px;
 }
 
 #scoreboard{
