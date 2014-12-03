@@ -36,4 +36,6 @@ Manager.prototype.getSprites = function(){
 
 Manager.prototype.destroy = function(item){
   this.items = _.without(this.items, item);
+  item.sprite.destroy();
+  delete(item);
 };

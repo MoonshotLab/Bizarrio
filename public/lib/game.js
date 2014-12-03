@@ -36,8 +36,8 @@ Game.prototype.init = function(opts){
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
   self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
+  self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
 
-  self.interface.load.image('snowball', 'assets/snowball.png');
   self.interface.load.image('platform', 'assets/platform.png');
   self.interface.load.image('trap-door', 'assets/trap-door.png');
   self.interface.load.image('portal', 'assets/portal.png');
