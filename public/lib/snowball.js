@@ -1,14 +1,16 @@
-// { x : 0, y : 0, dir : 1 || 2 }
+// { x : 0, y : 0, dir : 'left' || 'right' }
 var Snowball = function(opts){
   this.exploded = false;
   this.name = new Date().getTime();
+
+  console.log(opts.dir);
 
   var yVel = -20;
   var xVel = 600;
   var xPos = opts.x;
   var yPos = opts.y - 20;
 
-  if(opts.dir === 1){
+  if(opts.dir === 'left'){
     xVel = -500;
     xPos -= 15;
   } else xPos += 15;

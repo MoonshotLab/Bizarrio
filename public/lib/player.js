@@ -3,6 +3,7 @@ var Player = function(opts){
   this.score        = 0;
   this.name         = 'Player ' + opts.indice;
   this.cssSelector  = 'player-' + opts.indice;
+  this.facing       = 'right';
 
   // keep track of frozeness and if snowballed
   this.isFrozen     = false;
@@ -119,7 +120,7 @@ Player.prototype.attachActions = function(){
       var snowball = new Snowball({
         x   : body.x,
         y   : body.y,
-        dir : body.facing
+        dir : self.facing
       });
     }
   };
@@ -132,11 +133,13 @@ Player.prototype.attachActions = function(){
   this.actions.moveLeft = function(speed){
     self.sprite.body.velocity.x = -1*speed;
     self.sprite.animations.play('left');
+    self.facing = 'left';
   };
 
   this.actions.moveRight = function(speed){
     self.sprite.body.velocity.x = speed;
     self.sprite.animations.play('right');
+    self.facing = 'right';
   };
 
   this.actions.onConveyor = function(){
