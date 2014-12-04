@@ -27,6 +27,9 @@
  <tileset firstgid="9" name="coin" tilewidth="40" tileheight="40">
   <image source="../public/assets/coin.png" width="40" height="40"/>
  </tileset>
+ <tileset firstgid="10" name="fan" tilewidth="100" tileheight="100">
+  <image source="../public/assets/fan.png" width="100" height="100"/>
+ </tileset>
  <layer name="platforms" width="116" height="88">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -620,4 +623,12 @@
 0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="fans" width="116" height="88">
+  <object gid="10" x="2220" y="1760">
+   <properties>
+    <property name="arduino" value="1"/>
+    <property name="pin" value="21"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

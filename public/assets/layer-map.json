@@ -1173,6 +1173,32 @@
          "width":116,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":88,
+         "name":"fans",
+         "objects":[
+                {
+                 "gid":10,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+                     "arduino":"1",
+                     "pin":"21"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2220,
+                 "y":1760
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":116,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":
@@ -1315,6 +1341,21 @@
          "spacing":0,
          "tileheight":40,
          "tilewidth":40
+        }, 
+        {
+         "firstgid":10,
+         "image":"fan.png",
+         "imageheight":100,
+         "imagewidth":100,
+         "margin":0,
+         "name":"fan",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":100,
+         "tilewidth":100
         }],
  "tilewidth":20,
  "version":1,

@@ -47,6 +47,7 @@ Game.prototype.preload = function(self, opts){
   self.interface.load.image('ice', 'assets/ice.png');
   self.interface.load.image('waterfall', 'assets/waterfall.png');
   self.interface.load.image('conveyor', 'assets/conveyor.png');
+  self.interface.load.image('fan', 'assets/fan.png');
 };
 
 
@@ -85,7 +86,9 @@ Game.prototype.update = function(self, opts){
       door.playerCollide();
     }
   );
-  self.trapDoorManager.addWeight();
+  // Only collect snow if not in debug mode
+  if(!bizarrio.debug)
+    self.trapDoorManager.addWeight();
 
   // Toggles
   self.interface.physics.arcade.overlap(
@@ -177,6 +180,7 @@ Game.prototype._createObjects = function(){
 
   this.objects.trapDoors = this.interface.add.group();
   this.objects.portals = this.interface.add.group();
+  this.objects.fans = this.interface.add.group();
   this.objects.ice = this.interface.add.group();
   this.objects.toggles = this.interface.add.group();
   this.objects.waterfalls = this.interface.add.group();
@@ -259,6 +263,18 @@ Game.prototype._createObjects = function(){
     self.conveyorManager.add(conveyor);
 
     if(!bizarrio.debug) conveyor.toggle();
+  });
+
+  // make the fans
+  this.map.objects.fans.forEach(function(el, i){
+    var fan = new Fan({
+      game    : self,
+      group   : self.objects.fans,
+      el      : el,
+      indice  : i
+    });
+
+    if(!bizarrio.debug) fan.scheduleRandomToggle();
   });
 
   // make the coins
