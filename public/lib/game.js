@@ -78,7 +78,13 @@ Game.prototype.update = function(self, opts){
   self.interface.physics.arcade.collide(self.characters, self.layers.platforms);
 
   // Trap Doors
-  self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
+  self.interface.physics.arcade.collide(
+    self.characters, self.objects.trapDoors,
+    function(character, trapDoor){
+      var door = self.trapDoorManager.findByName(trapDoor.name);
+      door.playerCollide();
+    }
+  );
   self.trapDoorManager.addWeight();
 
   // Toggles

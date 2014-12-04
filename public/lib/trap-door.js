@@ -10,7 +10,8 @@ var TrapDoor = function(opts){
   this.sprite.body.immovable    = true;
   this.sprite.alive = true;
 
-  // related to snow collection
+  // related to snow collection and player weight
+  this.playerTouching = false;
   this.columnIndex    = 0;
   this.verticalIndex  = 0;
   this.weight         = 0;
@@ -21,6 +22,16 @@ var TrapDoor = function(opts){
 
 
 TrapDoor.prototype = Object.create(Obstacle.prototype);
+
+
+TrapDoor.prototype.playerCollide = function(){
+  this.playerTouching = true;
+
+  if(this.weight + bizarrio.settings.playerWeight >= this.maxWeight){
+    this.weight = 0;
+    this.fall();
+  }
+};
 
 
 TrapDoor.prototype.addWeight = function(weight){
