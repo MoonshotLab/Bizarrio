@@ -80,11 +80,9 @@ TrapDoorManager.prototype.addWeight = function(){
     this.iterations = 0;
 
     for(var i=0; i<this.columnCount; i++){
-      if(i === 0){
-        var nextDoor = self._findNextDoorInColumn(i);
-        if(nextDoor)
-          nextDoor.addWeight();
-      }
+      var nextDoor = self._findNextDoorInColumn(i);
+      if(nextDoor)
+        nextDoor.addWeight();
     }
   }
 };

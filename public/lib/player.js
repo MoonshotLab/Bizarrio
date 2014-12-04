@@ -24,7 +24,6 @@ var Player = function(opts){
   // set a bunch of sprite attributes
   this.sprite.name = 'player-' + opts.indice;
   this.sprite.body.bounce.y = bizarrio.settings.playerBounce;
-  this.sprite.body.collideWorldBounds = true;
   this.sprite.body.setSize(20, 32, 5, 16);
   this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
   this.sprite.animations.add('turn', [4], 20, true);

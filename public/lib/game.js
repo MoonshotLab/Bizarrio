@@ -22,7 +22,7 @@ Game.prototype.init = function(opts){
   var self = this;
 
   this.interface = new Phaser.Game(
-    1920, 1560, Phaser.CANVAS, 'bizarrio',
+    2320, 1760, Phaser.CANVAS, 'bizarrio',
     { preload : function(){
       self.preload(self, opts);
     }, create : function(){
