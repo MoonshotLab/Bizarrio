@@ -52,16 +52,14 @@ Obstacle.prototype.init = function(opts){
   if(bizarrio.debug){
     if(opts.el.properties.arduino && opts.el.properties.pin){
       bizarrio.game.interface.add.text(
-        opts.el.x - 10, y - 5, opts.el.properties.arduino + ' - ' + opts.el.properties.pin,
+        opts.el.x - 10, this.y - 5, opts.el.properties.arduino + ' - ' + opts.el.properties.pin,
         { font : '30px Arial', fill : '#ffffff', align : 'center' }
       );
     }
 
     var self = this;
     this.sprite.inputEnabled = true;
-    this.sprite.events.onInputDown.add(function(){
-      self.toggle();
-    }, this);
+    this.sprite.events.onInputDown.add(self.toggle, this);
   }
 
   return this;

@@ -1,12 +1,12 @@
 var bizarrio = {
   socket      : io(),
-  game        : new Game(),
+  game        : null,
   debug       : false,
   project     : true,
 
   settings    : {
     iceSlickness    : 5000,
-    conveyorSpeed   : 7000,
+    conveyorSpeed   : 12000,
     gravity         : 1100,
     freezeLength    : 3000,
     playerWeight    : 10,
@@ -45,6 +45,12 @@ var bizarrio = {
 };
 
 
-bizarrio.game.init({
-  players : [{}, {}]
+$(function(){
+  bizarrio.game = new Game();
+  bizarrio.game.init({
+    players : [{}, {}]
+  });
+
+  if(bizarrio.debug)
+    $('#scoreboard').hide();
 });

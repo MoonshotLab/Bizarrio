@@ -1,16 +1,17 @@
 html, body{
+  background-color: black;
   margin: 0;
-  background-color: rgba(0,0,0,.9);
-  margin: 100px;
 }
 
-#container{
-  padding: 0 500px;
+
+#bizarrio{
+  margin: auto;
+  width: 1160px;
+  height: 880px;
 }
 
 canvas{
   margin: auto;
-  zoom: .49;
 }
 
 #scoreboard{
