@@ -79,6 +79,7 @@ Game.prototype.update = function(self, opts){
 
   // Trap Doors
   self.interface.physics.arcade.collide(self.characters, self.objects.trapDoors);
+  self.trapDoorManager.addWeight();
 
   // Toggles
   self.interface.physics.arcade.overlap(
