@@ -9,6 +9,18 @@ var TrapDoorManager = function(){
 TrapDoorManager.prototype = Object.create(Manager.prototype);
 
 
+TrapDoorManager.prototype.add = function(trapDoor){
+  var self = this;
+
+  trapDoor.bind('fall', function(opts){
+    var nextDoor = self._findNextDoorInColumn(opts.columnIndex);
+    if(nextDoor) nextDoor.addWeight(opts.weight);
+  });
+
+  this.items.push(trapDoor);
+};
+
+
 TrapDoorManager.prototype.columnify = function(){
   var self = this;
 
@@ -42,34 +54,35 @@ TrapDoorManager.prototype.columnify = function(){
 };
 
 
+TrapDoorManager.prototype._findNextDoorInColumn = function(index){
+  var column = _.where(this.items, { columnIndex : index });
+  var sorted = _.sortBy(column, function(item){
+    return -1*item.y;
+  });
+
+  var nextDoor;
+  sorted.some(function(item){
+    if(item.sprite.alive){
+      nextDoor = item;
+      return;
+    }
+  });
+
+  return nextDoor;
+};
+
+
 TrapDoorManager.prototype.addWeight = function(){
   var self = this;
-
-  var findTopDoor = function(i){
-    var column = _.where(self.items, { columnIndex : i });
-    var sorted = _.sortBy(column, function(item){
-      return -1*item.y;
-    });
-
-    var topDoor;
-    sorted.some(function(item){
-      if(item.sprite.alive){
-        topDoor = item;
-        return;
-      }
-    });
-
-    return topDoor;
-  };
-
   // Add snow to the top most door
   this.iterations++;
   if(this.iterations >= this.snowFrequency){
     this.iterations = 0;
 
     for(var i=0; i<this.columnCount; i++){
-      var topDoor = findTopDoor(i);
-      topDoor.addWeight();
+      var nextDoor = self._findNextDoorInColumn(i);
+      if(nextDoor)
+        nextDoor.addWeight();
     }
   }
 };

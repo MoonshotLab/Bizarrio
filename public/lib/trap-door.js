@@ -23,10 +23,11 @@ var TrapDoor = function(opts){
 TrapDoor.prototype = Object.create(Obstacle.prototype);
 
 
-TrapDoor.prototype.addWeight = function(){
-  this.weight++;
-  console.log('column:', this.columnIndex, 'weight:', this.weight, 'max-weight:', this.maxWeight);
-  if(this.weight > this.maxWeight)
+TrapDoor.prototype.addWeight = function(weight){
+  if(!weight) weight = 1;
+  this.weight += weight;
+
+  if(this.weight >= this.maxWeight)
     this.fall();
 };
 
@@ -43,6 +44,14 @@ TrapDoor.prototype.fall = function(){
 
   this.sprite.alive = false;
   this.sprite.y = -100;
+
+  // Delay event to simulate snow falling
+  setTimeout(function(){
+    self.trigger('fall', {
+      columnIndex : self.columnIndex,
+      weight      : self.weight
+    });
+  }, 700);
 
   setTimeout(function(){
     self.lift();
@@ -68,3 +77,6 @@ TrapDoor.prototype.toggle = function(){
   if(this.sprite.alive) this.fall();
   else this.lift();
 };
+
+
+MicroEvent.mixin(TrapDoor);
