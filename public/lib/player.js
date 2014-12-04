@@ -135,7 +135,7 @@ Player.prototype.attachActions = function(){
 
   this.actions.buildJumpPower = function(){
     self.jumpPressed = true;
-    self.jumpPower += 30;
+    self.jumpPower += 60;
   };
 
   this.actions.moveLeft = function(speed){
