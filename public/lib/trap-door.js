@@ -9,6 +9,7 @@ var TrapDoor = function(opts){
   this.sprite.body.allowGravity = false;
   this.sprite.body.immovable    = true;
   this.sprite.alive = true;
+  this.sprite.alpha = 0.75;
 
   // related to snow collection and player weight
   this.playerTouching = false;
@@ -81,12 +82,6 @@ TrapDoor.prototype.lift = function(){
   this.sprite.alive = true;
   this.sprite.y = this.originalY;
   this.weight = 0;
-};
-
-
-TrapDoor.prototype.toggle = function(){
-  if(this.sprite.alive) this.fall();
-  else this.lift();
 };
 
 
