@@ -53,8 +53,8 @@ Game.prototype.preload = function(self, opts){
 
 Game.prototype.create = function(self, opts){
   // scale map to fit
-  self.interface.scale.height = 880;
-  self.interface.scale.width = 1160;
+  self.interface.scale.height = 853;
+  self.interface.scale.width = 1125;
   self.interface.scale.refresh();
 
   // start physics, gravity, collision mapping, and create
