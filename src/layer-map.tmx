@@ -251,12 +251,6 @@
     <property name="pin" value="49"/>
    </properties>
   </object>
-  <object gid="9" x="360" y="760">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="48"/>
-   </properties>
-  </object>
   <object gid="9" x="600" y="640">
    <properties>
     <property name="arduino" value="0"/>
@@ -275,18 +269,6 @@
     <property name="pin" value="46"/>
    </properties>
   </object>
-  <object gid="9" x="240" y="1000">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="45"/>
-   </properties>
-  </object>
-  <object gid="9" x="480" y="1120">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="43"/>
-   </properties>
-  </object>
   <object gid="9" x="600" y="1120">
    <properties>
     <property name="arduino" value="0"/>
@@ -299,34 +281,10 @@
     <property name="pin" value="42"/>
    </properties>
   </object>
-  <object gid="9" x="480" y="1360">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="41"/>
-   </properties>
-  </object>
-  <object gid="9" x="360" y="1480">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="40"/>
-   </properties>
-  </object>
   <object gid="9" x="240" y="1480">
    <properties>
     <property name="arduino" value="0"/>
     <property name="pin" value="39"/>
-   </properties>
-  </object>
-  <object gid="9" x="960" y="1480">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="29"/>
-   </properties>
-  </object>
-  <object gid="9" x="1080" y="1360">
-   <properties>
-    <property name="arduino" value="0"/>
-    <property name="pin" value="31"/>
    </properties>
   </object>
   <object gid="9" x="1320" y="1360">
@@ -431,10 +389,28 @@
     <property name="pin" value="38"/>
    </properties>
   </object>
-  <object gid="9" x="1080" y="640">
+  <object gid="9" x="240" y="1240">
    <properties>
     <property name="arduino" value="0"/>
-    <property name="pin" value="33"/>
+    <property name="pin" value="45"/>
+   </properties>
+  </object>
+  <object gid="9" x="360" y="1240">
+   <properties>
+    <property name="arduino" value="0"/>
+    <property name="pin" value="40"/>
+   </properties>
+  </object>
+  <object gid="9" x="980" y="520">
+   <properties>
+    <property name="arduino" value="0"/>
+    <property name="pin" value="43"/>
+   </properties>
+  </object>
+  <object gid="9" x="1080" y="520">
+   <properties>
+    <property name="arduino" value="0"/>
+    <property name="pin" value="48"/>
    </properties>
   </object>
  </objectgroup>
@@ -451,9 +427,9 @@
     <property name="pin" value="10"/>
    </properties>
   </object>
-  <object gid="7" x="1200" y="1520">
+  <object gid="7" x="960" y="1520">
    <properties>
-    <property name="arduino" value="1"/>
+    <property name="arduino" value="0"/>
     <property name="pin" value="12"/>
    </properties>
   </object>
