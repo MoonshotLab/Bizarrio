@@ -22,13 +22,20 @@ module.exports = function(){
       'reset'     : 0
     },
     'toggle' : {
-      'hi'        : 70,
+      'hi'        : 120,
       'lo'        : 30,
       'mode'      : 'SERVO',
       'action'    : 'servoWrite',
       'reset'     : 70
     },
     'waterfall' : {
+      'hi'        : 1,
+      'lo'        : 0,
+      'mode'      : 'OUTPUT',
+      'action'    : 'digitalWrite',
+      'reset'     : 0
+    },
+    'fan' : {
       'hi'        : 1,
       'lo'        : 0,
       'mode'      : 'OUTPUT',
