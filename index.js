@@ -42,8 +42,8 @@ SerialPort.list(function(err, ports){
     if(port.manufacturer.indexOf('Arduino') != -1){
       var arduino = new Arduino(port, i.toString());
       if(port.serialNumber == '95333353836351511280')
-        arduino.index = 0;
-      else arduino.index = 1;
+        arduino.index = 1;
+      else arduino.index = 0;
 
       arduinos.push(arduino);
     }
