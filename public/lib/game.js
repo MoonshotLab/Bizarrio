@@ -1,4 +1,5 @@
 var Game = function(){
+  this.spawnPoints      = new SpawnPoints();
   this.playerManager    = new PlayerManager();
   this.coinManager      = new CoinManager();
   this.portalManager    = new PortalManager();
@@ -36,11 +37,12 @@ Game.prototype.init = function(opts){
 
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
-  self.interface.load.spritesheet('player', 'assets/player.png', 32, 48);
+  self.interface.load.spritesheet('player', 'assets/player.png', 150, 150);
   self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
 
   self.interface.load.image('platform', 'assets/platform.png');
   self.interface.load.image('trap-door', 'assets/trap-door.png');
+  self.interface.load.image('spawn-point', 'assets/spawn-point.png');
   self.interface.load.image('portal', 'assets/portal.png');
   self.interface.load.image('toggle', 'assets/toggle.png');
   self.interface.load.image('coin', 'assets/coin.png');
@@ -69,13 +71,13 @@ Game.prototype.create = function(self, opts){
   if(bizarrio.project || bizarrio.debug)
     self.map.addTilesetImage('platform');
 
+  self._createObjects();
+
   // init all the interface elements
   if(!bizarrio.debug){
     self._createPlayers(opts.players);
     self._createScoreboard();
   }
-
-  self._createObjects();
 };
 
 
@@ -192,6 +194,11 @@ Game.prototype._createObjects = function(){
   this.objects.conveyors = this.interface.add.group();
   this.objects.coins = this.interface.add.group();
   this.objects.snowballs = this.interface.add.group();
+
+  // add spawn points
+  this.map.objects.spawnPoints.forEach(function(el, i){
+    self.spawnPoints.add({ x : el.x, y : el.y });
+  });
 
   // make the trap doors
   this.map.objects.trapDoors.forEach(function(el, i){

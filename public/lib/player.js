@@ -18,18 +18,22 @@ var Player = function(opts){
   }
 
   // create the sprite and enable gravity
-  this.sprite = opts.game.add.sprite(400, 50, 'player');
+  this.sprite = opts.game.add.sprite(0, 0, 'player');
+  this.spawn();
+  this.sprite.height = 90;
+  this.sprite.width = 90;
   opts.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
   // set a bunch of sprite attributes
   this.sprite.name = 'player-' + opts.indice;
   this.sprite.body.bounce.y = bizarrio.settings.playerBounce;
-  this.sprite.body.setSize(20, 32, 5, 16);
-  this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
-  this.sprite.animations.add('turn', [4], 20, true);
-  this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
-  this.sprite.animations.add('frozen', [9], 10, false);
-  this.sprite.animations.add('smacked', [10, 11], 5, false);
+  // this.sprite.body.setSize(75, 75, 0, 0);
+  this.sprite.animations.add('left', [0, 1, 2, 1], 7, true);
+  this.sprite.animations.add('turn', [8], 10, true);
+  this.sprite.animations.add('right', [3, 4, 5, 4], 7, true);
+  this.sprite.animations.add('frozen', [9], 1, true);
+  this.sprite.animations.add('smacked', [10] , 1, true);
+  this.sprite.animations.add('dead', [11] , 1, true);
 
   // keep track of external set states
   // yes, isFrozen is listed twice
@@ -49,8 +53,8 @@ var Player = function(opts){
 Player.prototype.update = function(){
   var speed = bizarrio.settings.playerSpeed;
 
-  // disable controls if frozen or snowballed
-  if(!this.isFrozen){
+  // disable controls if frozen or snowballed or dead
+  if(!this.isFrozen &&!this.snowballed && this.sprite.alive){
 
     // if not on ice, play normally
     if(!this.sprite.onIce){
@@ -87,6 +91,13 @@ Player.prototype.update = function(){
   this.sprite.isFrozen = false;
 
   return this;
+};
+
+
+Player.prototype.spawn = function(){
+  var spawnPoint = bizarrio.game.spawnPoints.getRandom();
+  this.sprite.x = spawnPoint.x;
+  this.sprite.y = spawnPoint.y;
 };
 
 
