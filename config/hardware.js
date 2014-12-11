@@ -22,8 +22,8 @@ module.exports = function(){
       'reset'     : 0
     },
     'toggle' : {
-      'hi'        : 120,
-      'lo'        : 30,
+      'hi'        : 110,
+      'lo'        : 40,
       'mode'      : 'SERVO',
       'action'    : 'servoWrite',
       'reset'     : 70
