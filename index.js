@@ -30,8 +30,8 @@ io.on('connection', function(socket){
 
 
 // See the readme for an explanation of the below
-// 0 - 95333353836351511280
-// 1 - 7543730383035120E070
+// 0 - 7543730383035120E070
+// 1 - 64935343133351108002
 // find and create the arduinos
 var Arduino = require('./lib/arduino');
 var SerialPort = require('serialport');
@@ -41,7 +41,8 @@ SerialPort.list(function(err, ports){
   ports.forEach(function(port, i){
     if(port.manufacturer.indexOf('Arduino') != -1){
       var arduino = new Arduino(port, i.toString());
-      if(port.serialNumber == '95333353836351511280')
+
+      if(port.serialNumber == '64935343133351108002')
         arduino.index = 1;
       else arduino.index = 0;
 
