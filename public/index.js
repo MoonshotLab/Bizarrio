@@ -2,9 +2,10 @@ var bizarrio = {
   socket      : io(),
   game        : null,
   debug       : false,
-  project     : true,
+  project     : false,
 
   settings    : {
+    gameTime        : 180000,
     iceSlickness    : 5000,
     conveyorSpeed   : 12000,
     gravity         : 1100,
@@ -46,11 +47,20 @@ var bizarrio = {
 
 
 $(function(){
-  bizarrio.game = new Game();
-  bizarrio.game.init({
-    players : [{}, {}]
-  });
 
-  if(bizarrio.debug)
-    $('#scoreboard').hide();
+  var startGame = function(){
+    bizarrio.game = new Game();
+    bizarrio.game.init({
+      players : [{}]
+    });
+
+    var urlVars = utils.getUrlVars();
+    if(urlVars.indexOf('debug') != -1)
+      bizarrio.debug = true;
+    if(urlVars.indexOf('project') != -1)
+      bizarrio.project = true;
+
+    if(bizarrio.debug)
+      $('#scoreboard').hide();
+  }();
 });
