@@ -82,6 +82,8 @@ Game.prototype.create = function(self, opts){
 
 
 Game.prototype.update = function(self, opts){
+  self.characters = self.playerManager.getAliveSprites();
+
   // Platforms
   self.interface.physics.arcade.collide(self.characters, self.layers.platforms);
 
@@ -197,7 +199,7 @@ Game.prototype._createObjects = function(){
 
   // add spawn points
   this.map.objects.spawnPoints.forEach(function(el, i){
-    self.spawnPoints.add({ x : el.x, y : el.y });
+    self.spawnPoints.add({ x : el.x, y : el.y - 150 });
   });
 
   // make the trap doors

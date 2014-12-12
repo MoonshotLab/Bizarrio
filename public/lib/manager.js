@@ -34,6 +34,18 @@ Manager.prototype.getSprites = function(){
 };
 
 
+Manager.prototype.getAliveSprites = function(){
+  var sprites = [];
+
+  this.items.forEach(function(item){
+    if(item.sprite.alive)
+      sprites.push(item.sprite);
+  });
+
+  return sprites;
+};
+
+
 Manager.prototype.destroy = function(item){
   this.items = _.without(this.items, item);
   item.sprite.destroy();

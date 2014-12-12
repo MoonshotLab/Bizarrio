@@ -19,15 +19,15 @@ var Player = function(opts){
 
   // create the sprite and enable gravity
   this.sprite = opts.game.add.sprite(0, 0, 'player');
-  this.spawn();
   this.sprite.height = 90;
   this.sprite.width = 90;
   opts.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+  this.spawn();
 
   // set a bunch of sprite attributes
   this.sprite.name = 'player-' + opts.indice;
   this.sprite.body.bounce.y = bizarrio.settings.playerBounce;
-  // this.sprite.body.setSize(75, 75, 0, 0);
+  this.sprite.body.setSize(70, 115, 20, 10);
   this.sprite.animations.add('left', [0, 1, 2, 1], 7, true);
   this.sprite.animations.add('turn', [8], 10, true);
   this.sprite.animations.add('right', [3, 4, 5, 4], 7, true);
@@ -90,14 +90,50 @@ Player.prototype.update = function(){
   this.sprite.onIce = false;
   this.sprite.isFrozen = false;
 
+  // DIEEEEE!!!
+  if(this.sprite.body.y > bizarrio.game.interface.height)
+    this.die();
+
   return this;
 };
 
 
+Player.prototype.die = function(){
+  var self = this;
+
+  if(this.sprite.alive){
+    this.sprite.alive = false;
+    if(this.score > 0) this.score--;
+
+    // if outside the stage, but death in the middle
+    if(this.sprite.body.x > bizarrio.game.interface.width ||
+      this.sprite.body.x < 0){
+        this.sprite.body.x = bizarrio.game.interface.width/2;
+    }
+
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.velocity.y = -1500;
+    this.sprite.animations.play('dead');
+
+    setTimeout(function(){ self.spawn(); }, 5000);
+  }
+};
+
+
 Player.prototype.spawn = function(){
+  var self = this;
   var spawnPoint = bizarrio.game.spawnPoints.getRandom();
+
+  this.sprite.body.reset(0, 0);
+
+  this.sprite.animations.play('turn');
   this.sprite.x = spawnPoint.x;
   this.sprite.y = spawnPoint.y;
+
+  // wait, otherwise you'll die a bunch of times in a row
+  setTimeout(function(){
+    self.sprite.alive = true;
+  }, 100);
 };
 
 
