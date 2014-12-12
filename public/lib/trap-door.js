@@ -3,6 +3,7 @@ var TrapDoor = function(opts){
     opts.imagePath = 'trap-door';
 
   this.type      = 'trap-door';
+  this.originalX = opts.el.x;
   this.originalY = opts.el.y - opts.game.map.tileHeight;
   this.init(opts);
 
@@ -55,7 +56,12 @@ TrapDoor.prototype.fall = function(){
   });
 
   this.sprite.alive = false;
-  this.sprite.y = -100;
+
+  this.sprite.width = 20;
+  this.sprite.height = 120;
+
+  if(this.columnIndex%2 == 1)
+    this.sprite.x = this.originalX + 100;
 
   // Delay event to simulate snow falling
   setTimeout(function(){
@@ -80,7 +86,10 @@ TrapDoor.prototype.lift = function(){
   });
 
   this.sprite.alive = true;
-  this.sprite.y = this.originalY;
+  this.sprite.width = 120;
+  this.sprite.height = 20;
+
+  this.sprite.x = this.originalX;
   this.weight = 0;
 };
 
