@@ -8,6 +8,7 @@ var Player = function(opts){
   // keep track of jumping
   this.jumpPower    = 0;
   this.jumpPressed  = 0;
+  this.jumping      = false;
 
   // set up controls
   this.controls = {};
@@ -34,6 +35,8 @@ var Player = function(opts){
   this.sprite.animations.add('frozen', [9], 1, true);
   this.sprite.animations.add('smacked', [10] , 1, true);
   this.sprite.animations.add('dead', [11] , 1, true);
+  this.sprite.animations.add('jump-left', [7], 7, true);
+  this.sprite.animations.add('jump-right', [6], 7, true);
 
   // keep track of external set states
   // yes, isFrozen is listed twice
@@ -52,6 +55,9 @@ var Player = function(opts){
 
 Player.prototype.update = function(){
   var speed = bizarrio.settings.playerSpeed;
+
+  if(this.sprite.body.touching.down || this.sprite.body.onFloor())
+    this.jumping = false;
 
   // disable controls if frozen or snowballed or dead
   if(!this.isFrozen &&!this.snowballed && this.sprite.alive){
@@ -168,11 +174,12 @@ Player.prototype.attachActions = function(){
 
       self.sprite.body.velocity.y = -1*(self.jumpPower);
       self.jumpPower = 40;
+      self.jumping = true;
     }
   };
 
   this.actions.fireSnowball = function(){
-    if(!self.isFrozen){
+    if(!self.isFrozen && self.sprite.alive && !self.snowballed){
       var body = self.sprite.body;
       var snowball = new Snowball({
         x   : body.x,
@@ -190,6 +197,10 @@ Player.prototype.attachActions = function(){
   this.actions.moveLeft = function(speed){
     self.sprite.body.velocity.x = -1*speed;
     self.sprite.animations.play('left');
+
+    if(!self.sprite.body.touching.down && !self.sprite.body.onFloor() && self.jumping)
+      self.sprite.animations.play('jump-left');
+
     self.facing = 'left';
   };
 
@@ -202,6 +213,10 @@ Player.prototype.attachActions = function(){
   this.actions.moveRight = function(speed){
     self.sprite.body.velocity.x = speed;
     self.sprite.animations.play('right');
+
+    if(!self.sprite.body.touching.down && !self.sprite.body.onFloor() && self.jumping)
+      self.sprite.animations.play('jump-right');
+
     self.facing = 'right';
   };
 
