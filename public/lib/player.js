@@ -56,8 +56,10 @@ var Player = function(opts){
 Player.prototype.update = function(){
   var speed = bizarrio.settings.playerSpeed;
 
-  if(this.sprite.body.touching.down || this.sprite.body.onFloor())
+  if(this.sprite.body.touching.down || this.sprite.body.onFloor()){
     this.jumping = false;
+    this.sprite.animations.play('turn');
+  }
 
   // disable controls if frozen or snowballed or dead
   if(!this.isFrozen &&!this.snowballed && this.sprite.alive){

@@ -3,15 +3,15 @@ var Snowball = function(opts){
   this.exploded = false;
   this.name = new Date().getTime();
 
-  var yVel = -20;
-  var xVel = 600;
+  var yVel = -400;
+  var xVel = 700;
   var xPos = opts.x;
-  var yPos = opts.y - 20;
+  var yPos = opts.y + 5;
 
   if(opts.dir === 'left'){
-    xVel = -500;
-    xPos -= 15;
-  } else xPos += 15;
+    xVel = -700;
+    xPos -= 20;
+  } else xPos += 50;
 
   this.sprite = bizarrio.game.interface.add.sprite(xPos, yPos, 'snowball');
   bizarrio.game.interface.physics.enable(this.sprite, Phaser.Physics.ARCADE);
