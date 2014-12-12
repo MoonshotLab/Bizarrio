@@ -103,7 +103,10 @@ Player.prototype.die = function(){
 
   if(this.sprite.alive){
     this.sprite.alive = false;
-    if(this.score > 0) this.score--;
+    if(this.score > 0){
+      this.score--;
+      this.trigger('score', self);
+    }
 
     // if outside the stage, but death in the middle
     if(this.sprite.body.x > bizarrio.game.interface.width ||
@@ -246,3 +249,6 @@ Player.prototype.attachActions = function(){
 
   this.controls.speed.onDown.add(this.actions.fireSnowball, this);
 };
+
+
+MicroEvent.mixin(Player);

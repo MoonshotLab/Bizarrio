@@ -16,4 +16,14 @@ PlayerManager.prototype.score = function(name){
 };
 
 
+PlayerManager.prototype.add = function(item){
+  var self = this;
+
+  this.items.push(item);
+  item.bind('score', function(player){
+    self.trigger('score', player);
+  });
+};
+
+
 MicroEvent.mixin(PlayerManager);
