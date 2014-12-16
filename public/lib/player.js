@@ -19,7 +19,9 @@ var Player = function(opts){
   }
 
   // create the sprite and enable gravity
-  this.sprite = opts.game.add.sprite(0, 0, 'player-1');
+  var playerSprite = 'player-' + (opts.indice + 1);
+  console.log(playerSprite);
+  this.sprite = opts.game.add.sprite(0, 0, playerSprite);
   this.sprite.height = 90;
   this.sprite.width = 90;
   opts.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);

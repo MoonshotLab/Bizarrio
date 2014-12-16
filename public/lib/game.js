@@ -37,10 +37,10 @@ Game.prototype.init = function(opts){
 
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
-  self.interface.load.spritesheet('player-1', 'assets/player.png', 150, 150);
-  self.interface.load.spritesheet('player-2', 'assets/player.png', 150, 150);
-  self.interface.load.spritesheet('player-3', 'assets/player.png', 150, 150);
-  self.interface.load.spritesheet('player-4', 'assets/player.png', 150, 150);
+  self.interface.load.spritesheet('player-1', 'assets/player-1.png', 150, 150);
+  self.interface.load.spritesheet('player-2', 'assets/player-2.png', 150, 150);
+  self.interface.load.spritesheet('player-3', 'assets/player-3.png', 150, 150);
+  self.interface.load.spritesheet('player-4', 'assets/player-4.png', 150, 150);
   self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
   self.interface.load.image('spawn-point', 'assets/spawn-point.png');
 

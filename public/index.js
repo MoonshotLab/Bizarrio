@@ -51,7 +51,7 @@ $(function(){
   var startGame = function(){
     bizarrio.game = new Game();
     bizarrio.game.init({
-      players : [{}]
+      players : [{}, {}, {}, {}]
     });
 
     var urlVars = utils.getUrlVars();
