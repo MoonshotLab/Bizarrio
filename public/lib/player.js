@@ -6,8 +6,6 @@ var Player = function(opts){
   this.facing       = 'right';
 
   // keep track of jumping
-  this.jumpPower    = 0;
-  this.jumpPressed  = 0;
   this.jumping      = false;
 
   // set up controls
@@ -80,10 +78,7 @@ Player.prototype.update = function(){
       else this.sprite.animations.stop();
     }
 
-    // handle jumping and resetting
-    if(this.jumpPressed && !this.controls.jump.isDown) this.actions.jump();
-    else if(this.controls.jump.isDown) this.actions.buildJumpPower();
-    else this.jumpPower = 0;
+    if(this.controls.jump.isDown) this.actions.jump();
   }
 
   // reset acceleration
@@ -169,13 +164,8 @@ Player.prototype.attachActions = function(){
   this.actions = {};
 
   this.actions.jump = function(){
-    self.jumpPressed = false;
-
     if(self.sprite.body.touching.down || self.sprite.body.onFloor()){
-      if(self.jumpPower >= bizarrio.settings.playerJumpPow)
-        self.jumpPower = bizarrio.settings.playerJumpPow;
-
-      self.sprite.body.velocity.y = -1*(self.jumpPower);
+      self.sprite.body.velocity.y = -1*(bizarrio.settings.playerJumpPow);
       self.jumpPower = 40;
       self.jumping = true;
     }
@@ -190,11 +180,6 @@ Player.prototype.attachActions = function(){
         dir : self.facing
       });
     }
-  };
-
-  this.actions.buildJumpPower = function(){
-    self.jumpPressed = true;
-    self.jumpPower += 60;
   };
 
   this.actions.moveLeft = function(speed){
@@ -259,10 +244,8 @@ Player.prototype.attachActions = function(){
 
   this.actions.onIce = function(){
     self.sprite.onIce = true;
-
     if(self.controls.left.isDown) self.actions.slideLeft();
     else if(self.controls.right.isDown) self.actions.slideRight();
-
   };
 
   this.controls.speed.onDown.add(this.actions.fireSnowball, this);
