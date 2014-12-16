@@ -121,6 +121,7 @@ Player.prototype.die = function(){
     this.sprite.body.velocity.x = 0;
     this.sprite.body.velocity.y = -1500;
     this.sprite.animations.play('dead');
+    bizarrio.game.sounds.dead.play();
 
     setTimeout(function(){ self.spawn(); }, 5000);
   }
@@ -150,6 +151,7 @@ Player.prototype.hitByPitch = function(){
   if(!this.snowballed){
     this.sprite.animations.play('smacked');
     this.snowballed = true;
+    bizarrio.game.sounds.hit.play();
 
     setTimeout(function(){
       self.sprite.animations.play('turn');
@@ -165,6 +167,7 @@ Player.prototype.attachActions = function(){
 
   this.actions.jump = function(){
     if(self.sprite.body.touching.down || self.sprite.body.onFloor()){
+      bizarrio.game.sounds.jump.play();
       self.sprite.body.velocity.y = -1*(bizarrio.settings.playerJumpPow);
       self.jumpPower = 40;
       self.jumping = true;
@@ -173,6 +176,7 @@ Player.prototype.attachActions = function(){
 
   this.actions.fireSnowball = function(){
     if(!self.isFrozen && self.sprite.alive && !self.snowballed){
+      bizarrio.game.sounds.throw.play();
       var body = self.sprite.body;
       var snowball = new Snowball({
         x   : body.x,
@@ -226,6 +230,7 @@ Player.prototype.attachActions = function(){
 
   this.actions.freeze = function(){
     self.isFrozen = true;
+    bizarrio.game.sounds.frozen.play();
     clearTimeout(self.freezeTimer);
 
     self.sprite.animations.play('frozen');

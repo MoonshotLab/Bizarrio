@@ -10,6 +10,7 @@ var Game = function(){
 
   this.interface        = null;
   this.map              = null;
+  this.sounds           = {};
 
   this.layers           = {};
   this.objects          = {};
@@ -44,6 +45,12 @@ Game.prototype.preload = function(self, opts){
   self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
   self.interface.load.image('spawn-point', 'assets/spawn-point.png');
 
+  self.interface.load.audio('dead', 'assets/sounds/dead.mp3');
+  self.interface.load.audio('frozen', 'assets/sounds/frozen.mp3');
+  self.interface.load.audio('hit', 'assets/sounds/hit.mp3');
+  self.interface.load.audio('jump', 'assets/sounds/jump.mp3');
+  self.interface.load.audio('throw', 'assets/sounds/throw.mp3');
+
   if(bizarrio.project || bizarrio.debug){
     self.interface.load.image('platform', 'assets/platform.png');
     self.interface.load.image('trap-door', 'assets/trap-door.png');
@@ -73,6 +80,13 @@ Game.prototype.create = function(self, opts){
   self.interface.scale.height = 853;
   self.interface.scale.width = 1125;
   self.interface.scale.refresh();
+
+  // add sounds
+  self.sounds.dead    = self.interface.add.audio('dead');
+  self.sounds.frozen  = self.interface.add.audio('frozen');
+  self.sounds.hit     = self.interface.add.audio('hit');
+  self.sounds.jump    = self.interface.add.audio('jump');
+  self.sounds.throw   = self.interface.add.audio('throw');
 
   // start physics, gravity, collision mapping, and create
   // the static platform mappings
