@@ -43,11 +43,11 @@ module.exports = function(){
       'reset'     : 0
     },
     'conveyor' : {
-      'hi'        : 1,
-      'lo'        : 0,
-      'mode'      : 'OUTPUT',
-      'action'    : 'digitalWrite',
-      'reset'     : 0
+      'hi'        : 0,
+      'lo'        : 90,
+      'mode'      : 'SERVO',
+      'action'    : 'servoWrite',
+      'reset'     : 90
     }
   };
 };
