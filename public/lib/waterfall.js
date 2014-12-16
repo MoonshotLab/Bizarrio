@@ -2,9 +2,7 @@ var Waterfall = function(opts){
   // this needs to change, i don't know why it's required
   opts.y = (opts.el.y - opts.game.map.tileHeight*24);
 
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'waterfall';
-
+  opts.imagePath = 'waterfall';
   this.type = 'waterfall';
   this.init(opts);
 

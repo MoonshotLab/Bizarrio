@@ -1,7 +1,5 @@
 var TrapDoor = function(opts){
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'trap-door';
-
+  opts.imagePath = 'trap-door';
   this.type      = 'trap-door';
   this.originalX = opts.el.x;
   this.originalY = opts.el.y - opts.game.map.tileHeight;

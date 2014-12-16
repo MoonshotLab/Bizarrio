@@ -1,6 +1,5 @@
 var Fan = function(opts){
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'fan';
+  opts.imagePath = 'fan';
 
   // this needs to change, i don't know why it's required
   opts.y = (opts.el.y - opts.game.map.tileHeight*5);

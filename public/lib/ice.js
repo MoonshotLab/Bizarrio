@@ -1,6 +1,5 @@
 var Ice = function(opts){
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'ice';
+  opts.imagePath = 'ice';
 
   this.type = 'ice';
   this.init(opts);

@@ -1,6 +1,5 @@
 var Coin = function(opts){
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'coin';
+  opts.imagePath = 'coin';
 
   this.type = 'coin';
   this.init(opts);

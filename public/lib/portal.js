@@ -1,6 +1,5 @@
 var Portal = function(opts){
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'portal';
+  opts.imagePath = 'portal';
 
   this.type = 'portal';
   this.init(opts);

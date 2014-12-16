@@ -2,9 +2,7 @@ var Toggle = function(opts){
 
   // this needs to change, i don't know why it's required
   opts.y = (opts.el.y - opts.game.map.tileHeight*4);
-
-  if(bizarrio.project || bizarrio.debug)
-    opts.imagePath = 'toggle';
+  opts.imagePath = 'toggle';
 
   this.type = 'toggle';
   this.init(opts);

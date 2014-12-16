@@ -37,19 +37,34 @@ Game.prototype.init = function(opts){
 
 Game.prototype.preload = function(self, opts){
   self.interface.load.tilemap('platforms', 'assets/layer-map.json', null, Phaser.Tilemap.TILED_JSON);
-  self.interface.load.spritesheet('player', 'assets/player.png', 150, 150);
+  self.interface.load.spritesheet('player-1', 'assets/player.png', 150, 150);
+  self.interface.load.spritesheet('player-2', 'assets/player.png', 150, 150);
+  self.interface.load.spritesheet('player-3', 'assets/player.png', 150, 150);
+  self.interface.load.spritesheet('player-4', 'assets/player.png', 150, 150);
   self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
-
-  self.interface.load.image('platform', 'assets/platform.png');
-  self.interface.load.image('trap-door', 'assets/trap-door.png');
   self.interface.load.image('spawn-point', 'assets/spawn-point.png');
-  self.interface.load.image('portal', 'assets/portal.png');
-  self.interface.load.image('toggle', 'assets/toggle.png');
-  self.interface.load.image('coin', 'assets/coin.png');
-  self.interface.load.image('ice', 'assets/ice.png');
-  self.interface.load.image('waterfall', 'assets/waterfall.png');
-  self.interface.load.image('conveyor', 'assets/conveyor.png');
-  self.interface.load.image('fan', 'assets/fan.png');
+
+  if(bizarrio.project || bizarrio.debug){
+    self.interface.load.image('platform', 'assets/platform.png');
+    self.interface.load.image('trap-door', 'assets/trap-door.png');
+    self.interface.load.image('portal', 'assets/portal.png');
+    self.interface.load.image('toggle', 'assets/toggle.png');
+    self.interface.load.image('coin', 'assets/coin.png');
+    self.interface.load.image('ice', 'assets/ice.png');
+    self.interface.load.image('waterfall', 'assets/waterfall.png');
+    self.interface.load.image('conveyor', 'assets/conveyor.png');
+    self.interface.load.image('fan', 'assets/fan.png');
+  } else {
+    self.interface.load.image('platform', 'assets/platform-black.png');
+    self.interface.load.image('trap-door', 'assets/trap-door-black.png');
+    self.interface.load.image('portal', 'assets/portal-black.png');
+    self.interface.load.image('toggle', 'assets/toggle-black.png');
+    self.interface.load.image('coin', 'assets/coin-black.png');
+    self.interface.load.image('ice', 'assets/ice-black.png');
+    self.interface.load.image('waterfall', 'assets/waterfall-black.png');
+    self.interface.load.image('conveyor', 'assets/conveyor-black.png');
+    self.interface.load.image('fan', 'assets/fan-black.png');
+  }
 };
 
 
