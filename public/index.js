@@ -47,7 +47,6 @@ var bizarrio = {
 
 
 $(function(){
-
   var startGame = function(){
     bizarrio.game = new Game();
     bizarrio.game.init({
@@ -60,7 +59,9 @@ $(function(){
     if(urlVars.indexOf('project') != -1)
       bizarrio.project = true;
 
-    if(bizarrio.debug)
+    if(bizarrio.debug){
+      $('#music')[0].pause();
       $('#scoreboard').hide();
+    }
   }();
 });
