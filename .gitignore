@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 public/vendor/*
 !public/vendor/.gitkeep
+public/assets/sounds/*
+!public/assets/sounds/.gitkeep
