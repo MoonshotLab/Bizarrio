@@ -2,6 +2,7 @@ var bizarrio = {
   gameStarted     : false,
   playersSelected : false,
 
+  numPlayers  : 0,
   socket      : io(),
   game        : null,
   debug       : false,
@@ -57,7 +58,19 @@ $(function(){
   if(urlVars.indexOf('project') != -1)
     bizarrio.project = true;
 
-  // player selection screen
+  // hide intro screens, pause music, make fake game
+  if(bizarrio.debug){
+    $('#screens').hide();
+    $('#music')[0].pause();
+    $('#scoreboard').hide();
+    startGame({});
+  }
+
+  // create game
+  bizarrio.game = new Game();
+  bizarrio.game.init();
+
+  // // player selection screen
   var $playerSelect = $('#player-select');
   $('body').keydown(function(e){
     e.preventDefault();
@@ -80,25 +93,23 @@ $(function(){
       setTimeout(function(){
         var $selected = $playerSelect.find('.selected');
         $selected.addClass('fade');
-        startGame({ numPlayers : $selected.data('players') });
+        bizarrio.numPlayers = $selected.data('players');
+        tutorial.start(startGame);
       }, 1000);
     }
   });
 });
 
-var startGame = function(opts){
+
+var startGame = function(){
   // generate players
   var players = [];
-  for(var i=0; i<opts.numPlayers; i++){
+  for(var i=0; i<bizarrio.numPlayers; i++){
     players.push({});
   }
 
-  // create game
-  bizarrio.game = new Game();
-  bizarrio.game.init({ players : players });
-
-  if(bizarrio.debug){
-    $('#music')[0].pause();
-    $('#scoreboard').hide();
-  }
+  // start the game forrealsy
+  bizarrio.game.createPlayers(players);
+  bizarrio.game.start();
+  bizarrio.gameStarted = true;
 };

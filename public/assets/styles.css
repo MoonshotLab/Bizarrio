@@ -32,6 +32,16 @@ canvas{
 #screens .screen{
   width: 100%;
   height: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#screens .screen:first-child{
+  display: block;
+}
+#player-select{
+  display: none;
 }
 #player-select .player-selection{
   font-size: 150%;
@@ -53,6 +63,20 @@ canvas{
 #player-select .player-selection.fade{
   opacity: 0;
 }
+#tutorial .step{
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#tutorial .step h2{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 410px;
+}
+
 
 #scoreboard{
   display: none;

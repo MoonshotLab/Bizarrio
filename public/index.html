@@ -35,6 +35,7 @@
     <script src='lib/snowball.js'></script>
 
     <script src='lib/game.js'></script>
+    <script src='lib/tutorial.js'></script>
     <script src='index.js'></script>
 
     <link rel='stylesheet' href='assets/styles.css' />
@@ -48,7 +49,12 @@
           <div class='player-selection' data-players='3'>3 Player</div>
           <div class='player-selection' data-players='4'>4 Player</div>
         </div>
-        <div class='screen' id='tutorial'></div>
+        <div class='screen' id='tutorial'>
+          <div class='step'><h2>Navigate Obstacles</h2></div>
+          <div class='step'><h2>Capture Snowflakes</h2></div>
+          <div class='step'><h2>Travel Through Portals</h2></div>
+          <div class='step'><h2>Watch out for the Waterfall</h2></div>
+        </div>
         <div class='screen' id='finished'></div>
       </div>
       <div id='scoreboard'>
@@ -57,6 +63,6 @@
       </div>
     </div>
 
-    <!-- <audio id='music' loop autoplay><source src='assets/sounds/music.m4a' type='audio/mp4'></audio> -->
+    <audio id='music' loop autoplay><source src='assets/sounds/music.m4a' type='audio/mp4'></audio>
   </body>
 </html>

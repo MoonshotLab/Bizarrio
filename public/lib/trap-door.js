@@ -43,8 +43,9 @@ TrapDoor.prototype.addWeight = function(weight){
 };
 
 
-TrapDoor.prototype.fall = function(){
+TrapDoor.prototype.fall = function(opts){
   var self = this;
+  if(!opts) opts = {};
 
   bizarrio.socket.emit('update-hardware', {
     pin           : this.pin,
@@ -69,9 +70,11 @@ TrapDoor.prototype.fall = function(){
     });
   }, 700);
 
-  setTimeout(function(){
-    self.lift();
-  }, 5000);
+  if(opts.skipLift){
+    setTimeout(function(){
+      self.lift();
+    }, 5000);
+  }
 };
 
 

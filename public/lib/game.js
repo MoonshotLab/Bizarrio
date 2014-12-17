@@ -1,4 +1,7 @@
 var Game = function(){
+  this.waterfall        = null;
+  this.fan              = null;
+
   this.spawnPoints      = new SpawnPoints();
   this.playerManager    = new PlayerManager();
   this.coinManager      = new CoinManager();
@@ -19,7 +22,6 @@ var Game = function(){
 };
 
 
-// { players : [{}, {}] }
 Game.prototype.init = function(opts){
   var self = this;
 
@@ -103,10 +105,8 @@ Game.prototype.create = function(self, opts){
   self._createObjects();
 
   // init all the interface elements
-  if(!bizarrio.debug){
-    self._createPlayers(opts.players);
+  if(!bizarrio.debug)
     self._createScoreboard();
-  }
 };
 
 
@@ -125,7 +125,7 @@ Game.prototype.update = function(self, opts){
     }
   );
   // Only collect snow if not in debug mode
-  if(!bizarrio.debug)
+  if(!bizarrio.debug && bizarrio.gameStarted)
     self.trapDoorManager.addWeight();
 
   // Toggles
@@ -191,7 +191,8 @@ Game.prototype.update = function(self, opts){
 };
 
 
-Game.prototype._createPlayers = function(players){
+// { players : [{}, {}] }
+Game.prototype.createPlayers = function(players){
   var self = this;
 
   players.forEach(function(player, i){
@@ -204,6 +205,17 @@ Game.prototype._createPlayers = function(players){
   });
 
   self.characters = self.playerManager.getSprites();
+};
+
+
+Game.prototype.start = function(){
+  this.coinManager.showRandomCoin();
+  this.waterfall.scheduleRandomToggle();
+  this.fan.scheduleRandomToggle();
+
+  this.conveyorManager.items.forEach(function(conveyor){
+    conveyor.toggle();
+  });
 };
 
 
@@ -284,14 +296,12 @@ Game.prototype._createObjects = function(){
 
   // make the waterfalls
   this.map.objects.waterfalls.forEach(function(el, i){
-    var waterfall = new Waterfall({
+    self.waterfall = new Waterfall({
       game    : self,
       group   : self.objects.waterfalls,
       el      : el,
       indice  : i
     });
-
-    if(!bizarrio.debug) waterfall.scheduleRandomToggle();
   });
 
   // make the conveyors
@@ -304,20 +314,16 @@ Game.prototype._createObjects = function(){
     });
 
     self.conveyorManager.add(conveyor);
-
-    if(!bizarrio.debug) conveyor.toggle();
   });
 
   // make the fans
   this.map.objects.fans.forEach(function(el, i){
-    var fan = new Fan({
+    self.fan = new Fan({
       game    : self,
       group   : self.objects.fans,
       el      : el,
       indice  : i
     });
-
-    if(!bizarrio.debug) fan.scheduleRandomToggle();
   });
 
   // make the coins
@@ -331,6 +337,4 @@ Game.prototype._createObjects = function(){
 
     self.coinManager.add(coin);
   });
-
-  if(!bizarrio.debug) this.coinManager.showRandomCoin();
 };
