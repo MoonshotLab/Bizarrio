@@ -70,7 +70,7 @@ TrapDoor.prototype.fall = function(opts){
     });
   }, 700);
 
-  if(opts.skipLift){
+  if(!opts.skipLift){
     setTimeout(function(){
       self.lift();
     }, 5000);
