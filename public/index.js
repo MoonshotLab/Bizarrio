@@ -1,4 +1,7 @@
 var bizarrio = {
+  gameStarted     : false,
+  playersSelected : false,
+
   socket      : io(),
   game        : null,
   debug       : false,
@@ -12,7 +15,7 @@ var bizarrio = {
     freezeLength    : 3000,
     playerWeight    : 10,
     playerSpeed     : 140,
-    playerSpeedBoost: 1.5,
+    playerSpeedBoost: 2,
     playerBounce    : 0,
     playerJumpPow   : 600,
 
@@ -47,21 +50,55 @@ var bizarrio = {
 
 
 $(function(){
-  var startGame = function(){
-    bizarrio.game = new Game();
-    bizarrio.game.init({
-      players : [{}, {}, {}, {}]
-    });
+  // debug or project mode?
+  var urlVars = utils.getUrlVars();
+  if(urlVars.indexOf('debug') != -1)
+    bizarrio.debug = true;
+  if(urlVars.indexOf('project') != -1)
+    bizarrio.project = true;
 
-    var urlVars = utils.getUrlVars();
-    if(urlVars.indexOf('debug') != -1)
-      bizarrio.debug = true;
-    if(urlVars.indexOf('project') != -1)
-      bizarrio.project = true;
+  // player selection screen
+  var $playerSelect = $('#player-select');
+  $('body').keydown(function(e){
+    e.preventDefault();
 
-    if(bizarrio.debug){
-      $('#music')[0].pause();
-      $('#scoreboard').hide();
+    // handle number of players toggling
+    if(e.keyCode == 32 && !bizarrio.gameStarted && !bizarrio.playersSelected){
+      var $selected = $playerSelect.find('.selected');
+      $selected.removeClass('selected');
+
+      if($selected.next().length)
+        $selected.next().addClass('selected');
+      else
+        $playerSelect.find('.player-selection:first-child').addClass('selected');
     }
-  }();
+
+    // handle number of player selection
+    if(e.keyCode == 13 && !bizarrio.gameStarted && !bizarrio.playersSelected){
+      bizarrio.playersSelected = true;
+      $playerSelect.find('.player-selection').not('.selected').addClass('fade');
+      setTimeout(function(){
+        var $selected = $playerSelect.find('.selected');
+        $selected.addClass('fade');
+        startGame({ numPlayers : $selected.data('players') });
+      }, 1000);
+    }
+  });
 });
+
+var startGame = function(opts){
+  // generate players
+  var players = [];
+  for(var i=0; i<opts.numPlayers; i++){
+    players.push({});
+  }
+
+  // create game
+  bizarrio.game = new Game();
+  bizarrio.game.init({ players : players });
+
+  if(bizarrio.debug){
+    $('#music')[0].pause();
+    $('#scoreboard').hide();
+  }
+};
