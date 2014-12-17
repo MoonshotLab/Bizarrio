@@ -58,6 +58,10 @@ $(function(){
   if(urlVars.indexOf('project') != -1)
     bizarrio.project = true;
 
+  // create game
+  bizarrio.game = new Game();
+  bizarrio.game.init();
+
   // hide intro screens, pause music, make fake game
   if(bizarrio.debug){
     $('#screens').hide();
@@ -65,10 +69,6 @@ $(function(){
     $('#scoreboard').hide();
     startGame({});
   }
-
-  // create game
-  bizarrio.game = new Game();
-  bizarrio.game.init();
 
   // // player selection screen
   var $playerSelect = $('#player-select');
@@ -110,6 +110,7 @@ var startGame = function(){
 
   // start the game forrealsy
   bizarrio.game.createPlayers(players);
-  bizarrio.game.start();
+  if(!bizarrio.debug)
+    bizarrio.game.start();
   bizarrio.gameStarted = true;
 };
