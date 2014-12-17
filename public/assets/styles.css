@@ -133,27 +133,43 @@ canvas{
   display: inline-block;
   text-align: center;
   width: 25%;
-  font-size: 80%;
+  font-size: 140%;
+  top: 30%;
+  left: 10%;
+}
+#scoreboard li span.name{
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
 }
 #scoreboard li:nth-child(1){
   left: 10%;
-  top: 10%;
+}
+#scoreboard li:nth-child(1) span.name{
+  background-image: url('/assets/scoreboard-player-1.png');
 }
 #scoreboard li:nth-child(2){
-  left: 10%;
-  top: 53%;
+  left: 23%;
+}
+#scoreboard li:nth-child(2) span.name{
+  background-image: url('/assets/scoreboard-player-2.png');
 }
 #scoreboard li:nth-child(3){
-  left: 70%;
-  top: 10%;
+  left: 58%;
+}
+#scoreboard li:nth-child(3) span.name{
+  background-image: url('/assets/scoreboard-player-3.png');
 }
 #scoreboard li:nth-child(4){
   left: 70%;
-  top: 53%;
 }
-#scoreboard .name{
-  opacity: .5;
+#scoreboard li:nth-child(4) span.name{
+  background-image: url('/assets/scoreboard-player-4.png');
 }
 #scoreboard .score{
+  position: relative;
+  top: -4px;
   padding-left: 10px;
 }

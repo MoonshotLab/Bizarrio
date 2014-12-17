@@ -5,9 +5,7 @@ var Scoreboard = function(players){
   var $players = $('#scoreboard').find('.players');
   var template = _.template([
     '<li class="<%= cssSelector %>">',
-      '<span class="name">',
-        '<%= name %>:',
-      '</span>',
+      '<span class="name"></span>',
       '<span class="score">0</span>',
     '</li>'
   ].join(''));
