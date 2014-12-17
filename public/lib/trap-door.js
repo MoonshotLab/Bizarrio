@@ -47,10 +47,14 @@ TrapDoor.prototype.fall = function(opts){
   var self = this;
   if(!opts) opts = {};
 
+  var state = 'lo';
+  if(this.columnIndex === 0 || this.columnIndex === 2)
+    state = 'hi';
+
   bizarrio.socket.emit('update-hardware', {
     pin           : this.pin,
     type          : this.type,
-    state         : 'lo',
+    state         : state,
     arduinoIndex  : this.arduinoIndex
   });
 
@@ -79,10 +83,14 @@ TrapDoor.prototype.fall = function(opts){
 
 
 TrapDoor.prototype.lift = function(){
+  var state = 'hi';
+  if(this.columnIndex === 0 || this.columnIndex === 2)
+    state = 'lo';
+
   bizarrio.socket.emit('update-hardware', {
     pin           : this.pin,
     type          : this.type,
-    state         : 'hi',
+    state         : state,
     arduinoIndex  : this.arduinoIndex
   });
 

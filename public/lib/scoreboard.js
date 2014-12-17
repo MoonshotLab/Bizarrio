@@ -46,6 +46,15 @@ Scoreboard.prototype.updateTime = function(){
     });
 
     $('#finished').find('h2').html(winningPlayer.name + ' Wins!');
+    bizarrio.gameStarted = false;
+
+    var liftDoor = function(door, i){
+      setTimeout(function(){ door.lift(); }, i*200);
+    };
+
+    bizarrio.game.trapDoorManager.items.forEach(function(trapDoor, i){
+      liftDoor(trapDoor, i);
+    });
 
     setTimeout(function(){
       $('#finished').addClass('show');
