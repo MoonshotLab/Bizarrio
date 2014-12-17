@@ -228,8 +228,10 @@ Player.prototype.attachActions = function(){
   };
 
   this.actions.freeze = function(){
+    if(!self.isFrozen)
+      bizarrio.game.sounds.frozen.play();
     self.isFrozen = true;
-    bizarrio.game.sounds.frozen.play();
+
     clearTimeout(self.freezeTimer);
 
     self.sprite.animations.play('frozen');
