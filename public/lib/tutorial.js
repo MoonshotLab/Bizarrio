@@ -23,7 +23,7 @@ tutorial.steps.push(function(){
     }, timeout);
     setTimeout(function(){
       bizarrio.game.trapDoorManager.items[index].lift();
-    }, timeout+200);
+    }, timeout+500);
   };
 
   for(var i=0; i<bizarrio.game.trapDoorManager.items.length; i++){
