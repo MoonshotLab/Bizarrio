@@ -8,7 +8,7 @@ var Scoreboard = function(players){
       '<span class="name">',
         '<%= name %>:',
       '</span>',
-      '<span class="score"></span>',
+      '<span class="score">0</span>',
     '</li>'
   ].join(''));
 

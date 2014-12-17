@@ -14,6 +14,7 @@ body{
   margin-top: 500px;
   width: 1160px;
   height: 880px;
+  position: relative;
 }
 
 canvas{
@@ -23,27 +24,54 @@ canvas{
 #scoreboard{
   font-family: Monospace;
   color: white;
-  position: fixed;
+  position: absolute;
   width: 100%;
-  height: 100px;
-  bottom: 0;
+  height: 50px;
+  top: 0;
   left: 0;
-  background-color: rgba(255,255,255,.2);
   font-size: 1.5em;
-  padding: 20px 20px 0px;
 }
 
+#scoreboard #time-remaining{
+  width: 20%;
+  left: 40%;
+  position: absolute;
+  text-align: center;
+}
+#scoreboard #time-remaining h2{
+  margin: 7px 0 0 0;
+}
 #scoreboard ul{
   margin: 0;
   padding: 0;
 }
-
 #scoreboard li{
+  position: absolute;
   list-style-type: none;
   display: inline-block;
-  width: 50%;
+  text-align: center;
+  width: 25%;
+  font-size: 80%;
 }
-
+#scoreboard li:nth-child(1){
+  left: 10%;
+  top: 10%;
+}
+#scoreboard li:nth-child(2){
+  left: 10%;
+  top: 53%;
+}
+#scoreboard li:nth-child(3){
+  left: 70%;
+  top: 10%;
+}
+#scoreboard li:nth-child(4){
+  left: 70%;
+  top: 53%;
+}
 #scoreboard .name{
   opacity: .5;
+}
+#scoreboard .score{
+  padding-left: 10px;
 }

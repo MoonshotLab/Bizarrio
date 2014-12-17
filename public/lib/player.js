@@ -1,7 +1,7 @@
 // { game : game, indice : 5 }
 var Player = function(opts){
   this.score        = 0;
-  this.name         = 'Player ' + opts.indice;
+  this.name         = 'Player ' + (opts.indice + 1);
   this.cssSelector  = 'player-' + opts.indice;
   this.facing       = 'right';
 
@@ -18,7 +18,6 @@ var Player = function(opts){
 
   // create the sprite and enable gravity
   var playerSprite = 'player-' + (opts.indice + 1);
-  console.log(playerSprite);
   this.sprite = opts.game.add.sprite(0, 0, playerSprite);
   this.sprite.height = 90;
   this.sprite.width = 90;
