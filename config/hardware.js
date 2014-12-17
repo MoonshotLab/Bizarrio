@@ -29,8 +29,8 @@ module.exports = function(){
       'reset'     : 70
     },
     'waterfall' : {
-      'hi'        : 0,
-      'lo'        : 1,
+      'hi'        : 1,
+      'lo'        : 0,
       'mode'      : 'OUTPUT',
       'action'    : 'digitalWrite',
       'reset'     : 0
