@@ -76,16 +76,30 @@ canvas{
   text-align: center;
   padding-top: 410px;
 }
-#finished{
+#finished .winner.player-0{
+  background-image: url('/assets/victory-player-1.png');
+}
+#finished .winner.player-1{
+  background-image: url('/assets/victory-player-2.png');
+}
+#finished .winner.player-2{
+  background-image: url('/assets/victory-player-3.png');
+}
+#finished .winner.player-3{
+  background-image: url('/assets/victory-player-4.png');
+}
+#finished .winner{
   transition: .5s linear all;
   opacity: 0;
+  position: absolute;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
 }
-#finished.show{
+#finished .winner.show{
   opacity: 1;
-}
-#finished h2{
-  margin-top: 440px;
-  text-align : center;
 }
 
 

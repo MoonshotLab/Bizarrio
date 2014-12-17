@@ -45,7 +45,6 @@ Scoreboard.prototype.updateTime = function(){
         winningPlayer = player;
     });
 
-    $('#finished').find('h2').html(winningPlayer.name + ' Wins!');
     bizarrio.gameStarted = false;
 
     var liftDoor = function(door, i){
@@ -57,7 +56,7 @@ Scoreboard.prototype.updateTime = function(){
     });
 
     setTimeout(function(){
-      $('#finished').addClass('show');
+      $('#finished').find('.' + winningPlayer.cssSelector).addClass('show');
     }, 500);
 
     setTimeout(function(){
