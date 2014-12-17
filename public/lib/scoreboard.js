@@ -35,10 +35,24 @@ Scoreboard.prototype.updateTime = function(){
     $('#scoreboard').find('#time-remaining').find('.time')
       .text(utils.formatTime(this.timeLeft));
   } else {
+    $('#finished').show();
     bizarrio.game.interface.paused = true;
+
+    var winningPlayer = {};
+    bizarrio.game.playerManager.items.forEach(function(player, i){
+      if(i === 0) winningPlayer = player;
+      if(player.score > winningPlayer.score)
+        winningPlayer = player;
+    });
+
+    $('#finished').find('h2').html(winningPlayer.name + ' Wins!');
+
+    setTimeout(function(){
+      $('#finished').addClass('show');
+    }, 500);
 
     setTimeout(function(){
       location.reload();
-    }, 3000);
+    }, 4000);
   }
 };

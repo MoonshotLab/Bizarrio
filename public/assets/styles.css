@@ -76,6 +76,17 @@ canvas{
   text-align: center;
   padding-top: 410px;
 }
+#finished{
+  transition: .5s linear all;
+  opacity: 0;
+}
+#finished.show{
+  opacity: 1;
+}
+#finished h2{
+  margin-top: 440px;
+  text-align : center;
+}
 
 
 #scoreboard{
