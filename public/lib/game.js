@@ -103,10 +103,6 @@ Game.prototype.create = function(self, opts){
     self.map.addTilesetImage('platform');
 
   self._createObjects();
-
-  // init all the interface elements
-  if(!bizarrio.debug)
-    self._createScoreboard();
 };
 
 
@@ -212,6 +208,7 @@ Game.prototype.start = function(){
   this.coinManager.showRandomCoin();
   this.waterfall.scheduleRandomToggle();
   this.fan.scheduleRandomToggle();
+  this._createScoreboard();
 
   this.conveyorManager.items.forEach(function(conveyor){
     conveyor.toggle();

@@ -110,7 +110,9 @@ var startGame = function(){
 
   // start the game forrealsy
   bizarrio.game.createPlayers(players);
-  if(!bizarrio.debug)
+  if(!bizarrio.debug){
+    $('#scoreboard').show();
     bizarrio.game.start();
+  }
   bizarrio.gameStarted = true;
 };
