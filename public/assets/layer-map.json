@@ -1200,6 +1200,32 @@
          "width":116,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":88,
+         "name":"jingleBells",
+         "objects":[
+                {
+                 "gid":10,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+                     "arduino":"0",
+                     "pin":"11"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2220,
+                 "y":100
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":116,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":

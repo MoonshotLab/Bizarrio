@@ -11,6 +11,7 @@ PlayerManager.prototype.score = function(name){
 
   if(scoringPlayer){
     scoringPlayer.score++;
+    bizarrio.game.jingleBell.toggle();
     this.trigger('score', scoringPlayer);
   }
 };

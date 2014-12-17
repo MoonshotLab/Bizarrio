@@ -586,4 +586,12 @@
   <object gid="11" x="1920" y="740"/>
   <object gid="11" x="2040" y="740"/>
  </objectgroup>
+ <objectgroup name="jingleBells" width="116" height="88">
+  <object gid="10" x="2220" y="100">
+   <properties>
+    <property name="arduino" value="0"/>
+    <property name="pin" value="11"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

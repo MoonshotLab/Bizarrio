@@ -1,6 +1,7 @@
 var Game = function(){
   this.waterfall        = null;
   this.fan              = null;
+  this.jingleBell       = null;
 
   this.spawnPoints      = new SpawnPoints();
   this.playerManager    = new PlayerManager();
@@ -63,6 +64,7 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('waterfall', 'assets/waterfall.png');
     self.interface.load.image('conveyor', 'assets/conveyor.png');
     self.interface.load.image('fan', 'assets/fan.png');
+    self.interface.load.image('jingleBell', 'assets/fan.png');
   } else {
     self.interface.load.image('platform', 'assets/platform-black.png');
     self.interface.load.image('trap-door', 'assets/trap-door-black.png');
@@ -73,6 +75,7 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('waterfall', 'assets/waterfall-black.png');
     self.interface.load.image('conveyor', 'assets/conveyor-black.png');
     self.interface.load.image('fan', 'assets/fan-black.png');
+    self.interface.load.image('jingleBell', 'assets/fan-black.png');
   }
 };
 
@@ -228,6 +231,7 @@ Game.prototype._createObjects = function(){
   this.objects.trapDoors = this.interface.add.group();
   this.objects.portals = this.interface.add.group();
   this.objects.fans = this.interface.add.group();
+  this.objects.jingleBells = this.interface.add.group();
   this.objects.ice = this.interface.add.group();
   this.objects.toggles = this.interface.add.group();
   this.objects.waterfalls = this.interface.add.group();
@@ -318,6 +322,16 @@ Game.prototype._createObjects = function(){
     self.fan = new Fan({
       game    : self,
       group   : self.objects.fans,
+      el      : el,
+      indice  : i
+    });
+  });
+
+  // make the jingleBell
+  this.map.objects.jingleBells.forEach(function(el, i){
+    self.jingleBell = new JingleBell({
+      game    : self,
+      group   : self.objects.jingleBells,
       el      : el,
       indice  : i
     });

@@ -29,8 +29,8 @@ module.exports = function(){
       'reset'     : 70
     },
     'waterfall' : {
-      'hi'        : 1,
-      'lo'        : 0,
+      'hi'        : 0,
+      'lo'        : 1,
       'mode'      : 'OUTPUT',
       'action'    : 'digitalWrite',
       'reset'     : 0
@@ -48,6 +48,13 @@ module.exports = function(){
       'mode'      : 'SERVO',
       'action'    : 'servoWrite',
       'reset'     : 90
+    },
+    'jingleBell' : {
+      'hi'        : 140,
+      'lo'        : 50,
+      'mode'      : 'SERVO',
+      'action'    : 'servoWrite',
+      'reset'     : 50
     }
   };
 };
