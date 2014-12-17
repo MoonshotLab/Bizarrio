@@ -42,6 +42,8 @@ canvas{
 }
 #player-select{
   display: none;
+  margin-top: 250px;
+  margin-left: 170px;
 }
 #player-select .player-selection{
   font-size: 150%;
@@ -50,15 +52,37 @@ canvas{
   width: 25%;
   text-align: center;
   margin-top: 60px;
+  background-size: contain;
+}
+#player-select .players-1{
+  background-image: url('/assets/player-select-p1.png');
+}
+#player-select .players-1.selected{
+  background-image: url('/assets/player-select-p1-selected.png');
+}
+#player-select .players-2{
+  background-image: url('/assets/player-select-p2.png');
+}
+#player-select .players-2.selected{
+  background-image: url('/assets/player-select-p2-selected.png');
+}
+#player-select .players-3{
+  background-image: url('/assets/player-select-p3.png');
+}
+#player-select .players-3.selected{
+  background-image: url('/assets/player-select-p3-selected.png');
+}
+#player-select .players-4{
+  background-image: url('/assets/player-select-p4.png');
+}
+#player-select .players-4.selected{
+  background-image: url('/assets/player-select-p4-selected.png');
 }
 #player-select .player-selection{
   transition: .1s linear all;
-  opacity: .4;
-}
-#player-select .player-selection.selected{
-  opacity: 1;
-  background: url('/assets/caret.png') no-repeat 25% 0;
-  background-size: contain;
+  height: 50px;
+  width: 40%;
+  background-repeat: no-repeat;
 }
 #player-select .player-selection.fade{
   opacity: 0;
