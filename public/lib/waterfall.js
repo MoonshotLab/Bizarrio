@@ -5,6 +5,11 @@ var Waterfall = function(opts){
   opts.imagePath = 'waterfall';
   this.type = 'waterfall';
   this.init(opts);
+  this.sprite.alpha = 1;
+
+  this.sprite.animations.add('on', [0, 1, 2], 7, true);
+  this.sprite.animations.add('off', [3], 7, true);
+  this.sprite.animations.play('off');
 
   return this;
 };
@@ -20,4 +25,25 @@ Waterfall.prototype.scheduleRandomToggle = function(){
     self.scheduleRandomToggle();
     self.toggle();
   }, timeout);
+};
+
+
+Waterfall.prototype.toggle = function(){
+  this.sprite.alive = this.sprite.alive ? false : true;
+
+  var state = 'lo';
+  if(this.sprite.alive)
+    state = 'hi';
+
+  if(state == 'hi')
+    this.sprite.animations.play('on');
+  else
+    this.sprite.animations.play('off');
+
+  bizarrio.socket.emit('update-hardware', {
+    pin           : this.pin,
+    type          : this.type,
+    state         : state,
+    arduinoIndex  : this.arduinoIndex
+  });
 };

@@ -45,6 +45,7 @@ Game.prototype.preload = function(self, opts){
   self.interface.load.spritesheet('player-2', 'assets/player-2.png', 150, 150);
   self.interface.load.spritesheet('player-3', 'assets/player-3.png', 150, 150);
   self.interface.load.spritesheet('player-4', 'assets/player-4.png', 150, 150);
+  self.interface.load.spritesheet('waterfall', 'assets/waterfall.png', 120, 480);
   self.interface.load.spritesheet('snowball', 'assets/snowball.png', 20, 20);
   self.interface.load.image('spawn-point', 'assets/spawn-point.png');
 
@@ -61,7 +62,6 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('toggle', 'assets/toggle.png');
     self.interface.load.image('coin', 'assets/coin.png');
     self.interface.load.image('ice', 'assets/ice.png');
-    self.interface.load.image('waterfall', 'assets/waterfall.png');
     self.interface.load.image('conveyor', 'assets/conveyor.png');
     self.interface.load.image('fan', 'assets/fan.png');
     self.interface.load.image('jingleBell', 'assets/fan.png');
@@ -72,7 +72,6 @@ Game.prototype.preload = function(self, opts){
     self.interface.load.image('toggle', 'assets/toggle-black.png');
     self.interface.load.image('coin', 'assets/coin-black.png');
     self.interface.load.image('ice', 'assets/ice-black.png');
-    self.interface.load.image('waterfall', 'assets/waterfall-black.png');
     self.interface.load.image('conveyor', 'assets/conveyor-black.png');
     self.interface.load.image('fan', 'assets/fan-black.png');
     self.interface.load.image('jingleBell', 'assets/fan-black.png');
