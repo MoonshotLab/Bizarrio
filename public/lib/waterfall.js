@@ -35,10 +35,14 @@ Waterfall.prototype.toggle = function(){
   if(this.sprite.alive)
     state = 'hi';
 
-  if(state == 'hi')
+  if(state == 'hi'){
+    bizarrio.game.sounds.waterfall.play();
     this.sprite.animations.play('on');
-  else
+  }
+  else{
+    bizarrio.game.sounds.waterfall.stop();
     this.sprite.animations.play('off');
+  }
 
   bizarrio.socket.emit('update-hardware', {
     pin           : this.pin,

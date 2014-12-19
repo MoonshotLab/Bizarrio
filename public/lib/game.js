@@ -54,6 +54,7 @@ Game.prototype.preload = function(self, opts){
   self.interface.load.audio('hit', 'assets/sounds/hit.mp3');
   self.interface.load.audio('jump', 'assets/sounds/jump.mp3');
   self.interface.load.audio('throw', 'assets/sounds/throw.mp3');
+  self.interface.load.audio('waterfall', 'assets/sounds/waterfall.mp3');
 
   if(bizarrio.project || bizarrio.debug){
     self.interface.load.image('platform', 'assets/platform.png');
@@ -91,6 +92,7 @@ Game.prototype.create = function(self, opts){
   self.sounds.hit     = self.interface.add.audio('hit');
   self.sounds.jump    = self.interface.add.audio('jump');
   self.sounds.throw   = self.interface.add.audio('throw');
+  self.sounds.waterfall = self.interface.add.audio('waterfall');
 
   // start physics, gravity, collision mapping, and create
   // the static platform mappings
