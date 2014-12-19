@@ -8,6 +8,7 @@ html, body{
 body{
   width: 3000px;
   height: 3000px;
+  zoom: 1.01;
 }
 
 
@@ -42,17 +43,18 @@ canvas{
 }
 #player-select{
   display: none;
-  margin-top: 250px;
-  margin-left: 170px;
+  margin-top: 400px;
+  margin-left: 370px;
+  width: 60% !important;
 }
 #player-select .player-selection{
   font-size: 150%;
-  display: inline-block;kk
+  display: inline-block;
   float: left;
   width: 25%;
   text-align: center;
   margin-top: 60px;
-  background-size: contain;
+  background-size: 75%;
 }
 #player-select .players-1{
   background-image: url('/assets/player-select-p1.png');
@@ -142,7 +144,7 @@ canvas{
   position: absolute;
   width: 100%;
   height: 50px;
-  top: 0;
+  top: 48px;
   left: 0;
   font-size: 1.5em;
 }
