@@ -209,7 +209,10 @@ Game.prototype.createPlayers = function(players){
 
 
 Game.prototype.start = function(){
-  this.coinManager.showRandomCoin();
+  for(var i=0; i<bizarrio.numPlayers; i++){
+    this.coinManager.turnOn();
+  }
+
   this.waterfall.scheduleRandomToggle();
   // this.fan.scheduleRandomToggle();
   this._createScoreboard();

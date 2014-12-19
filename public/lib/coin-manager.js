@@ -7,10 +7,14 @@ CoinManager.prototype = Object.create(Manager.prototype);
 
 
 CoinManager.prototype.showRandomCoin = function(lastCoin){
-  var coins = _.without(this.items, lastCoin);
-  var rando = Math.floor(Math.random() * coins.length);
+  var otherCoins = _.without(this.items, lastCoin);
+  var offCoins = [];
+  otherCoins.forEach(function(coin){
+    if(!coin.sprite.alive) offCoins.push(coin);
+  });
+  var rando = Math.floor(Math.random() * offCoins.length);
 
-  coins[rando].toggle();
+  offCoins[rando].toggle();
 };
 
 
