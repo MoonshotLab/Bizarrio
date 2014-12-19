@@ -209,7 +209,7 @@ Game.prototype.createPlayers = function(players){
 Game.prototype.start = function(){
   this.coinManager.showRandomCoin();
   this.waterfall.scheduleRandomToggle();
-  this.fan.scheduleRandomToggle();
+  // this.fan.scheduleRandomToggle();
   this._createScoreboard();
 
   this.conveyorManager.items.forEach(function(conveyor){
