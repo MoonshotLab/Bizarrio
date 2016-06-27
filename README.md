@@ -1,7 +1,7 @@
 # Bizarrio
 A two-dimensional game projection mapped upon a dynamic three-dimensional surface.
 
-![](http://i.imgur.com/pQdqrXd.gif)
+![](http://i.imgur.com/WposEDN.gif)
 
 Two [Arduino Megas](http://arduino.cc/en/Main/arduinoBoardMega) are enslaved to a [Node](http://nodejs.org/) server. The game interface is a web page running the [Phaser](http://phaser.io/) engine which controls all game logic. Communication to the server is facilitated via [web sockets](http://socket.io/).
 
@@ -18,6 +18,8 @@ This game uses keyboard controls for character movement. [Joystick Mapper](http:
 
 I had an issue with phaser, or possibly the way I've written some portion of the game, and graphics card switching on recent Mac Book Pros. I overcame the problem by installing [gfxCardStatus](https://gfx.io/) and forcing integrated use only.
 
+
+[![](http://i.imgur.com/4vByo76.png)](https://www.dropbox.com/s/c0txg19rdsd3fmy/frostbite.mp4?dl=0)
 
 ## Other Stuff
 Adding Players: You can add more players to the game by adding empty objects to the players array in game initialization - `public/index.js`.
