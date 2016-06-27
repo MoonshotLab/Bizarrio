@@ -1,6 +1,8 @@
 # Bizarrio
 A two-dimensional game projection mapped upon a dynamic three-dimensional surface.
 
+![](http://i.imgur.com/pQdqrXd.gif)
+
 Two [Arduino Megas](http://arduino.cc/en/Main/arduinoBoardMega) are enslaved to a [Node](http://nodejs.org/) server. The game interface is a web page running the [Phaser](http://phaser.io/) engine which controls all game logic. Communication to the server is facilitated via [web sockets](http://socket.io/).
 
 
@@ -9,6 +11,7 @@ Two [Arduino Megas](http://arduino.cc/en/Main/arduinoBoardMega) are enslaved to 
 * Load the standard [firmata](http://arduino.cc/en/reference/firmata) library  on one or more Arduinos - [tutorial](https://www.youtube.com/watch?v=l4jFQIoY9ZY).
 * Hardware pin mappings are defined as object properties within each obstacle via the [tiled map editor](http://www.mapeditor.org/).
 
+![](http://i.imgur.com/XXIL1Et.jpg)
 
 ## Other Tips
 This game uses keyboard controls for character movement. [Joystick Mapper](http://joystickmapper.com/) is an excellent choice for keyboard to control mapping, NES USB controls can be picked up on [Amazon](http://www.amazon.com/Classic-USB-NES-Controller-PC/dp/B002YVD3KM) for fairly cheap.
